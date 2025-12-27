@@ -55,7 +55,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             onClick={() => handleNavClick('home')}
             className="group flex items-center gap-3 transition-opacity hover:opacity-90"
           >
-            <div className={`p-2 rounded-xl text-white shadow-lg transition-colors ${scrolled ? 'bg-blue-600' : 'bg-blue-600/90'}`}>
+            <div className={`p-2 rounded-xl text-white shadow-lg transition-colors ${scrolled ? 'bg-lime-600' : 'bg-lime-600/90'}`}>
                 <BookOpen size={24} strokeWidth={2.5} />
             </div>
             <span className="text-xl md:text-2xl font-heading font-bold text-white tracking-tight">
@@ -82,7 +82,7 @@ export const Navigation: React.FC<NavigationProps> = ({
               href={LINKS.REGISTRATION}
               target="_blank"
               rel="noreferrer"
-              className="ml-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold py-2.5 px-6 rounded-lg transition-all shadow-lg shadow-blue-600/20 hover:scale-105 active:scale-95"
+              className="ml-4 bg-lime-600 hover:bg-lime-500 text-white text-sm font-bold py-2.5 px-6 rounded-lg transition-all shadow-lg shadow-lime-600/20 hover:scale-105 active:scale-95"
             >
               Book Now
             </a>
@@ -111,8 +111,8 @@ export const Navigation: React.FC<NavigationProps> = ({
               onClick={() => handleNavClick(item.id)}
               className={`block w-full text-2xl font-heading font-bold transition-colors py-2 ${
                 activeView === item.id 
-                  ? 'text-blue-500' 
-                  : 'text-white hover:text-blue-400'
+                  ? 'text-lime-500'
+                  : 'text-white hover:text-lime-400'
               }`}
             >
               {item.label}
@@ -123,7 +123,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                 href={LINKS.REGISTRATION}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full max-w-xs bg-blue-600 text-white text-lg font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 hover:bg-blue-500 transition-colors"
+                className="w-full max-w-xs bg-lime-600 text-white text-lg font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 hover:bg-lime-500 transition-colors"
             >
                 Book a Session
             </a>

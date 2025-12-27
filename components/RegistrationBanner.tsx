@@ -21,7 +21,7 @@ import React, { useState, useEffect } from 'react';
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'
           }`}
         >
-          <div className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-2xl p-4 md:p-6 flex items-start space-x-4 border border-white/20">
+          <div className="bg-lime-600 hover:bg-lime-700 text-white rounded-xl shadow-2xl p-4 md:p-6 flex items-start space-x-4 border border-white/20">
             <a 
               href={LINKS.REGISTRATION} 
               target="_blank" 
@@ -34,7 +34,7 @@ import React, { useState, useEffect } from 'react';
               
               <div>
                 <p className="font-bold text-base md:text-lg leading-tight mb-1">2026 Registrations Open!</p>
-                <p className="text-xs font-medium text-blue-200 uppercase tracking-wide group-hover:text-white transition-colors">Click to Sign up</p>
+                <p className="text-xs font-medium text-lime-200 uppercase tracking-wide group-hover:text-white transition-colors">Click to Sign up</p>
                 <div className="mt-2 bg-white/20 inline-block px-2 py-0.5 rounded text-xs font-bold">98% Pass Rate</div>
               </div>
             </a>

@@ -49,7 +49,7 @@ export const Services: React.FC = () => {
   return (
     <div className="animate-fade-in max-w-7xl mx-auto space-y-16 pb-12">
       <div className="text-center max-w-3xl mx-auto">
-        <p className="text-blue-400 font-bold text-sm uppercase tracking-widest mb-3">What We Offer</p>
+        <p className="text-lime-400 font-bold text-sm uppercase tracking-widest mb-3">What We Offer</p>
         <h2 className="font-heading font-bold text-3xl md:text-5xl text-white mb-6">
           Our Services
         </h2>
@@ -64,22 +64,22 @@ export const Services: React.FC = () => {
           return (
             <div 
               key={service.id} 
-              className="glass-card-blue p-8 rounded-2xl h-full flex flex-col transition-all duration-300 hover:border-blue-500/30 group"
+              className="glass-card-lime p-8 rounded-2xl h-full flex flex-col transition-all duration-300 hover:border-lime-500/30 group"
               data-testid={`card-service-${service.id}`}
             >
-              <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center mb-6 border border-blue-500/20 group-hover:scale-110 transition-transform duration-300">
-                <IconComponent className="h-7 w-7 text-blue-400" />
+              <div className="w-14 h-14 rounded-xl bg-lime-500/10 flex items-center justify-center mb-6 border border-lime-500/20 group-hover:scale-110 transition-transform duration-300">
+                <IconComponent className="h-7 w-7 text-lime-400" />
               </div>
               <h3 className="font-heading font-bold text-xl text-white mb-2">
                 {service.title}
               </h3>
-              <p className="text-blue-400 font-medium text-sm mb-4 uppercase tracking-wide">
+              <p className="text-lime-400 font-medium text-sm mb-4 uppercase tracking-wide">
                 {service.subtitle}
               </p>
               <p className="text-slate-300 text-sm leading-relaxed flex-1 mb-6">
                 {service.description}
               </p>
-              <div className="flex items-center text-blue-400 font-semibold text-sm group-hover:gap-2 transition-all">
+              <div className="flex items-center text-lime-400 font-semibold text-sm group-hover:gap-2 transition-all">
                   Read More <ArrowRight className="h-4 w-4 ml-1" />
               </div>
             </div>
@@ -89,7 +89,7 @@ export const Services: React.FC = () => {
 
       <div className="glass-card-story rounded-2xl p-10 md:p-12 border border-white/5 relative overflow-hidden">
         {/* Decorative background element */}
-        <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-lime-500/20 rounded-full blur-3xl"></div>
 
         <div className="relative z-10">
             <div className="text-center mb-12">
@@ -104,7 +104,7 @@ export const Services: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
                 <div key={index} className="text-center p-6 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mx-auto mb-5 shadow-lg">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-lime-500 to-indigo-600 flex items-center justify-center mx-auto mb-5 shadow-lg">
                     <feature.icon className="h-6 w-6 text-white" />
                 </div>
                 <h4 className="font-heading font-bold text-white mb-2 text-lg">{feature.title}</h4>
@@ -115,7 +115,7 @@ export const Services: React.FC = () => {
         </div>
       </div>
 
-      <div className="text-center glass-card-blue border border-blue-500/30 rounded-2xl p-8 md:p-10">
+      <div className="text-center glass-card-lime border border-lime-500/30 rounded-2xl p-8 md:p-10">
         <h3 className="text-white text-xl md:text-2xl font-bold mb-4">Ready to start?</h3>
         <p className="text-slate-300 text-base mb-6">
           Contact us today to schedule your first session.
@@ -130,7 +130,7 @@ export const Services: React.FC = () => {
             </a>
             <a
                 href="tel:+27712716011"
-                className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-medium transition-colors flex items-center gap-2 shadow-lg shadow-blue-600/20"
+                className="bg-lime-600 hover:bg-lime-500 text-white px-6 py-3 rounded-xl font-medium transition-colors flex items-center gap-2 shadow-lg shadow-lime-600/20"
                 data-testid="link-services-phone"
             >
                 Call Now
