@@ -10,6 +10,7 @@ import { Tutors } from './views/Tutors';
 import { Stories } from './views/Stories';
 import { Contact } from './views/Contact';
 import { Services } from './views/Services';
+import { Career } from './views/Career';
 import { ViewState } from './types';
 
 function App() {
@@ -44,7 +45,8 @@ function App() {
           {activeView === 'tutors' && <Tutors />}
           {activeView === 'stories' && <Stories />}
           {activeView === 'locations' && <Contact />}
-          {activeView === 'services' && <Services />}
+          {activeView === 'services' && <Services setActiveView={setActiveView} />}
+          {activeView === 'career' && <Career setActiveView={setActiveView} />}
 
         </div>
       </main>
