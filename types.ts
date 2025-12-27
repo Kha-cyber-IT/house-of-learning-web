@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type ViewState = 'home' | 'about' | 'tutors' | 'stories' | 'locations' | 'services' | 'career';
+export type ViewState = 'home' | 'about' | 'tutors' | 'stories' | 'locations' | 'services';
 
 export interface Tutor {
   id: string;

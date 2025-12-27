@@ -1,6 +1,5 @@
 import React from 'react';
-import { GraduationCap, UserCheck, FileText, Target, Users, BookOpen, ArrowRight, Briefcase } from "lucide-react";
-import { ViewState } from '../types';
+import { GraduationCap, UserCheck, FileText, Target, Users, BookOpen, ArrowRight } from "lucide-react";
 
 interface Service {
   id: string;
@@ -8,7 +7,6 @@ interface Service {
   subtitle: string;
   description: string;
   icon: string;
-  action?: string;
 }
 
 const services: Service[] = [
@@ -33,14 +31,6 @@ const services: Service[] = [
     description: "We take a comprehensive and collaborative approach in creating a plan and program that is right for every student. Adjusting to different personalities and specific academic needs, we always find what works best.",
     icon: "file",
   },
-  {
-    id: "4",
-    title: "Career Intelligence",
-    subtitle: "Launch Your IT Career",
-    description: "Upload your CV to unlock AI-driven job matching, mock interviews, and personalized career guidance tailored to your skills and experience.",
-    icon: "briefcase",
-    action: "career"
-  },
 ];
 
 const features = [
@@ -53,14 +43,9 @@ const iconMap: Record<string, React.ElementType> = {
   graduation: GraduationCap,
   user: UserCheck,
   file: FileText,
-  briefcase: Briefcase,
 };
 
-interface ServicesProps {
-  setActiveView: (view: ViewState) => void;
-}
-
-export const Services: React.FC<ServicesProps> = ({ setActiveView }) => {
+export const Services: React.FC = () => {
   return (
     <div className="animate-fade-in max-w-7xl mx-auto space-y-16 pb-12">
       <div className="text-center max-w-3xl mx-auto">
@@ -73,15 +58,14 @@ export const Services: React.FC<ServicesProps> = ({ setActiveView }) => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {services.map((service) => {
           const IconComponent = iconMap[service.icon] || GraduationCap;
           return (
             <div 
               key={service.id} 
-              className={`glass-card-lime p-8 rounded-2xl h-full flex flex-col transition-all duration-300 hover:border-lime-500/30 group ${service.action ? 'cursor-pointer' : ''}`}
+              className="glass-card-lime p-8 rounded-2xl h-full flex flex-col transition-all duration-300 hover:border-lime-500/30 group"
               data-testid={`card-service-${service.id}`}
-              onClick={() => service.action && setActiveView(service.action as ViewState)}
             >
               <div className="w-14 h-14 rounded-xl bg-lime-500/10 flex items-center justify-center mb-6 border border-lime-500/20 group-hover:scale-110 transition-transform duration-300">
                 <IconComponent className="h-7 w-7 text-lime-400" />
@@ -96,7 +80,7 @@ export const Services: React.FC<ServicesProps> = ({ setActiveView }) => {
                 {service.description}
               </p>
               <div className="flex items-center text-lime-400 font-semibold text-sm group-hover:gap-2 transition-all">
-                  {service.action ? 'Get Started' : 'Read More'} <ArrowRight className="h-4 w-4 ml-1" />
+                  Read More <ArrowRight className="h-4 w-4 ml-1" />
               </div>
             </div>
           );
