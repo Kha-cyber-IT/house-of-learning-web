@@ -37,7 +37,7 @@ function App() {
       />
 
       <main className="flex-grow w-full flex flex-col items-center pt-24 md:pt-32 pb-12">
-        <div className="w-full max-w-7xl px-4 md:px-6 animate-fade-in">
+        <div className="w-full max-w-7xl px-4 md:px-6">
           
           {activeView === 'home' && <Home setActiveView={setActiveView} />}
           {activeView === 'about' && <About />}
