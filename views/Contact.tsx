@@ -17,7 +17,7 @@ export const Contact: React.FC = () => {
     <div id="contact" className="py-8 md:py-12 animate-fade-in max-w-7xl mx-auto px-4 md:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-blue-400 font-medium mb-2 text-sm uppercase tracking-wide">Contact Us</p>
+          <p className="text-lime-400 font-medium mb-2 text-sm uppercase tracking-wide">Contact Us</p>
           <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground mb-4 text-shadow-strong">
             Get in Touch
           </h2>
@@ -30,7 +30,7 @@ export const Contact: React.FC = () => {
           
           {/* Left Column: Form */}
           <div>
-            <div className="glass-card-blue p-6 md:p-8 h-full rounded-2xl">
+            <div className="glass-card-lime p-6 md:p-8 h-full rounded-2xl">
               <h3 className="font-heading font-semibold text-xl text-white mb-6">
                 Send us a message
               </h3>
@@ -60,7 +60,7 @@ export const Contact: React.FC = () => {
                     <input 
                       type="text"
                       placeholder="Your full name" 
-                      className="flex h-10 w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="flex h-10 w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
                       required
                     />
                   </div>
@@ -70,7 +70,7 @@ export const Contact: React.FC = () => {
                     <input 
                       type="email" 
                       placeholder="your@email.com" 
-                      className="flex h-10 w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="flex h-10 w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
                       required
                     />
                   </div>
@@ -80,7 +80,7 @@ export const Contact: React.FC = () => {
                     <input 
                       type="text"
                       placeholder="What is this about?" 
-                      className="flex h-10 w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="flex h-10 w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent"
                       required
                     />
                   </div>
@@ -89,14 +89,14 @@ export const Contact: React.FC = () => {
                     <label className="text-white/80 text-sm font-medium">Message</label>
                     <textarea 
                       placeholder="Tell us how we can help you..." 
-                      className="flex min-h-[120px] w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                      className="flex min-h-[120px] w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:border-transparent resize-none"
                       required
                     />
                   </div>
 
                   <button 
                     type="submit" 
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white border border-blue-500 h-10 px-4 py-2 rounded-md flex items-center justify-center gap-2 font-medium transition-colors"
+                    className="w-full bg-lime-600 hover:bg-lime-700 text-white border border-lime-500 h-10 px-4 py-2 rounded-md flex items-center justify-center gap-2 font-medium transition-colors"
                   >
                     <Send className="h-4 w-4" />
                     Send Message
@@ -108,7 +108,7 @@ export const Contact: React.FC = () => {
 
           {/* Right Column: Info & CTA */}
           <div className="space-y-6">
-            <div className="glass-card-blue p-6 md:p-8 rounded-2xl">
+            <div className="glass-card-lime p-6 md:p-8 rounded-2xl">
               <h3 className="font-heading font-semibold text-xl text-white mb-6">
                 Contact Information
               </h3>
@@ -116,8 +116,8 @@ export const Contact: React.FC = () => {
                 
                 {/* Address */}
                 <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-md bg-blue-600/30 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="h-5 w-5 text-blue-400" />
+                    <div className="w-10 h-10 rounded-md bg-lime-600/30 flex items-center justify-center flex-shrink-0">
+                      <MapPin className="h-5 w-5 text-lime-400" />
                     </div>
                     <div>
                       <p className="text-sm text-white/50 mb-0.5">Address</p>
@@ -127,12 +127,12 @@ export const Contact: React.FC = () => {
 
                 {/* Email - Fixed Overflow */}
                 <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-md bg-blue-600/30 flex items-center justify-center flex-shrink-0">
-                      <Mail className="h-5 w-5 text-blue-400" />
+                    <div className="w-10 h-10 rounded-md bg-lime-600/30 flex items-center justify-center flex-shrink-0">
+                      <Mail className="h-5 w-5 text-lime-400" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="text-sm text-white/50 mb-0.5">Email</p>
-                      <a href={`mailto:${LINKS.EMAIL}`} className="text-white font-medium hover:text-blue-400 transition-colors break-all text-sm block">
+                      <a href={`mailto:${LINKS.EMAIL}`} className="text-white font-medium hover:text-lime-400 transition-colors break-all text-sm block">
                         {LINKS.EMAIL}
                       </a>
                     </div>
@@ -140,12 +140,12 @@ export const Contact: React.FC = () => {
 
                 {/* Phone */}
                 <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-md bg-blue-600/30 flex items-center justify-center flex-shrink-0">
-                      <Phone className="h-5 w-5 text-blue-400" />
+                    <div className="w-10 h-10 rounded-md bg-lime-600/30 flex items-center justify-center flex-shrink-0">
+                      <Phone className="h-5 w-5 text-lime-400" />
                     </div>
                     <div>
                       <p className="text-sm text-white/50 mb-0.5">Phone</p>
-                      <a href={`tel:${LINKS.PHONE.replace(/\s/g, '')}`} className="text-white font-medium hover:text-blue-400 transition-colors">
+                      <a href={`tel:${LINKS.PHONE.replace(/\s/g, '')}`} className="text-white font-medium hover:text-lime-400 transition-colors">
                         {LINKS.PHONE}
                       </a>
                     </div>
@@ -153,12 +153,12 @@ export const Contact: React.FC = () => {
 
                  {/* WhatsApp - Added */}
                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-md bg-blue-600/30 flex items-center justify-center flex-shrink-0">
-                      <MessageCircle className="h-5 w-5 text-blue-400" />
+                    <div className="w-10 h-10 rounded-md bg-lime-600/30 flex items-center justify-center flex-shrink-0">
+                      <MessageCircle className="h-5 w-5 text-lime-400" />
                     </div>
                     <div>
                       <p className="text-sm text-white/50 mb-0.5">WhatsApp</p>
-                      <a href={LINKS.WHATSAPP} target="_blank" rel="noreferrer" className="text-white font-medium hover:text-blue-400 transition-colors">
+                      <a href={LINKS.WHATSAPP} target="_blank" rel="noreferrer" className="text-white font-medium hover:text-lime-400 transition-colors">
                         Chat on WhatsApp
                       </a>
                     </div>
@@ -166,8 +166,8 @@ export const Contact: React.FC = () => {
 
                 {/* Hours */}
                 <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-md bg-blue-600/30 flex items-center justify-center flex-shrink-0">
-                      <Clock className="h-5 w-5 text-blue-400" />
+                    <div className="w-10 h-10 rounded-md bg-lime-600/30 flex items-center justify-center flex-shrink-0">
+                      <Clock className="h-5 w-5 text-lime-400" />
                     </div>
                     <div>
                       <p className="text-sm text-white/50 mb-0.5">Hours</p>
@@ -206,15 +206,15 @@ export const Contact: React.FC = () => {
         </div>
 
         {/* Map Section */}
-        <div className="glass-card-blue p-2 rounded-2xl border border-blue-500/30 overflow-hidden shadow-2xl">
-            <div className="bg-blue-900/40 p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-white/5">
+        <div className="glass-card-lime p-2 rounded-2xl border border-lime-500/30 overflow-hidden shadow-2xl">
+            <div className="bg-lime-900/40 p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-white/5">
                 <div className="flex items-center gap-3">
-                    <div className="bg-blue-600 p-2 rounded-full">
+                    <div className="bg-lime-600 p-2 rounded-full">
                         <MapPin className="text-white h-5 w-5" />
                     </div>
                     <div className="text-left">
                         <h4 className="font-heading font-bold text-white">Green Masjid Ext 2, Eldorado Park</h4>
-                        <p className="text-blue-200 text-sm">Visit us for face-to-face tutoring</p>
+                        <p className="text-lime-200 text-sm">Visit us for face-to-face tutoring</p>
                     </div>
                 </div>
                 <a 

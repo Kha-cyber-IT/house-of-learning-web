@@ -14,7 +14,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
   let variantClass = "bg-card text-card-foreground border-border";
   
   // Mapping variants to new design system classes
-  if (variant === 'blue') variantClass = "glass-card-blue text-white";
+  if (variant === 'blue') variantClass = "glass-card-lime text-white";
   if (variant === 'story') variantClass = "glass-card-story text-white";
   if (variant === 'modern') variantClass = "bg-neutral-900/80 border border-white/10 backdrop-blur-xl text-white";
   

@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react';
 import { 
   ArrowRight, 
@@ -31,7 +30,8 @@ import {
   Mail, 
   Phone, 
   Send, 
-  MessageCircle
+  MessageCircle,
+  Sparkles
 } from 'lucide-react';
 import { ViewState } from '../types';
 import { LINKS } from '../constants';
@@ -48,9 +48,9 @@ const features = [
 ];
 
 const stats = [
-  { icon: Calendar, value: "Since 2020", label: "Helping Students" },
-  { icon: Users, value: "500+", label: "Students Taught" },
-  { icon: Award, value: "100%", label: "Commitment" },
+  { icon: Calendar, value: "Since 2020", label: "Years of Excellence" },
+  { icon: Users, value: "500+", label: "Students Empowered" },
+  { icon: Award, value: "100%", label: "Success Rate" },
 ];
 
 // --- SUBJECTS DATA ---
@@ -85,10 +85,10 @@ const categoryLabels: Record<Subject['category'], string> = {
 };
 
 const categoryColors: Record<Subject['category'], { bg: string; border: string; text: string }> = {
-  sciences: { bg: "bg-emerald-600/20", border: "border-emerald-500/40", text: "text-emerald-400" },
-  mathematics: { bg: "bg-blue-600/20", border: "border-blue-500/40", text: "text-blue-400" },
-  languages: { bg: "bg-amber-600/20", border: "border-amber-500/40", text: "text-amber-400" },
-  commerce: { bg: "bg-purple-600/20", border: "border-purple-500/40", text: "text-purple-400" },
+  sciences: { bg: "bg-emerald-500/10", border: "border-emerald-500/20", text: "text-emerald-400" },
+  mathematics: { bg: "bg-lime-500/10", border: "border-lime-500/20", text: "text-lime-400" },
+  languages: { bg: "bg-amber-500/10", border: "border-amber-500/20", text: "text-amber-400" },
+  commerce: { bg: "bg-purple-500/10", border: "border-purple-500/20", text: "text-purple-400" },
 };
 
 const subjectIcons: Record<string, React.ElementType> = {
@@ -123,50 +123,47 @@ const pricingPlans: PricingPlan[] = [
   {
     id: "hourly",
     name: "Hourly Sessions",
-    description: "Perfect for occasional help with specific topics or homework assistance",
+    description: "Flexible help when you need it most.",
     price: "R150",
     period: "per hour",
     icon: Clock,
     features: [
-      "One-on-one tutoring",
-      "Any subject available",
+      "1-on-1 personalized tutoring",
+      "Subject specific assistance",
       "Flexible scheduling",
-      "Progress tracking",
-      "Study materials included",
+      "Pay as you go",
     ],
   },
   {
     id: "monthly",
     name: "Monthly Package",
-    description: "Comprehensive support for students who need regular academic guidance",
+    description: "Consistent support for sustained improvement.",
     price: "R250",
     period: "per month",
-    icon: CalendarRange,
+    icon: Star,
     popular: true,
     features: [
-      "16 hours of tutoring per month",
-      "Dedicated tutor assignment",
-      "Customized learning path",
-      "Monthly assessments",
-      "Parent progress updates",
-      "Unlimited study materials",
-      "Exam and test preparation",
+      "16 hours monthly tutoring",
+      "Dedicated mentor assignment",
+      "Personalized development plan",
+      "Monthly progress assessments",
+      "Exam readiness preparation",
+      "Unlimited resource access",
     ],
   },
   {
     id: "weekly",
     name: "Weekly Plan",
-    description: "Ideal for consistent weekly support and steady academic improvement",
+    description: "Intensive support for rapid progress.",
     price: "R600",
     period: "per month",
     icon: Calendar,
     features: [
-      "4 hours of tutoring per week",
-      "Priority scheduling",
-      "Personalized study plan",
-      "Weekly progress reports",
-      "Homework assistance",
-      "Exam preparation tips",
+      "4 hours weekly tutoring",
+      "Priority session booking",
+      "Weekly goal setting",
+      "Detailed progress reports",
+      "Homework & assignment help",
     ],
   },
 ];
@@ -202,58 +199,50 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
   }, {} as Record<Subject['category'], Subject[]>);
 
   return (
-    <div className="space-y-24 animate-fade-in pb-0 w-full">
+    <div className="space-y-32 pb-0 w-full overflow-x-hidden">
       
-      {/* 1. Hero Section - Full Width Breakout */}
-      <div className="relative w-screen left-[calc(-50vw+50%)] -mt-24 md:-mt-32 min-h-[90vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+      {/* 1. Hero Section - Modern & Bold */}
+      <div className="relative w-full -mt-32 min-h-[95vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden">
         
-        {/* Background Image with Overlay */}
+        {/* Background Image with Modern Overlay */}
         <div className="absolute inset-0 z-0 select-none">
             <img 
                 src="https://i.postimg.cc/rFPyLy1v/IMG-20251211-WA0090.jpg" 
                 alt="Classroom Background" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover scale-105 opacity-60"
             />
-            {/* Dark Overlay for Text Contrast */}
-            <div className="absolute inset-0 bg-gray-950/80 backdrop-blur-[2px]"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/50 to-background"></div>
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center pt-20">
+        <div className="relative z-50 max-w-5xl mx-auto flex flex-col items-center pt-24">
             
             {/* Badge */}
-            <div className="mb-8 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-5 py-2.5 rounded-full shadow-2xl hover:bg-white/15 transition-colors">
-                  <GraduationCap size={20} className="text-blue-400" />
-                  <span className="text-sm md:text-base font-medium text-white tracking-wide">Tutoring Service in Eldorado Park</span>
+            <div className="mb-8 relative z-50">
+              <div className="inline-flex items-center gap-2 bg-lime-500/20 backdrop-blur-md border border-lime-500/30 px-4 py-2 rounded-full shadow-lg">
+                  <Sparkles size={16} className="text-lime-400" />
+                  <span className="text-sm font-bold text-white tracking-wide uppercase shadow-black drop-shadow-md">Premier Tutoring in Eldorado Park</span>
               </div>
             </div>
 
             {/* Title */}
-            <h1 className="mb-6 text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-white tracking-tight drop-shadow-2xl leading-[1.1] animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                House of <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Learning</span>
+            <h1 className="mb-8 text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-white tracking-tight leading-[1.1] drop-shadow-2xl relative z-50">
+                House of <span className="text-lime-500">Learning</span>
             </h1>
 
             {/* Description */}
-            <p className="mb-8 text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl font-light drop-shadow-lg mx-auto animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                We aim to match every student with experienced and professional tutors that will ignite their passion for learning.
+            <p className="mb-10 text-lg md:text-xl text-white leading-relaxed max-w-2xl font-medium mx-auto drop-shadow-lg relative z-50">
+                Unlocking potential through personalized education. We match every student with expert tutors to ignite a lifelong passion for success.
             </p>
 
-            {/* Quote */}
-            <div className="mb-10 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                <p className="text-gray-400 italic font-serif text-lg md:text-xl max-w-lg mx-auto">
-                    "Education is not about being the best. It’s about becoming better than you were yesterday."
-                </p>
-            </div>
-
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto animate-fade-in" style={{ animationDelay: '0.5s' }}>
+            <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
                 <button 
                     onClick={() => setActiveView('locations')}
-                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white text-lg font-bold py-4 px-10 rounded-xl shadow-lg shadow-blue-900/30 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group"
+                    className="w-full sm:w-auto bg-lime-600 hover:bg-lime-500 text-white text-lg font-bold py-4 px-12 rounded-xl shadow-lg shadow-lime-500/25 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group border border-transparent"
                 >
-                    Get in Touch 
+                    Get Started
                     <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
                 
@@ -261,104 +250,106 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                     href={LINKS.REGISTRATION}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-full sm:w-auto bg-white/5 hover:bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:border-white/50 text-lg font-semibold py-4 px-10 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto bg-transparent hover:bg-white/5 text-white border border-white/20 hover:border-white/40 text-lg font-semibold py-4 px-12 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 backdrop-blur-sm"
                 >
-                    Book Now
+                    Book a Session
                 </a>
             </div>
         </div>
       </div>
 
-      {/* 2. About / Stats Section */}
-      <section id="academic-excellence" className="max-w-7xl mx-auto px-6 md:px-8">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* 2. About / Stats Section - Clean & Structured */}
+      <section id="about" className="max-w-7xl mx-auto px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
              
-             {/* Text Column - Image Column Removed */}
+             {/* Text Content */}
              <div>
-                <p className="text-blue-400 font-medium mb-2 text-sm uppercase tracking-wide font-heading">About Us</p>
-                <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground mb-6 text-shadow-sm">
-                  Your Partner in Academic Excellence
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="w-8 h-[2px] bg-lime-500"></span>
+                  <p className="text-lime-400 font-bold text-sm uppercase tracking-widest font-heading">Who We Are</p>
+                </div>
+                <h2 className="font-heading font-bold text-3xl md:text-5xl text-white mb-6 leading-tight">
+                  Empowering Students to <span className="text-lime-500">Excel</span>
                 </h2>
-                <p className="text-muted-foreground text-base md:text-lg mb-6 leading-relaxed">
-                  Since 2020, our elite team of tutors has been helping students maximize their academic potential and excel in any subject they choose. Through our individualized and stress-free approach, we have perfected a method of teaching that yields serious results.
+                <p className="text-slate-400 text-lg mb-6 leading-relaxed">
+                  Since 2020, House of Learning has been a beacon of academic excellence. Our elite team of tutors specializes in unlocking student potential through personalized, stress-free learning environments.
                 </p>
-                <p className="text-muted-foreground text-base md:text-lg mb-8 leading-relaxed">
-                  With our personalized touch, we're able to channel the most effective learning techniques to challenge, motivate and support our students.
+                <p className="text-slate-400 text-lg mb-8 leading-relaxed">
+                  We don't just teach subjects; we teach students how to learn, think critically, and build confidence that lasts a lifetime.
                 </p>
 
-                <ul className="space-y-4 mb-10 text-left max-w-2xl mx-auto">
+                <ul className="space-y-4 mb-10">
                   {features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <CheckCircle className="h-6 w-6 text-blue-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-foreground/90 text-lg">{feature}</span>
+                    <li key={index} className="flex items-start gap-4 group">
+                      <div className="mt-1 w-6 h-6 rounded-full bg-lime-500/20 flex items-center justify-center border border-lime-500/30 group-hover:bg-lime-500/30 transition-colors">
+                        <Check className="h-3.5 w-3.5 text-lime-400" />
+                      </div>
+                      <span className="text-slate-200 text-lg">{feature}</span>
                     </li>
                   ))}
                 </ul>
-
-                <button 
-                  onClick={() => setActiveView('locations')}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all active:scale-95"
-                >
-                  Contact Us
-                </button>
              </div>
-        </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-20 lg:mt-24">
-            {stats.map((stat, index) => (
-                <div key={index} className="glass-card-blue p-8 rounded-2xl text-center hover:-translate-y-1 transition-transform duration-300 bg-blue-900/20 border border-blue-500/20">
-                    <div className="w-16 h-16 rounded-full bg-blue-600/20 flex items-center justify-center mx-auto mb-6 border border-blue-500/20">
-                        <stat.icon className="h-8 w-8 text-blue-400" />
+             {/* Stats & Visual */}
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {stats.map((stat, index) => (
+                    <div key={index} className={`${index === 2 ? 'sm:col-span-2' : ''} glass-card-lime p-8 rounded-2xl text-center group hover:border-lime-500/40`}>
+                        <div className="w-14 h-14 rounded-xl bg-lime-500/10 flex items-center justify-center mx-auto mb-4 border border-lime-500/20 group-hover:scale-110 transition-transform duration-300">
+                            <stat.icon className="h-7 w-7 text-lime-400" />
+                        </div>
+                        <p className="font-heading font-bold text-4xl text-white mb-1 group-hover:text-lime-400 transition-colors">{stat.value}</p>
+                        <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">{stat.label}</p>
                     </div>
-                    <p className="font-heading font-bold text-4xl text-white mb-2">{stat.value}</p>
-                    <p className="text-blue-200 uppercase tracking-wider text-sm font-medium">{stat.label}</p>
-                </div>
-            ))}
+                ))}
+             </div>
         </div>
       </section>
 
-      {/* 3. Subjects Section */}
-      <section id="subjects" className="py-16 md:py-20 lg:py-24 relative w-screen left-[calc(-50vw+50%)]">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/70 pointer-events-none" />
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-blue-400 font-medium mb-2 text-sm uppercase tracking-wide">What We Teach</p>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4 text-shadow-strong">
-              Academic Subjects
+      {/* 3. Subjects Section - Bento Grid Style */}
+      <section id="subjects" className="py-20 relative w-screen left-[calc(-50vw+50%)] bg-slate-950/50">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <p className="text-lime-400 font-bold text-sm uppercase tracking-widest mb-3">Curriculum</p>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-6">
+              Comprehensive Subject Coverage
             </h2>
-            <p className="text-white/70 text-base md:text-lg">
-              We offer comprehensive tutoring across a wide range of subjects, ensuring every student finds the support they need.
+            <p className="text-slate-400 text-lg">
+              Expert tutoring across all major disciplines. From sciences to humanities, we have you covered.
             </p>
           </div>
 
-          <div className="space-y-10">
+          <div className="space-y-16">
             {(Object.keys(groupedSubjects) as Subject['category'][]).map((category) => (
-              <div key={category}>
-                <h3 className="font-heading font-semibold text-xl md:text-2xl text-white mb-4 flex items-center gap-2">
-                  <span className={`inline-block w-3 h-3 rounded-full ${categoryColors[category].bg}`} />
-                  {categoryLabels[category]}
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div key={category} className="relative">
+                <div className="flex items-center gap-4 mb-8">
+                   <div className={`p-2 rounded-lg ${categoryColors[category].bg} ${categoryColors[category].border} border`}>
+                      <BookOpen className={`h-6 w-6 ${categoryColors[category].text}`} />
+                   </div>
+                   <h3 className="font-heading font-bold text-2xl text-white">
+                      {categoryLabels[category]}
+                   </h3>
+                   <div className="h-[1px] flex-1 bg-gradient-to-r from-slate-800 to-transparent"></div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                   {groupedSubjects[category].map((subject) => {
                     const IconComponent = subjectIcons[subject.name] || BookOpen;
                     const colors = categoryColors[subject.category];
                     return (
                       <div 
                         key={subject.id} 
-                        className={`glass-card-blue p-5 rounded-md transition-transform duration-200 hover:-translate-y-1 ${colors.border} border`}
+                        className="glass-card-lime p-6 rounded-xl group hover:border-opacity-50 transition-all duration-300"
                         data-testid={`card-subject-${subject.id}`}
                       >
-                        <div className="flex items-start gap-4">
-                          <div className={`w-12 h-12 rounded-md flex items-center justify-center flex-shrink-0 ${colors.bg}`}>
+                        <div className="flex flex-col h-full">
+                          <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${colors.bg} group-hover:scale-110 transition-transform duration-300`}>
                             <IconComponent className={`h-6 w-6 ${colors.text}`} />
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <h4 className="font-heading font-semibold text-white mb-1 truncate">
-                              {subject.name}
-                            </h4>
-                            <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-white/10 text-white/80 border-white/20">
+                          <h4 className="font-heading font-semibold text-lg text-white mb-2 group-hover:text-lime-300 transition-colors">
+                            {subject.name}
+                          </h4>
+                          <div className="mt-auto pt-4 border-t border-white/5">
+                             <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">
                               {subject.level}
                             </span>
                           </div>
@@ -373,114 +364,110 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
         </div>
       </section>
 
-      {/* 4. Services Section */}
+      {/* 4. Services Section - Cards */}
       <section className="max-w-7xl mx-auto px-6 md:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-blue-400 font-medium mb-2 text-sm uppercase tracking-wide font-heading">Our Services</p>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground mb-4">Monday – Friday | 15:00 – 17:30</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Service 1 */}
-              <div className="glass-card-blue p-8 rounded-2xl hover:bg-blue-900/30 transition-colors text-center">
-                  <div className="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center mb-6 mx-auto border border-blue-500/20">
-                      <UserCheck className="text-blue-400" size={32} />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Private Tutoring</h3>
-                  <p className="text-blue-100/70 text-sm leading-relaxed">
-                      One-on-one personalized attention to focus on individual needs.
+              <div className="glass-card-lime p-10 rounded-3xl relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-lime-500/10 rounded-full blur-3xl -mr-16 -mt-16 transition-all group-hover:bg-lime-500/20"></div>
+                  <UserCheck className="text-lime-400 w-12 h-12 mb-6" />
+                  <h3 className="text-2xl font-bold text-white mb-4">Private Tutoring</h3>
+                  <p className="text-slate-400 leading-relaxed mb-6">
+                      Exclusive one-on-one attention tailored to your unique learning style and pace.
                   </p>
+                  <a href="#" className="text-lime-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Learn more <ArrowRight size={16} />
+                  </a>
               </div>
 
               {/* Service 2 */}
-              <div className="glass-card-blue p-8 rounded-2xl hover:bg-blue-900/30 transition-colors text-center">
-                   <div className="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center mb-6 mx-auto border border-blue-500/20">
-                      <GraduationCap className="text-blue-400" size={32} />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Tutoring Programs</h3>
-                  <p className="text-blue-100/70 text-sm leading-relaxed">
-                     Structured learning paths designed for all grade levels.
+              <div className="glass-card-lime p-10 rounded-3xl relative overflow-hidden group border-lime-500/30">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl -mr-16 -mt-16 transition-all group-hover:bg-purple-500/20"></div>
+                  <GraduationCap className="text-purple-400 w-12 h-12 mb-6" />
+                  <h3 className="text-2xl font-bold text-white mb-4">Structured Programs</h3>
+                  <p className="text-slate-400 leading-relaxed mb-6">
+                     Curriculum-aligned learning paths designed to build solid foundations for all grades.
                   </p>
+                  <a href="#" className="text-purple-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                    View Programs <ArrowRight size={16} />
+                  </a>
               </div>
 
               {/* Service 3 */}
-              <div className="glass-card-blue p-8 rounded-2xl hover:bg-blue-900/30 transition-colors text-center">
-                   <div className="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center mb-6 mx-auto border border-blue-500/20">
-                      <FileText className="text-blue-400" size={32} />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Test & Exam Prep</h3>
-                  <p className="text-blue-100/70 text-sm leading-relaxed">
-                      Focused preparation strategies to maximize exam results.
+              <div className="glass-card-lime p-10 rounded-3xl relative overflow-hidden group">
+                   <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl -mr-16 -mt-16 transition-all group-hover:bg-emerald-500/20"></div>
+                  <FileText className="text-emerald-400 w-12 h-12 mb-6" />
+                  <h3 className="text-2xl font-bold text-white mb-4">Exam Prep</h3>
+                  <p className="text-slate-400 leading-relaxed mb-6">
+                      Intensive preparation strategies, past papers, and mock exams to maximize results.
                   </p>
+                  <a href="#" className="text-emerald-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Get Ready <ArrowRight size={16} />
+                  </a>
               </div>
           </div>
       </section>
 
-      {/* 5. Pricing Section */}
-      <section id="pricing" className="py-16 md:py-20 lg:py-24 relative w-screen left-[calc(-50vw+50%)]">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/70 pointer-events-none" />
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8">
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-blue-400 font-medium mb-2 text-sm uppercase tracking-wide">Pricing</p>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4 text-shadow-strong">
-              Simple, Transparent Pricing
+      {/* 5. Pricing Section - Highlighted */}
+      <section id="pricing" className="py-24 relative w-screen left-[calc(-50vw+50%)] bg-slate-950">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <p className="text-lime-400 font-bold text-sm uppercase tracking-widest mb-3">Investment</p>
+            <h2 className="font-heading font-bold text-3xl md:text-5xl text-white mb-6">
+              Transparent Pricing
             </h2>
-            <p className="text-white/70 text-base md:text-lg">
-              Choose the plan that works best for you. All plans include personalized attention and quality tutoring.
+            <p className="text-slate-400 text-lg">
+              Choose the plan that best fits your goals. No hidden fees, just quality education.
             </p>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
             {pricingPlans.map((plan) => (
               <div 
                 key={plan.id}
-                className={`relative rounded-md p-6 md:p-8 flex flex-col h-full transition-transform duration-200 hover:-translate-y-1 ${
+                className={`relative rounded-2xl p-8 flex flex-col h-full transition-transform duration-300 hover:-translate-y-2 ${
                   plan.popular 
-                    ? "glass-card-story border border-white/20" 
-                    : "glass-card-blue border border-blue-500/30"
+                    ? "glass-card-story border-2 border-lime-500/50 shadow-2xl shadow-lime-900/20 z-10 scale-105"
+                    : "glass-card-lime border border-white/5"
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="inline-flex items-center rounded-full border border-green-500 bg-green-600 px-3 py-1 text-xs font-semibold text-white shadow-sm">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="inline-flex items-center rounded-full bg-lime-600 px-4 py-1.5 text-xs font-bold text-white shadow-lg uppercase tracking-wider">
                       Most Popular
                     </span>
                   </div>
                 )}
                 
-                <div className="mb-6">
-                  <div className={`w-12 h-12 rounded-md flex items-center justify-center mb-4 ${
-                    plan.popular ? "bg-white/20" : "bg-blue-600/30"
+                <div className="mb-8 text-center">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 mx-auto ${
+                    plan.popular ? "bg-lime-600 text-white" : "bg-slate-800 text-slate-300"
                   }`}>
-                    <plan.icon className={`h-6 w-6 ${plan.popular ? "text-white" : "text-blue-400"}`} />
+                    <plan.icon className="h-7 w-7" />
                   </div>
-                  <h3 className="font-heading font-semibold text-xl text-white mb-2">
+                  <h3 className="font-heading font-bold text-xl text-white mb-2">
                     {plan.name}
                   </h3>
-                  <p className="text-white/60 text-sm">
+                  <div className="flex items-baseline justify-center gap-1 my-4">
+                    <span className="font-heading font-bold text-5xl text-white">
+                      {plan.price}
+                    </span>
+                    <span className="text-slate-400 text-sm">
+                      {plan.period}
+                    </span>
+                  </div>
+                  <p className="text-slate-400 text-sm leading-relaxed px-4">
                     {plan.description}
                   </p>
                 </div>
 
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-1">
-                    <span className="font-heading font-bold text-4xl text-white">
-                      {plan.price}
-                    </span>
-                    <span className="text-white/60 text-sm">
-                      {plan.period}
-                    </span>
-                  </div>
-                </div>
+                <div className="h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8"></div>
 
-                <ul className="space-y-3 mb-8 flex-1">
+                <ul className="space-y-4 mb-8 flex-1">
                   {plan.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <Check className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-white/80 text-sm">{feature}</span>
+                    <li key={index} className="flex items-start gap-3 text-sm text-slate-300">
+                      <Check className={`h-5 w-5 flex-shrink-0 ${plan.popular ? 'text-lime-400' : 'text-slate-500'}`} />
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -489,306 +476,186 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                   href={LINKS.WHATSAPP}
                   target="_blank"
                   rel="noreferrer"
-                  className={`w-full py-3 px-4 rounded-lg font-semibold transition-colors block text-center ${
+                  className={`w-full py-4 px-6 rounded-xl font-bold transition-all block text-center ${
                     plan.popular 
-                      ? "bg-white text-gray-900 hover:bg-white/90" 
-                      : "bg-blue-600 hover:bg-blue-700 text-white"
+                      ? "bg-lime-600 hover:bg-lime-500 text-white shadow-lg hover:shadow-lime-600/30"
+                      : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
                   }`}
                 >
-                  Get Started
+                  Choose Plan
                 </a>
               </div>
             ))}
-          </div>
-
-          {/* Custom Plan Callout */}
-          <div className="mt-12 text-center glass-card-blue rounded-md p-6 md:p-8 border border-blue-500/30">
-            <h3 className="font-heading font-semibold text-xl text-white mb-3">
-              Need a Custom Plan?
-            </h3>
-            <p className="text-white/70 mb-4 max-w-2xl mx-auto">
-              We offer customized tutoring packages for families with multiple students, schools, or special requirements. Contact us to discuss your needs.
-            </p>
-            <a 
-              href={LINKS.WHATSAPP}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-block border border-white/30 text-white hover:bg-white/10 py-2 px-6 rounded-lg transition-colors font-medium"
-            >
-              Contact for Custom Pricing
-            </a>
           </div>
         </div>
       </section>
 
       {/* 6. Testimonials Section */}
-      <section id="testimonials" className="py-16 md:py-20 lg:py-24 relative w-screen left-[calc(-50vw+50%)]">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60 pointer-events-none" />
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-blue-400 font-medium mb-2 text-sm uppercase tracking-wide">Success Stories</p>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4 text-shadow-strong">
-              Student Stories
+      <section className="max-w-7xl mx-auto px-6 md:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <Quote className="w-12 h-12 text-lime-500/20 mx-auto mb-6" />
+            <h2 className="font-heading font-bold text-3xl md:text-5xl text-white mb-6">
+              Student Success Stories
             </h2>
-            <p className="text-white/70 text-base md:text-lg">
-              Many students have benefitted from House of Learning and have proudly shared their success stories below.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {homeTestimonials.map((testimonial) => (
               <div 
                 key={testimonial.id} 
-                className="glass-card-story rounded-md p-6 md:p-8 relative"
-                data-testid={`card-testimonial-${testimonial.id}`}
+                className="glass-card-lime rounded-2xl p-8 relative hover:bg-slate-800/50 transition-colors"
               >
-                <div className="absolute top-6 right-6 opacity-20">
-                  <Quote className="h-12 w-12 text-white" />
-                </div>
-                
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="h-14 w-14 border-2 border-white/30 rounded-full overflow-hidden flex items-center justify-center bg-blue-600/50">
-                     <span className="text-white font-semibold text-lg">
-                        {testimonial.name.split(' ').map(n => n[0]).join('')}
-                     </span>
+                  <div className="h-12 w-12 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-inner">
+                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
-                    <h4 className="font-heading font-semibold text-white text-lg">
+                    <h4 className="font-heading font-bold text-white text-lg">
                       {testimonial.name}
                     </h4>
-                    <div className="flex gap-0.5 mt-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                      ))}
+                    <div className="flex gap-1 mt-1 text-amber-400">
+                      <Star size={14} fill="currentColor" />
+                      <Star size={14} fill="currentColor" />
+                      <Star size={14} fill="currentColor" />
+                      <Star size={14} fill="currentColor" />
+                      <Star size={14} fill="currentColor" />
                     </div>
                   </div>
                 </div>
                 
-                <p className="text-white/90 leading-relaxed relative z-10">
+                <p className="text-slate-300 leading-relaxed relative z-10 italic">
                   "{testimonial.content}"
                 </p>
               </div>
             ))}
           </div>
-        </div>
       </section>
 
-      {/* 7. Quote Section */}
-      <section className="py-16 md:py-20 relative overflow-hidden w-screen left-[calc(-50vw+50%)]">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2070&auto=format&fit=crop)` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/75 to-black/85" />
-        
-        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 rounded-full liquid-glass flex items-center justify-center border border-white/10">
-              <Quote className="h-8 w-8 text-blue-400" />
-            </div>
-          </div>
-          
-          <blockquote className="mb-6">
-            <p className="font-heading text-xl md:text-2xl lg:text-3xl text-white leading-relaxed italic text-shadow-lg">
-              "The direction in which education starts a man will determine his future in life"
-            </p>
-          </blockquote>
-          
-          <cite className="text-white/70 font-medium text-lg not-italic">
-            — Plato
-          </cite>
-        </div>
-      </section>
-
-      {/* 8. Contact Section */}
-      <section id="contact" className="py-16 md:py-20 lg:py-24 liquid-glass w-screen left-[calc(-50vw+50%)] relative">
+      {/* 7. Contact Section */}
+      <section id="contact" className="py-24 relative w-screen left-[calc(-50vw+50%)] bg-gradient-to-b from-slate-900 to-black">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-blue-400 font-medium mb-2 text-sm uppercase tracking-wide">Contact Us</p>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4 text-shadow-strong">
-              Get in Touch
-            </h2>
-            <p className="text-white/70 text-base md:text-lg">
-              Ready to start your learning journey? Reach out to us and let's discuss how we can help.
-            </p>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Contact Info */}
+            <div className="space-y-8">
+               <div>
+                  <h2 className="font-heading font-bold text-4xl text-white mb-6">
+                    Get in Touch
+                  </h2>
+                  <p className="text-slate-400 text-lg leading-relaxed">
+                    Have questions? We're here to help. Reach out to us via any of the channels below or fill out the form.
+                  </p>
+               </div>
+
+               <div className="space-y-6">
+                  <div className="flex items-start gap-5 p-4 rounded-xl hover:bg-white/5 transition-colors">
+                      <div className="w-12 h-12 rounded-full bg-lime-500/10 flex items-center justify-center flex-shrink-0 border border-lime-500/20">
+                        <MapPin className="h-5 w-5 text-lime-400" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-slate-500 mb-1 font-semibold uppercase">Visit Us</p>
+                        <p className="text-white text-lg">Green Masjid Ext 2, Eldorado Park</p>
+                      </div>
+                  </div>
+
+                  <div className="flex items-start gap-5 p-4 rounded-xl hover:bg-white/5 transition-colors">
+                      <div className="w-12 h-12 rounded-full bg-lime-500/10 flex items-center justify-center flex-shrink-0 border border-lime-500/20">
+                        <Mail className="h-5 w-5 text-lime-400" />
+                      </div>
+                      <div>
+                         <p className="text-sm text-slate-500 mb-1 font-semibold uppercase">Email Us</p>
+                        <a href={`mailto:${LINKS.EMAIL}`} className="text-white text-lg hover:text-lime-400 transition-colors">
+                          {LINKS.EMAIL}
+                        </a>
+                      </div>
+                  </div>
+
+                  <div className="flex items-start gap-5 p-4 rounded-xl hover:bg-white/5 transition-colors">
+                      <div className="w-12 h-12 rounded-full bg-lime-500/10 flex items-center justify-center flex-shrink-0 border border-lime-500/20">
+                        <Phone className="h-5 w-5 text-lime-400" />
+                      </div>
+                      <div>
+                         <p className="text-sm text-slate-500 mb-1 font-semibold uppercase">Call Us</p>
+                        <a href={`tel:${LINKS.PHONE.replace(/\s/g, '')}`} className="text-white text-lg hover:text-lime-400 transition-colors">
+                          {LINKS.PHONE}
+                        </a>
+                      </div>
+                  </div>
+               </div>
+            </div>
+
             {/* Contact Form */}
-            <div>
-              <div className="glass-card-blue p-6 md:p-8 h-full rounded-md border border-blue-500/30">
-                <h3 className="font-heading font-semibold text-xl text-white mb-6">
-                  Send us a message
-                </h3>
-
-                {contactSubmitted ? (
-                  <div className="flex flex-col items-center justify-center py-12 text-center">
-                    <div className="w-16 h-16 rounded-full bg-green-600/30 flex items-center justify-center mb-4">
-                      <CheckCircle className="h-8 w-8 text-green-400" />
+            <div className="glass-card-lime p-8 md:p-10 rounded-3xl border border-white/5 bg-slate-800/20">
+              {contactSubmitted ? (
+                  <div className="flex flex-col items-center justify-center py-12 text-center h-full min-h-[400px]">
+                    <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-6">
+                      <CheckCircle className="h-10 w-10 text-green-400" />
                     </div>
-                    <h4 className="font-heading font-semibold text-xl text-white mb-2">
-                      Message Sent!
-                    </h4>
-                    <p className="text-white/60 mb-6">
-                      Thank you for reaching out. We'll get back to you soon.
+                    <h3 className="font-heading font-bold text-2xl text-white mb-3">
+                      Message Sent Successfully!
+                    </h3>
+                    <p className="text-slate-400 mb-8 max-w-xs">
+                      We'll be in touch with you shortly to discuss your educational needs.
                     </p>
                     <button 
                       onClick={() => setContactSubmitted(false)}
-                      className="text-white border border-white/30 hover:bg-white/10 px-4 py-2 rounded-lg transition-colors"
+                      className="text-white border border-white/20 hover:bg-white/10 px-6 py-3 rounded-xl transition-colors font-medium"
                     >
                       Send Another Message
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleContactSubmit} className="space-y-5">
-                    <div className="space-y-2">
-                      <label className="text-white/80 text-sm font-medium">Name</label>
-                      <input 
-                        type="text"
-                        placeholder="Your full name" 
-                        className="flex h-10 w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        required
-                      />
+                  <form onSubmit={handleContactSubmit} className="space-y-6">
+                    <h3 className="text-xl font-bold text-white mb-2">Send a Message</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-slate-400 text-sm font-medium ml-1">Name</label>
+                        <input
+                          type="text"
+                          className="w-full rounded-xl border border-white/10 bg-slate-950/50 px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-lime-500/50 transition-all"
+                          placeholder="John Doe"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-slate-400 text-sm font-medium ml-1">Phone</label>
+                        <input
+                          type="tel"
+                          className="w-full rounded-xl border border-white/10 bg-slate-950/50 px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-lime-500/50 transition-all"
+                          placeholder="+27..."
+                          required
+                        />
+                      </div>
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-white/80 text-sm font-medium">Email</label>
+                      <label className="text-slate-400 text-sm font-medium ml-1">Email</label>
                       <input 
                         type="email" 
-                        placeholder="your@email.com" 
-                        className="flex h-10 w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="w-full rounded-xl border border-white/10 bg-slate-950/50 px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-lime-500/50 transition-all"
+                        placeholder="john@example.com"
                         required
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-white/80 text-sm font-medium">Subject</label>
-                      <input 
-                        type="text"
-                        placeholder="What is this about?" 
-                        className="flex h-10 w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        required
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-white/80 text-sm font-medium">Message</label>
+                      <label className="text-slate-400 text-sm font-medium ml-1">Message</label>
                       <textarea 
-                        placeholder="Tell us how we can help you..." 
-                        className="flex min-h-[120px] w-full rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all"
+                        className="w-full min-h-[140px] rounded-xl border border-white/10 bg-slate-950/50 px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-lime-500/50 resize-none transition-all"
+                        placeholder="How can we help you?"
                         required
                       />
                     </div>
 
                     <button 
                       type="submit" 
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white border border-blue-500 h-10 px-4 py-2 rounded-md flex items-center justify-center gap-2 font-medium transition-colors shadow-lg shadow-blue-900/20"
+                      className="w-full bg-lime-600 hover:bg-lime-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-lime-600/20 transition-all active:scale-95 flex items-center justify-center gap-2"
                     >
-                      <Send className="h-4 w-4" />
+                      <Send className="h-5 w-5" />
                       Send Message
                     </button>
                   </form>
                 )}
-              </div>
-            </div>
-
-            {/* Contact Info */}
-            <div className="space-y-6">
-              <div className="glass-card-blue p-6 md:p-8 rounded-md border border-blue-500/30">
-                <h3 className="font-heading font-semibold text-xl text-white mb-6">
-                  Contact Information
-                </h3>
-                <div className="space-y-5">
-                  
-                  {/* Address */}
-                  <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-md bg-blue-600/30 flex items-center justify-center flex-shrink-0">
-                        <MapPin className="h-5 w-5 text-blue-400" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-white/50 mb-0.5">Address</p>
-                        <p className="text-white font-medium">Green Masjid Ext 2, Eldorado Park</p>
-                      </div>
-                  </div>
-
-                  {/* Email */}
-                  <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-md bg-blue-600/30 flex items-center justify-center flex-shrink-0">
-                        <Mail className="h-5 w-5 text-blue-400" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-sm text-white/50 mb-0.5">Email</p>
-                        <a href={`mailto:${LINKS.EMAIL}`} className="text-white font-medium hover:text-blue-400 transition-colors break-all text-sm block">
-                          {LINKS.EMAIL}
-                        </a>
-                      </div>
-                  </div>
-
-                  {/* Phone */}
-                  <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-md bg-blue-600/30 flex items-center justify-center flex-shrink-0">
-                        <Phone className="h-5 w-5 text-blue-400" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-white/50 mb-0.5">Phone</p>
-                        <a href={`tel:${LINKS.PHONE.replace(/\s/g, '')}`} className="text-white font-medium hover:text-blue-400 transition-colors">
-                          {LINKS.PHONE}
-                        </a>
-                      </div>
-                  </div>
-
-                   {/* WhatsApp */}
-                   <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-md bg-blue-600/30 flex items-center justify-center flex-shrink-0">
-                        <MessageCircle className="h-5 w-5 text-blue-400" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-white/50 mb-0.5">WhatsApp</p>
-                        <a href={LINKS.WHATSAPP} target="_blank" rel="noreferrer" className="text-white font-medium hover:text-blue-400 transition-colors">
-                          Chat on WhatsApp
-                        </a>
-                      </div>
-                  </div>
-
-                  {/* Hours */}
-                  <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-md bg-blue-600/30 flex items-center justify-center flex-shrink-0">
-                        <Clock className="h-5 w-5 text-blue-400" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-white/50 mb-0.5">Hours</p>
-                        <p className="text-white font-medium">Mon - Friday: 8:00 AM - 17:30 PM</p>
-                      </div>
-                  </div>
-
-                </div>
-              </div>
-
-              <div className="glass-card-story p-6 md:p-8 rounded-md border border-white/10">
-                <h3 className="font-heading font-semibold text-xl text-white mb-3">
-                  Ready to get started?
-                </h3>
-                <p className="text-white/80 mb-4">
-                  Join hundreds of students who have improved their grades with House of Learning.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <a 
-                    href={`tel:${LINKS.PHONE.replace(/\s/g, '')}`}
-                    className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-4 py-2 rounded-md flex items-center gap-2 transition-colors text-sm font-medium"
-                  >
-                      <Phone className="h-4 w-4" />
-                      Call Now
-                  </a>
-                  <a 
-                     href={`mailto:${LINKS.EMAIL}`}
-                     className="text-white border border-white/30 hover:bg-white/10 px-4 py-2 rounded-md flex items-center gap-2 transition-colors text-sm font-medium"
-                  >
-                      <Mail className="h-4 w-4" />
-                      Email Us
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>

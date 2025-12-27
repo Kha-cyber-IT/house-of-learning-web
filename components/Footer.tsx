@@ -61,7 +61,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <BookOpen className="h-6 w-6 text-blue-400" />
+              <BookOpen className="h-6 w-6 text-lime-400" />
               <span className="font-heading font-bold text-xl text-white">House of Learning</span>
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
@@ -82,7 +82,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
                 className="w-10 h-10 rounded-md bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all group"
                 aria-label="Facebook"
               >
-                <Facebook className="h-5 w-5 text-white/70 group-hover:text-blue-400 transition-colors" />
+                <Facebook className="h-5 w-5 text-white/70 group-hover:text-lime-400 transition-colors" />
               </a>
             </div>
           </div>
