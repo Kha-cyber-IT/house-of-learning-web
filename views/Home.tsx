@@ -212,7 +212,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 className="w-full h-full object-cover scale-105 opacity-60"
             />
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/50 to-background"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-background"></div>
         </div>
 
         {/* Hero Content */}
@@ -306,14 +306,14 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       </section>
 
       {/* 3. Subjects Section - Bento Grid Style */}
-      <section id="subjects" className="py-20 relative w-screen left-[calc(-50vw+50%)] bg-slate-950/50">
+      <section id="subjects" className="py-20 relative w-screen left-[calc(-50vw+50%)]">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="text-lime-400 font-bold text-sm uppercase tracking-widest mb-3">Curriculum</p>
+            <p className="text-white font-bold text-sm uppercase tracking-widest mb-3">Curriculum</p>
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-6">
               Comprehensive Subject Coverage
             </h2>
-            <p className="text-slate-400 text-lg">
+            <p className="text-white text-lg">
               Expert tutoring across all major disciplines. From sciences to humanities, we have you covered.
             </p>
           </div>
@@ -409,14 +409,14 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       </section>
 
       {/* 5. Pricing Section - Highlighted */}
-      <section id="pricing" className="py-24 relative w-screen left-[calc(-50vw+50%)] bg-slate-950">
+      <section id="pricing" className="py-24 relative w-screen left-[calc(-50vw+50%)]">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="text-lime-400 font-bold text-sm uppercase tracking-widest mb-3">Investment</p>
+            <p className="text-white font-bold text-sm uppercase tracking-widest mb-3">Investment</p>
             <h2 className="font-heading font-bold text-3xl md:text-5xl text-white mb-6">
               Transparent Pricing
             </h2>
-            <p className="text-slate-400 text-lg">
+            <p className="text-white text-lg">
               Choose the plan that best fits your goals. No hidden fees, just quality education.
             </p>
           </div>
@@ -532,7 +532,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       </section>
 
       {/* 7. Contact Section */}
-      <section id="contact" className="py-24 relative w-screen left-[calc(-50vw+50%)] bg-gradient-to-b from-slate-900 to-black">
+      <section id="contact" className="py-24 relative w-screen left-[calc(-50vw+50%)]">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
