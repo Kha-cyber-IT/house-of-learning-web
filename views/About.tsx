@@ -4,7 +4,7 @@ import { GlassCard } from '../components/GlassCard';
 
 export const About: React.FC = () => {
   return (
-    <div className="space-y-16 animate-fade-in max-w-4xl mx-auto">
+    <div className="space-y-16 animate-fade-in w-full max-w-[1920px] mx-auto">
       
       <div className="text-center space-y-4">
         <h2 className="text-4xl font-heading font-bold text-foreground">About Us</h2>

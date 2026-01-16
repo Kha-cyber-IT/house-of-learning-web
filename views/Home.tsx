@@ -254,7 +254,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       </div>
 
       {/* 2. About / Stats Section - Clean & Structured */}
-      <section id="about" className="max-w-7xl mx-auto px-6 md:px-8">
+      <section id="about" className="w-full max-w-[1920px] mx-auto px-6 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
              
              {/* Text Content */}
@@ -302,7 +302,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
 
       {/* 3. Subjects Section - Bento Grid Style */}
       <section id="subjects" className="py-20 relative w-screen left-[calc(-50vw+50%)] bg-slate-950/50">
-        <div className="max-w-7xl mx-auto px-6 md:px-8">
+        <div className="w-full max-w-[1920px] mx-auto px-6 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <p className="text-lime-400 font-bold text-sm uppercase tracking-widest mb-3">Curriculum</p>
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-6">
@@ -360,7 +360,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       </section>
 
       {/* 4. Services Section - Cards */}
-      <section className="max-w-7xl mx-auto px-6 md:px-8">
+      <section className="w-full max-w-[1920px] mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Service 1 */}
               <div className="glass-card-lime p-10 rounded-3xl relative overflow-hidden group">
@@ -405,7 +405,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
 
       {/* 5. Pricing Section - Highlighted */}
       <section id="pricing" className="py-24 relative w-screen left-[calc(-50vw+50%)] bg-slate-950">
-        <div className="max-w-7xl mx-auto px-6 md:px-8">
+        <div className="w-full max-w-[1920px] mx-auto px-6 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <p className="text-lime-400 font-bold text-sm uppercase tracking-widest mb-3">Investment</p>
             <h2 className="font-heading font-bold text-3xl md:text-5xl text-white mb-6">
@@ -486,7 +486,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       </section>
 
       {/* 6. Testimonials Section */}
-      <section className="max-w-7xl mx-auto px-6 md:px-8">
+      <section className="w-full max-w-[1920px] mx-auto px-6 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <Quote className="w-12 h-12 text-lime-500/20 mx-auto mb-6" />
             <h2 className="font-heading font-bold text-3xl md:text-5xl text-white mb-6">
@@ -528,7 +528,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
 
       {/* 7. Contact Section */}
       <section id="contact" className="py-24 relative w-screen left-[calc(-50vw+50%)] bg-gradient-to-b from-slate-900 to-black">
-        <div className="max-w-7xl mx-auto px-6 md:px-8">
+        <div className="w-full max-w-[1920px] mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
             {/* Contact Info */}

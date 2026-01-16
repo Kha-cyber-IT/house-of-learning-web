@@ -47,7 +47,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 export const Services: React.FC = () => {
   return (
-    <div className="animate-fade-in max-w-7xl mx-auto space-y-16 pb-12">
+    <div className="animate-fade-in w-full mx-auto space-y-16 pb-12">
       <div className="text-center max-w-3xl mx-auto">
         <p className="text-lime-400 font-bold text-sm uppercase tracking-widest mb-3">What We Offer</p>
         <h2 className="font-heading font-bold text-3xl md:text-5xl text-white mb-6">
