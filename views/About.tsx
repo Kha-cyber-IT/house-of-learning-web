@@ -67,17 +67,6 @@ export const About: React.FC = () => {
           </div>
         </section>
 
-        {/* Closing Image */}
-        <section className="flex justify-center pb-8">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 max-w-3xl w-full">
-                <img 
-                    src="https://i.postimg.cc/Rh2P46X4/Smart-Select-20251213-105934-Whats-App.jpg" 
-                    alt="House of Learning Group Photo" 
-                    className="w-full h-auto object-cover"
-                />
-            </div>
-        </section>
-
       </div>
     </div>
   );

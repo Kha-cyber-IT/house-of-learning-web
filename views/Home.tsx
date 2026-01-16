@@ -138,7 +138,7 @@ const pricingPlans: PricingPlan[] = [
     id: "monthly",
     name: "Monthly Package",
     description: "Consistent support for sustained improvement.",
-    price: "R250",
+    price: "R260",
     period: "per month",
     icon: Star,
     popular: true,
@@ -174,11 +174,6 @@ const homeTestimonials = [
     id: "1",
     name: "Liam Moor",
     content: "This is Liam Moor, who joined House of Learning this year for extra classes. It helped him improve his results, and he received his report card, moving to the next grade. Thank you, House of Learning, for the extra classes.",
-  },
-  {
-    id: "2",
-    name: "Refilwe",
-    content: "House of Learning helped me a lot. Paper 2 maths has always been a struggle for me but after the classes I was confident about what I wrote. Thank you House of Learning.",
   },
 ];
 
@@ -233,7 +228,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
 
             {/* Description */}
             <p className="mb-10 text-lg md:text-xl text-white leading-relaxed max-w-2xl font-medium mx-auto drop-shadow-lg relative z-50">
-                Unlocking potential through personalized education. We match every student with expert tutors to ignite a lifelong passion for success.
+                Unlocking potential through personalized education. We aim to match every student with expert tutors to ignite a lifelong passion for success.
             </p>
 
             {/* Buttons */}
