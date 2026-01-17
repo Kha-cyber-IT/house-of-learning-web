@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
 import { RegistrationBanner } from './components/RegistrationBanner';
@@ -25,8 +24,12 @@ function App() {
     <div className="min-h-screen font-sans bg-background text-foreground relative overflow-hidden flex flex-col">
       
       {/* Background with Overlay */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background"></div>
+      <div className={`fixed inset-0 -z-10 transition-colors duration-500 ${activeView === 'home' ? 'bg-[#F3F4F6]' : ''}`}>
+        <div className={`absolute inset-0 bg-gradient-to-b ${
+          activeView === 'home'
+          ? 'from-[#F3F4F6] via-[#F9FAFB] to-[#F3F4F6]'
+          : 'from-background via-background/95 to-background'
+        }`}></div>
       </div>
       
       <Navigation 

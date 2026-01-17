@@ -40,14 +40,18 @@ export const Navigation: React.FC<NavigationProps> = ({
     { id: 'services', label: 'Services' },
   ];
 
+  // Logic to determine text color based on light/dark mode view
+  const isLightMode = activeView === 'home';
+  const textColorClass = isLightMode && !scrolled ? 'text-slate-800' : 'text-white';
+  const logoColorClass = isLightMode && !scrolled ? 'text-slate-900' : 'text-white';
+  const glassClass = scrolled || isOpen
+    ? isLightMode ? 'bg-white/90 backdrop-blur-xl border-slate-200 shadow-sm' : 'glass-nav py-3 border-white/5 shadow-lg'
+    : 'bg-transparent py-5 border-transparent';
+
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
-          scrolled || isOpen
-            ? 'glass-nav py-3 border-white/5 shadow-lg'
-            : 'bg-transparent py-5 border-transparent'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${glassClass}`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
@@ -58,7 +62,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             <div className={`p-2 rounded-xl text-white shadow-lg transition-colors ${scrolled ? 'bg-lime-600' : 'bg-lime-600/90'}`}>
                 <BookOpen size={24} strokeWidth={2.5} />
             </div>
-            <span className="text-xl md:text-2xl font-heading font-bold text-white tracking-tight">
+            <span className={`text-xl md:text-2xl font-heading font-bold tracking-tight ${logoColorClass}`}>
                 House of Learning
             </span>
           </button>
@@ -71,8 +75,8 @@ export const Navigation: React.FC<NavigationProps> = ({
                 onClick={() => handleNavClick(item.id)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   activeView === item.id
-                    ? 'text-white bg-white/10'
-                    : 'text-slate-300 hover:text-white hover:bg-white/5'
+                    ? isLightMode && !scrolled ? 'text-white bg-lime-600 shadow-md' : 'text-white bg-white/10'
+                    : isLightMode && !scrolled ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' : 'text-slate-300 hover:text-white hover:bg-white/5'
                 }`}
               >
                 {item.label}
@@ -91,7 +95,7 @@ export const Navigation: React.FC<NavigationProps> = ({
           {/* Mobile Toggle */}
           <button 
             onClick={() => setIsOpen(!isOpen)} 
-            className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+            className={`md:hidden p-2 rounded-lg transition-colors ${isLightMode && !scrolled && !isOpen ? 'text-slate-800 hover:bg-slate-100' : 'text-white hover:bg-white/10'}`}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
