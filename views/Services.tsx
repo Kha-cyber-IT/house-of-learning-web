@@ -7,6 +7,7 @@ interface Service {
   subtitle: string;
   description: string;
   icon: string;
+  category: 'math' | 'science' | 'languages';
 }
 
 const services: Service[] = [
@@ -16,6 +17,7 @@ const services: Service[] = [
     subtitle: "Gain Academic Confidence",
     description: "Our curriculum and educational sessions completely revolve around the abilities and experiences of each student. We identify and target the gaps in learning to ensure complete academic confidence.",
     icon: "graduation",
+    category: "math",
   },
   {
     id: "2",
@@ -23,6 +25,7 @@ const services: Service[] = [
     subtitle: "Overcome Learning Challenges",
     description: "We take a comprehensive and collaborative approach in creating a plan and program that is right for every student. Adjusting to different personalities and specific academic needs, we always find what works best.",
     icon: "user",
+    category: "science",
   },
   {
     id: "3",
@@ -30,6 +33,7 @@ const services: Service[] = [
     subtitle: "Achieve Your Best Results",
     description: "We take a comprehensive and collaborative approach in creating a plan and program that is right for every student. Adjusting to different personalities and specific academic needs, we always find what works best.",
     icon: "file",
+    category: "languages",
   },
 ];
 
@@ -43,6 +47,18 @@ const iconMap: Record<string, React.ElementType> = {
   graduation: GraduationCap,
   user: UserCheck,
   file: FileText,
+};
+
+const categoryColors = {
+  math: 'bg-blue-600',
+  science: 'bg-emerald-600',
+  languages: 'bg-indigo-600',
+};
+
+const categoryTextColors = {
+  math: 'text-blue-600',
+  science: 'text-emerald-600',
+  languages: 'text-indigo-600',
 };
 
 export const Services: React.FC = () => {
@@ -64,23 +80,28 @@ export const Services: React.FC = () => {
           return (
             <div 
               key={service.id} 
-              className="glass-card-lime p-8 rounded-2xl h-full flex flex-col transition-all duration-300 hover:border-lime-500/30 group"
+              className="bg-white shadow-md rounded-xl overflow-hidden h-full flex flex-col transition-all duration-300 group hover:-translate-y-1 hover:shadow-lg"
               data-testid={`card-service-${service.id}`}
             >
-              <div className="w-14 h-14 rounded-xl bg-lime-500/10 flex items-center justify-center mb-6 border border-lime-500/20 group-hover:scale-110 transition-transform duration-300">
-                <IconComponent className="h-7 w-7 text-lime-400" />
+              {/* Header Image */}
+              <div className={`${categoryColors[service.category]} h-48 flex items-center justify-center`}>
+                <IconComponent className="h-16 w-16 text-white" />
               </div>
-              <h3 className="font-heading font-bold text-xl text-white mb-2">
-                {service.title}
-              </h3>
-              <p className="text-lime-400 font-medium text-sm mb-4 uppercase tracking-wide">
-                {service.subtitle}
-              </p>
-              <p className="text-slate-300 text-sm leading-relaxed flex-1 mb-6">
-                {service.description}
-              </p>
-              <div className="flex items-center text-lime-400 font-semibold text-sm group-hover:gap-2 transition-all">
-                  Read More <ArrowRight className="h-4 w-4 ml-1" />
+
+              {/* Content Body */}
+              <div className="p-8 flex flex-col flex-1">
+                <h3 className="font-heading font-bold text-xl text-gray-800 mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-gray-500 font-medium text-sm mb-4 uppercase tracking-wide">
+                  {service.subtitle}
+                </p>
+                <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-6">
+                  {service.description}
+                </p>
+                <div className={`flex items-center ${categoryTextColors[service.category]} font-semibold text-sm group-hover:gap-2 transition-all`}>
+                    Read More <ArrowRight className="h-4 w-4 ml-1" />
+                </div>
               </div>
             </div>
           );
