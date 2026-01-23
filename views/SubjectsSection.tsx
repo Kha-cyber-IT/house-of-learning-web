@@ -83,11 +83,23 @@ const subjectData = {
 };
 
 export const SubjectsSection = () => {
-  // State to track if a category is open. Null means showing the main list.
+  // State to track if a category is open. Null means showing the main list. 'all' means showing everything.
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  // Helper to get current active data
-  const currentData = activeCategory ? subjectData[activeCategory as keyof typeof subjectData] : null;
+  // Helper to get current active data or title
+  const getTitle = () => {
+    if (!activeCategory) return 'Our Subjects';
+    if (activeCategory === 'all') return 'All Subjects';
+    return subjectData[activeCategory as keyof typeof subjectData]?.title;
+  };
+
+  // Derive the subjects to display
+  const displaySubjects = activeCategory
+    ? (activeCategory === 'all'
+        ? Object.values(subjectData).flatMap(cat => cat.subSubjects.map(sub => ({ ...sub, icon: cat.icon })))
+        : subjectData[activeCategory as keyof typeof subjectData].subSubjects.map(sub => ({ ...sub, icon: subjectData[activeCategory as keyof typeof subjectData].icon }))
+      )
+    : [];
 
   return (
     <section className="mb-32">
@@ -95,9 +107,9 @@ export const SubjectsSection = () => {
       {/* 2. HEADER SECTION */}
       <div className="flex flex-col md:flex-row justify-between items-baseline mb-16 gap-4">
         <div>
-          {/* Dynamic Title: Shows "Explore Subjects" or the specific Category Name */}
+          {/* Dynamic Title */}
           <h2 className="font-heading text-4xl font-extrabold text-slate-900 mb-3 tracking-tight animate-fade-in">
-            {activeCategory ? currentData?.title : 'Our Subjects'}
+            {getTitle()}
           </h2>
           <p className="text-slate-500 text-lg font-medium">
             {activeCategory ? 'Select a specific course below.' : 'Expert tutoring across all major disciplines.'}
@@ -113,7 +125,10 @@ export const SubjectsSection = () => {
             <span className="material-symbols-outlined text-[20px] rotate-180">arrow_forward</span> Back to Categories
           </button>
         ) : (
-          <button className="text-primary font-bold flex items-center gap-2 group hover:gap-3 transition-all text-lg">
+          <button
+            onClick={() => setActiveCategory('all')}
+            className="text-primary font-bold flex items-center gap-2 group hover:gap-3 transition-all text-lg"
+          >
             Browse all <span className="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span>
           </button>
         )}
@@ -146,10 +161,10 @@ export const SubjectsSection = () => {
         </div>
       )}
 
-      {/* 4. SUB-SUBJECTS GRID (Visible when a category is selected) */}
-      {activeCategory && currentData && (
+      {/* 4. SUB-SUBJECTS GRID (Visible when a category or 'all' is selected) */}
+      {activeCategory && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-           {currentData.subSubjects.map((sub, index) => (
+           {displaySubjects.map((sub, index) => (
              <div
                key={index}
                className="group flex flex-col rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
@@ -160,7 +175,7 @@ export const SubjectsSection = () => {
                     {/* Background Decoration */}
                     <div className="absolute -right-6 -top-6 opacity-10 rotate-12">
                         <span className="material-symbols-outlined text-[140px] text-black/5 select-none">
-                            {currentData.icon}
+                            {sub.icon}
                         </span>
                     </div>
 
