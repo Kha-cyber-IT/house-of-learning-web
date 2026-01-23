@@ -201,11 +201,6 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
         
         {/* Background Image with Modern Overlay */}
         <div className="absolute inset-0 z-0 select-none">
-            <img 
-                src="https://i.postimg.cc/rFPyLy1v/IMG-20251211-WA0090.jpg" 
-                alt="Classroom Background" 
-                className="w-full h-full object-cover scale-105 opacity-60"
-            />
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/50 to-background"></div>
         </div>
