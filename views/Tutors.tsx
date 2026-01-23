@@ -13,25 +13,25 @@ export const Tutors: React.FC = () => {
       
       <div className="grid grid-cols-1 gap-8">
         {TUTORS.map((tutor) => (
-          <GlassCard key={tutor.id} className="p-8 rounded-3xl flex flex-col md:flex-row gap-8 items-start" variant="default">
+          <div key={tutor.id} className="bg-primary p-8 rounded-3xl flex flex-col md:flex-row gap-8 items-start shadow-xl">
              <div className="flex-shrink-0 mx-auto md:mx-0">
                 <img 
                   src={tutor.image} 
                   alt={tutor.name} 
-                  className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover shadow-xl border-4 border-background" 
+                  className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover shadow-xl border-4 border-white"
                 />
              </div>
              
              <div className="flex-grow text-center md:text-left">
-                <h4 className="text-2xl font-bold text-foreground mb-1">{tutor.name}</h4>
-                <p className="text-primary font-semibold mb-4 uppercase tracking-wider text-sm">{tutor.role}</p>
-                <div className="text-muted-foreground space-y-3 leading-relaxed">
+                <h4 className="text-2xl font-bold text-slate-900 mb-1">{tutor.name}</h4>
+                <p className="text-slate-800 font-bold mb-4 uppercase tracking-wider text-sm">{tutor.role}</p>
+                <div className="text-slate-900 space-y-3 leading-relaxed font-medium">
                   {tutor.description.map((para, index) => (
                     <p key={index}>{para}</p>
                   ))}
                 </div>
              </div>
-          </GlassCard>
+          </div>
         ))}
       </div>
     </div>

@@ -341,21 +341,21 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
         </div>
 
         {/* CLOSING CTA */}
-        <div className="bg-slate-100/50 rounded-[40px] p-16 text-center border border-gray-200/60 shadow-sm">
-            <h2 className="text-4xl font-extrabold font-display mb-6 text-slate-900 leading-tight">Ready to Excel?</h2>
-            <p className="text-slate-500 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">Join House of Learning today and take the first step towards academic success.</p>
+        <div className="bg-[#2A6EBB] rounded-[40px] p-16 text-center shadow-xl">
+            <h2 className="text-4xl font-extrabold font-display mb-6 text-white leading-tight">Ready to Excel?</h2>
+            <p className="text-white/90 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">Join House of Learning today and take the first step towards academic success.</p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <a
                     href={LINKS.REGISTRATION}
                     target="_blank"
                     rel="noreferrer"
-                    className="bg-primary hover:bg-lime-600 text-white px-12 py-5 rounded-2xl font-bold text-lg shadow-xl shadow-lime-500/20 transition-all"
+                    className="bg-white text-[#2A6EBB] hover:bg-gray-100 px-12 py-5 rounded-2xl font-bold text-lg shadow-xl transition-all"
                 >
                     Book Now
                 </a>
                 <button
                     onClick={() => setActiveView('locations')}
-                    className="bg-white border border-gray-200 text-slate-800 px-12 py-5 rounded-2xl font-bold text-lg shadow-sm hover:border-gray-300 transition-all"
+                    className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-12 py-5 rounded-2xl font-bold text-lg shadow-sm transition-all"
                 >
                     Contact Us
                 </button>

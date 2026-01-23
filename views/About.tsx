@@ -21,22 +21,22 @@ export const About: React.FC = () => {
 
         {/* Mission & Vision */}
         <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white/60 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col justify-center text-center">
-                <div className="w-12 h-12 bg-[#80ec13]/10 flex items-center justify-center rounded-xl mb-4 border border-[#80ec13]/20 mx-auto">
-                    <span className="material-symbols-outlined text-[#65a30d]">lightbulb</span>
+            <div className="bg-[#2A6EBB] text-white p-8 rounded-3xl shadow-lg flex flex-col justify-center text-center border border-transparent">
+                <div className="w-12 h-12 bg-white flex items-center justify-center rounded-xl mb-4 mx-auto text-[#2A6EBB]">
+                    <span className="material-symbols-outlined">lightbulb</span>
                 </div>
-                <h3 className="text-2xl font-bold font-heading mb-4 text-slate-900">Our Mission</h3>
-                <p className="text-slate-500">
+                <h3 className="text-2xl font-bold font-heading mb-4 text-white">Our Mission</h3>
+                <p className="text-white/90">
                 To educate every learner to achieve their academic best and empower them to reach their full potential.
                 </p>
             </div>
 
-            <div className="bg-white/60 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col justify-center text-center">
-                <div className="w-12 h-12 bg-[#80ec13]/10 flex items-center justify-center rounded-xl mb-4 border border-[#80ec13]/20 mx-auto">
-                    <span className="material-symbols-outlined text-[#65a30d]">visibility</span>
+            <div className="bg-[#2A6EBB] text-white p-8 rounded-3xl shadow-lg flex flex-col justify-center text-center border border-transparent">
+                <div className="w-12 h-12 bg-white flex items-center justify-center rounded-xl mb-4 mx-auto text-[#2A6EBB]">
+                    <span className="material-symbols-outlined">visibility</span>
                 </div>
-                <h3 className="text-2xl font-bold font-heading mb-4 text-slate-900">Our Vision</h3>
-                <p className="text-slate-500">
+                <h3 className="text-2xl font-bold font-heading mb-4 text-white">Our Vision</h3>
+                <p className="text-white/90">
                 To ensure that learners excel academically in all subjects and build a bright future.
                 </p>
             </div>
