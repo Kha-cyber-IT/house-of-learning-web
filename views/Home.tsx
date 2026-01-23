@@ -81,11 +81,31 @@ const pricingPlans: PricingPlan[] = [
   },
 ];
 
+// Updated Success Stories Data (as per request, using existing images)
 const homeTestimonials = [
   {
-    id: "1",
-    name: "Liam Moor",
-    content: "This is Liam Moor, who joined House of Learning this year for extra classes. It helped him improve his results, and he received his report card, moving to the next grade. Thank you, House of Learning, for the extra classes.",
+    id: 1,
+    name: 'Neo Nkadimeng',
+    text: 'I’ve commanded incredible support academically... The new tutors understand my own pace and build confidence.',
+    image: 'https://i.postimg.cc/gJ3hGsXK/Smart-Select-20251123-152747-Whats-App.jpg'
+  },
+  {
+    id: 2,
+    name: 'Trevor Nematohoni',
+    text: 'Admitting my struggles this year has been a game changer. The skills taught here... my grades have improved significantly.',
+    image: 'https://i.postimg.cc/T2JQ0TH4/IMG-20251124-WA0018.jpg'
+  },
+  {
+    id: 3,
+    name: 'Leyondre Walters',
+    text: 'House of Learning is a massive help and a new story of teaching logic. They were there to protect me when I felt like giving up.',
+    image: 'https://i.postimg.cc/R0nxJWGv/IMG-20251124-WA0019.jpg'
+  },
+  {
+    id: 4,
+    name: 'Keabetswe Usekwa',
+    text: 'The last day I announced House of Learning I thought I accepted failure. But the help I received changed my project entirely.',
+    image: 'https://i.postimg.cc/NMvyCXJY/IMG-20251209-WA0009.jpg'
   },
 ];
 
@@ -268,32 +288,26 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             </div>
         </div>
 
-        {/* TESTIMONIALS (Student Success - Restored & Updated) */}
+        {/* SUCCESS STORIES (Redesigned) */}
         <div className="mb-32">
-             <div className="text-center mb-16">
-                <h2 className="text-4xl font-extrabold font-display mb-4 text-slate-900">Student Success</h2>
-            </div>
-            <div className="max-w-4xl mx-auto flex justify-center">
-                {homeTestimonials.map((testimonial) => (
-                    <div key={testimonial.id} className="bg-primary rounded-xl p-10 text-center relative max-w-2xl w-full shadow-lg">
-                        <span className="material-symbols-outlined text-4xl text-slate-900 absolute top-8 left-8">format_quote</span>
-                        <p className="text-xl text-slate-900 leading-relaxed font-medium italic mb-6 relative z-10">"{testimonial.content}"</p>
-                        <div className="flex flex-col items-center">
-                            <div className="w-12 h-12 rounded-full bg-white text-primary flex items-center justify-center font-bold text-lg mb-3">
-                                {testimonial.name.charAt(0)}
-                            </div>
-                            <h4 className="font-bold text-slate-900">{testimonial.name}</h4>
-                            <div className="flex text-slate-900 gap-1 mt-1">
-                                <Star size={14} fill="currentColor" />
-                                <Star size={14} fill="currentColor" />
-                                <Star size={14} fill="currentColor" />
-                                <Star size={14} fill="currentColor" />
-                                <Star size={14} fill="currentColor" />
-                            </div>
-                        </div>
+             <h2 className="text-center text-[36px] font-bold text-[#C6F038] mb-10 font-heading">
+                Success Stories
+             </h2>
+             <div className="flex flex-wrap justify-center gap-8 p-5 md:p-10 max-w-[1200px] mx-auto">
+                {homeTestimonials.map((story) => (
+                  <div
+                    key={story.id}
+                    className="bg-white border-[3px] border-[#C6F038] shadow-[0_10px_30px_rgba(198,240,56,0.2)] rounded-3xl p-8 w-full md:w-[350px] flex flex-col items-center text-center hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(198,240,56,0.3)] transition-transform duration-300"
+                  >
+                    <div className="w-20 h-20 bg-[#F0FBD0] rounded-full mb-5 flex items-center justify-center overflow-hidden">
+                        <img src={story.image} alt={story.name} className="w-full h-full object-cover" />
                     </div>
+
+                    <h3 className="text-[22px] font-bold text-[#1A1A1A] mb-4 font-heading">{story.name}</h3>
+                    <p className="text-[16px] leading-[1.6] text-[#4A4A4A] text-left">{story.text}</p>
+                  </div>
                 ))}
-            </div>
+             </div>
         </div>
 
         {/* CONTACT SECTION (Orange AIE Style) */}
