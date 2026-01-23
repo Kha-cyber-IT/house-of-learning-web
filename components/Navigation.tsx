@@ -80,7 +80,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                     onClick={() => setIsOpen(!isOpen)}
                     className="md:hidden text-slate-600 hover:text-primary transition-colors p-1"
                   >
-                    {isOpen ? <X size={24} /> : <Menu size={24} />}
+                    {isOpen ? <X size={30} /> : <Menu size={30} />}
                   </button>
               </div>
           </div>
@@ -89,15 +89,15 @@ export const Navigation: React.FC<NavigationProps> = ({
       {/* Mobile Menu Overlay */}
       {isOpen && (
         <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-24 px-6 md:hidden">
-            <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-col items-center gap-4">
                 {menuItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleNavClick(item.id)}
-                    className={`text-2xl font-bold font-display ${
+                    className={`w-full h-[44px] flex items-center justify-center text-base font-bold font-display transition-colors ${
                       activeView === item.id
-                        ? 'text-primary'
-                        : 'text-slate-900 hover:text-primary'
+                        ? 'text-primary bg-primary/5 rounded-lg'
+                        : 'text-slate-900 hover:text-primary hover:bg-slate-50 rounded-lg'
                     }`}
                   >
                     {item.label}
@@ -107,7 +107,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                     href={LINKS.REGISTRATION}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-4 w-full max-w-xs bg-slate-900 text-white hover:bg-slate-800 py-4 rounded-xl text-lg font-bold transition-all text-center shadow-xl"
+                    className="mt-4 w-full h-[44px] flex items-center justify-center bg-slate-900 text-white hover:bg-slate-800 rounded-xl text-base font-bold transition-all shadow-xl"
                 >
                     Book a Session
                 </a>
