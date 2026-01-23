@@ -268,31 +268,49 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             </div>
         </div>
 
-        {/* TESTIMONIALS (Restored) */}
-         <div className="mb-32">
-             <div className="text-center mb-16">
-                <h2 className="text-4xl font-extrabold font-display mb-4 text-slate-900">Student Success</h2>
-            </div>
-            <div className="max-w-4xl mx-auto">
-                {homeTestimonials.map((testimonial) => (
-                    <div key={testimonial.id} className="bento-card p-10 text-center relative">
-                        <span className="material-symbols-outlined text-4xl text-gray-200 absolute top-8 left-8">format_quote</span>
-                        <p className="text-xl text-slate-700 leading-relaxed font-medium italic mb-6 relative z-10">"{testimonial.content}"</p>
-                        <div className="flex flex-col items-center">
-                            <div className="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-lg mb-3">
-                                {testimonial.name.charAt(0)}
-                            </div>
-                            <h4 className="font-bold text-slate-900">{testimonial.name}</h4>
-                            <div className="flex text-amber-400 gap-1 mt-1">
-                                <Star size={14} fill="currentColor" />
-                                <Star size={14} fill="currentColor" />
-                                <Star size={14} fill="currentColor" />
-                                <Star size={14} fill="currentColor" />
-                                <Star size={14} fill="currentColor" />
-                            </div>
-                        </div>
+        {/* TESTIMONIALS (Success Stories) */}
+        <div className="mb-32">
+            <div className="py-6">
+              <h3 className="px-4 mb-4 text-lg font-bold leading-tight text-slate-900">Success Stories</h3>
+              <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 no-scrollbar">
+
+                <div className="flex w-[280px] shrink-0 snap-start flex-col gap-4 rounded-xl bg-blue-50 p-5 shadow-sm border border-blue-100">
+                  <div className="flex items-center gap-1 text-primary">
+                    <span className="material-symbols-outlined text-lg fill-current">star</span>
+                    <span className="material-symbols-outlined text-lg fill-current">star</span>
+                    <span className="material-symbols-outlined text-lg fill-current">star</span>
+                    <span className="material-symbols-outlined text-lg fill-current">star</span>
+                    <span className="material-symbols-outlined text-lg fill-current">star</span>
+                  </div>
+                  <p className="text-sm font-medium leading-relaxed text-slate-900">"I was struggling with Calculus for months. My tutor explained concepts in a way that finally clicked!"</p>
+                  <div className="flex items-center gap-3">
+                    <div className="size-10 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDtiW4-AzEMB4mLJspPYCaBNcj5wreZaqGNBjoEPHR8GAf0LtnBrXf3RjXBk_GJfVjifOUvlRW4g3cEb9f09F7DmcklBIUBbRQC3Ch4h6a851Ksf_mTmyHcVckKoMjX5osMyWrS1Kq2RZcZvbbDJibJeX8MbH_4JYsryWS0kl11YP2I49td6Mo5z5LAuEgztdxHqB_wjDM16fc2pVtaW9sA94dCfJbBBxHrEX-nUJSzYpPcdu1_fTvx2MzNZsZXmc_9l4-Scw45nw")' }}></div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-900">Sarah J.</p>
+                      <p className="text-xs text-slate-500">High School Student</p>
                     </div>
-                ))}
+                  </div>
+                </div>
+
+                <div className="flex w-[280px] shrink-0 snap-start flex-col gap-4 rounded-xl bg-blue-50 p-5 shadow-sm border border-blue-100">
+                  <div className="flex items-center gap-1 text-primary">
+                    <span className="material-symbols-outlined text-lg fill-current">star</span>
+                    <span className="material-symbols-outlined text-lg fill-current">star</span>
+                    <span className="material-symbols-outlined text-lg fill-current">star</span>
+                    <span className="material-symbols-outlined text-lg fill-current">star</span>
+                    <span className="material-symbols-outlined text-lg fill-current">star</span>
+                  </div>
+                  <p className="text-sm font-medium leading-relaxed text-slate-900">"Found an amazing Spanish tutor for my son. His grades improved significantly in just one month."</p>
+                  <div className="flex items-center gap-3">
+                    <div className="size-10 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuB4LeJph-SqtlXX5YmBDg9BloogBMMNnSyb6BK7NmokA5E5Be7aWbwMF7kJrx3W1qitqBwtyaUWftCbW-GkB1QmDTbWw8YuDBtn8PiG6GLZAPS4Bydn1FvhYu9U553VYo4TatfEqSr2DKhosXl4ogcrTPsEvZhDitlMqybKeKw5yus8GwXyg_pJ84QmFGkSWiBrazTVdaUczwoLXxzlFyfUNcxArJtGhJxnEVa1OdLX7v2ptXurDB77i2ymcWZqniw-yc3xi2SWbw")' }}></div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-900">Michael T.</p>
+                      <p className="text-xs text-slate-500">Parent</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
         </div>
 
