@@ -10,71 +10,16 @@ import {
   Phone,
   Send,
   CheckCircle,
-  Calculator, 
-  FlaskConical, 
-  Leaf, 
-  Microscope,
-  Landmark, 
-  Languages, 
-  Globe,
-  TrendingUp, 
-  Briefcase, 
-  Receipt,
-  BookOpen,
-  BarChart
 } from 'lucide-react';
 import { ViewState } from '../types';
 import { LINKS } from '../constants';
+import { SubjectsSection } from './SubjectsSection';
 
 interface HomeProps {
   setActiveView: (view: ViewState) => void;
 }
 
 // --- DATA RESTORATION ---
-
-interface Subject {
-  id: string;
-  name: string;
-  category: 'mathematics' | 'sciences' | 'languages' | 'commerce';
-  level: string;
-}
-
-const subjects: Subject[] = [
-  { id: "1", name: "Mathematics", category: "mathematics", level: "All Levels" },
-  { id: "2", name: "Mathematical Literacy", category: "mathematics", level: "All Levels" },
-  { id: "3", name: "Physical Sciences", category: "sciences", level: "Every Topic" },
-  { id: "4", name: "Life Sciences", category: "sciences", level: "Every Topic" },
-  { id: "5", name: "Natural Science", category: "sciences", level: "All Levels" },
-  { id: "6", name: "History", category: "languages", level: "Any Curriculum" },
-  { id: "7", name: "English", category: "languages", level: "Every Topic" },
-  { id: "8", name: "Geography", category: "languages", level: "All Levels" },
-  { id: "9", name: "Economics", category: "commerce", level: "Any Curriculum" },
-  { id: "10", name: "Business Studies", category: "commerce", level: "All Levels" },
-  { id: "11", name: "Accounting", category: "commerce", level: "All Levels" },
-  { id: "12", name: "Economic Management Science", category: "commerce", level: "Every Topic" },
-];
-
-const categoryLabels: Record<Subject['category'], string> = {
-  sciences: "Sciences",
-  mathematics: "Mathematics",
-  languages: "Languages & Humanities",
-  commerce: "Commerce",
-};
-
-const subjectIcons: Record<string, React.ElementType> = {
-  "Mathematics": Calculator,
-  "Mathematical Literacy": BarChart,
-  "Physical Sciences": FlaskConical,
-  "Life Sciences": Leaf,
-  "Natural Science": Microscope,
-  "History": Landmark,
-  "English": Languages,
-  "Geography": Globe,
-  "Economics": TrendingUp,
-  "Business Studies": Briefcase,
-  "Accounting": Receipt,
-  "Economic Management Science": BookOpen,
-};
 
 interface PricingPlan {
   id: string;
@@ -151,14 +96,6 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
     e.preventDefault();
     setContactSubmitted(true);
   };
-
-  const groupedSubjects = subjects.reduce((acc, subject) => {
-    if (!acc[subject.category]) {
-      acc[subject.category] = [];
-    }
-    acc[subject.category].push(subject);
-    return acc;
-  }, {} as Record<Subject['category'], Subject[]>);
 
   return (
     <div className="space-y-32">
@@ -266,38 +203,8 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             </div>
         </div>
 
-        {/* SUBJECTS SECTION (Restored) */}
-        <div className="mb-32">
-             <div className="text-center mb-16">
-                <h2 className="text-4xl font-extrabold font-display mb-4 text-slate-900">Our Subjects</h2>
-                <p className="text-slate-500 text-lg font-medium">Expert tutoring across all major disciplines.</p>
-            </div>
-
-            <div className="space-y-12">
-                {(Object.keys(groupedSubjects) as Subject['category'][]).map((category) => (
-                    <div key={category}>
-                         <div className="flex items-center gap-4 mb-6">
-                            <h3 className="text-2xl font-bold font-display text-slate-800 capitalize">{categoryLabels[category]}</h3>
-                            <div className="h-[1px] flex-1 bg-gray-200"></div>
-                         </div>
-                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                            {groupedSubjects[category].map((subject) => {
-                                const Icon = subjectIcons[subject.name] || BookOpen;
-                                return (
-                                    <div key={subject.id} className="bento-card p-6 flex flex-col items-start hover:border-primary/50 transition-colors">
-                                        <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center mb-4 text-slate-600">
-                                            <Icon size={20} />
-                                        </div>
-                                        <h4 className="font-bold text-slate-900 mb-1">{subject.name}</h4>
-                                        <span className="text-xs text-slate-500 font-medium uppercase tracking-wide">{subject.level}</span>
-                                    </div>
-                                );
-                            })}
-                         </div>
-                    </div>
-                ))}
-            </div>
-        </div>
+        {/* SUBJECTS SECTION (Updated) */}
+        <SubjectsSection />
 
         {/* PRICING SECTION (Restored) */}
         <div className="mb-32">
