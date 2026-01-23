@@ -115,8 +115,8 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
         {/* SERVICES GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
             <div className="card-service rounded-2xl border-accent-blue p-8 flex flex-col">
-                <div className="w-12 h-12 md:w-14 md:h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-8">
-                    <span className="material-symbols-outlined text-blue-700 text-2xl md:text-3xl">person</span>
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-[#2A6EBB] rounded-2xl flex items-center justify-center mb-8">
+                    <span className="material-symbols-outlined text-white text-2xl md:text-3xl">person</span>
                 </div>
                 <h3 className="text-2xl font-bold font-display mb-4 text-slate-900">Private Tutoring</h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-8">Exclusive one-on-one attention tailored to your unique learning style and pace.</p>
@@ -128,8 +128,8 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 <button onClick={() => setActiveView('services')} className="w-full py-3.5 bg-slate-50 text-slate-700 hover:bg-blue-600 hover:text-white transition-all rounded-xl font-bold text-sm">Learn More</button>
             </div>
             <div className="card-service rounded-2xl border-accent-emerald p-8 flex flex-col">
-                <div className="w-12 h-12 md:w-14 md:h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mb-8">
-                    <span className="material-symbols-outlined text-emerald-700 text-2xl md:text-3xl">school</span>
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-[#2A6EBB] rounded-2xl flex items-center justify-center mb-8">
+                    <span className="material-symbols-outlined text-white text-2xl md:text-3xl">school</span>
                 </div>
                 <h3 className="text-2xl font-bold font-display mb-4 text-slate-900">Structured Programs</h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-8">Curriculum-aligned learning paths designed to build solid foundations for all grades.</p>
@@ -141,8 +141,8 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 <button onClick={() => setActiveView('services')} className="w-full py-3.5 bg-slate-50 text-slate-700 hover:bg-emerald-600 hover:text-white transition-all rounded-xl font-bold text-sm">View Programs</button>
             </div>
             <div className="card-service rounded-2xl border-accent-indigo p-8 flex flex-col">
-                <div className="w-12 h-12 md:w-14 md:h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-8">
-                    <span className="material-symbols-outlined text-indigo-700 text-2xl md:text-3xl">menu_book</span>
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-[#2A6EBB] rounded-2xl flex items-center justify-center mb-8">
+                    <span className="material-symbols-outlined text-white text-2xl md:text-3xl">menu_book</span>
                 </div>
                 <h3 className="text-2xl font-bold font-display mb-4 text-slate-900">Exam Prep</h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-8">Intensive preparation strategies, past papers, and mock exams to maximize results.</p>
