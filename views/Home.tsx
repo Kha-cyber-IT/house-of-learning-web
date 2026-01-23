@@ -162,34 +162,34 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 <p className="text-slate-500 text-lg font-medium">We don't just teach subjects; we teach students how to learn.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-auto md:h-[500px]">
-                <div className="md:col-span-2 md:row-span-2 bg-primary p-8 rounded-3xl flex flex-col justify-center text-slate-900 shadow-xl">
-                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white flex items-center justify-center mb-8">
-                        <span className="material-symbols-outlined text-primary text-3xl md:text-4xl">workspace_premium</span>
+                <div className="md:col-span-2 md:row-span-2 bg-[#0f172a] md:bg-primary p-6 md:p-8 rounded-xl md:rounded-3xl flex flex-col justify-center text-white md:text-slate-900 shadow-xl">
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white/10 md:bg-white flex items-center justify-center mb-8 text-white md:text-primary">
+                        <span className="material-symbols-outlined text-3xl md:text-4xl">workspace_premium</span>
                     </div>
-                    <h4 className="text-3xl font-bold font-display mb-4 text-slate-900">Personalized Learning</h4>
-                    <p className="text-slate-900 text-lg leading-relaxed font-medium">We develop individualized learning plans for each student, ensuring that we address their specific needs, learning styles, and academic goals.</p>
+                    <h4 className="text-3xl font-bold font-display mb-4">Personalized Learning</h4>
+                    <p className="text-white/90 md:text-slate-900 text-lg leading-relaxed font-medium">We develop individualized learning plans for each student, ensuring that we address their specific needs, learning styles, and academic goals.</p>
                 </div>
-                <div className="bg-primary p-8 rounded-3xl flex flex-col items-start text-slate-900 shadow-xl">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white flex items-center justify-center mb-6">
-                        <span className="material-symbols-outlined text-primary text-xl md:text-2xl">groups</span>
+                <div className="bg-[#0f172a] md:bg-primary p-6 md:p-8 rounded-xl md:rounded-3xl flex flex-col items-start text-white md:text-slate-900 shadow-xl">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white/10 md:bg-white flex items-center justify-center mb-6 text-white md:text-primary">
+                        <span className="material-symbols-outlined text-xl md:text-2xl">groups</span>
                     </div>
-                    <h4 className="text-xl font-bold font-display mb-2 text-slate-900">Experienced Tutors</h4>
-                    <p className="text-slate-900 text-sm leading-relaxed font-medium">Professional and vetted tutors dedicated to your success.</p>
+                    <h4 className="text-xl font-bold font-display mb-2">Experienced Tutors</h4>
+                    <p className="text-white/80 md:text-slate-900 text-sm leading-relaxed font-medium">Professional and vetted tutors dedicated to your success.</p>
                 </div>
-                <div className="bg-primary p-8 rounded-3xl flex flex-col items-start text-slate-900 shadow-xl">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white flex items-center justify-center mb-6">
-                        <span className="material-symbols-outlined text-primary text-xl md:text-2xl">star_rate</span>
+                <div className="bg-[#0f172a] md:bg-primary p-6 md:p-8 rounded-xl md:rounded-3xl flex flex-col items-start text-white md:text-slate-900 shadow-xl">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white/10 md:bg-white flex items-center justify-center mb-6 text-white md:text-primary">
+                        <span className="material-symbols-outlined text-xl md:text-2xl">star_rate</span>
                     </div>
-                    <h4 className="text-xl font-bold font-display mb-2 text-slate-900">Proven Results</h4>
-                    <p className="text-slate-900 text-sm leading-relaxed font-medium">100% success rate with students moving to the next grade.</p>
+                    <h4 className="text-xl font-bold font-display mb-2">Proven Results</h4>
+                    <p className="text-white/80 md:text-slate-900 text-sm leading-relaxed font-medium">100% success rate with students moving to the next grade.</p>
                 </div>
-                <div className="md:col-span-2 bg-primary p-8 rounded-3xl flex items-center gap-8 text-slate-900 shadow-xl">
-                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-3xl bg-white flex-shrink-0 flex items-center justify-center">
-                        <span className="material-symbols-outlined text-primary text-4xl md:text-5xl">library_books</span>
+                <div className="md:col-span-2 bg-[#0f172a] md:bg-primary p-6 md:p-8 rounded-xl md:rounded-3xl flex items-center gap-8 text-white md:text-slate-900 shadow-xl">
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-3xl bg-white/10 md:bg-white flex-shrink-0 flex items-center justify-center text-white md:text-primary">
+                        <span className="material-symbols-outlined text-4xl md:text-5xl">library_books</span>
                     </div>
                     <div>
-                        <h4 className="text-2xl font-bold font-display mb-2 text-slate-900">Comprehensive Coverage</h4>
-                        <p className="text-slate-900 text-base leading-relaxed font-medium">Maths, Sciences, Languages, and Commerce subjects for all levels.</p>
+                        <h4 className="text-2xl font-bold font-display mb-2">Comprehensive Coverage</h4>
+                        <p className="text-white/80 md:text-slate-900 text-base leading-relaxed font-medium">Maths, Sciences, Languages, and Commerce subjects for all levels.</p>
                     </div>
                 </div>
             </div>
@@ -303,33 +303,33 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                  </div>
 
                  {/* Right Column: Form */}
-                 <div className="bg-white rounded-t-3xl p-8 lg:bg-transparent lg:p-0 lg:rounded-none">
+                 <div className="bg-[#F15A29] p-4 rounded-2xl lg:bg-transparent lg:p-0 lg:rounded-none">
                      {contactSubmitted ? (
                           <div className="text-center py-12">
-                              <div className="w-16 h-16 bg-green-100 lg:bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600 lg:text-white">
+                              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 text-white">
                                   <CheckCircle size={32} />
                               </div>
-                              <h3 className="text-2xl font-bold text-slate-900 lg:text-white mb-2">Message Sent!</h3>
-                              <p className="text-slate-500 lg:text-white/80 mb-6">We'll be in touch shortly.</p>
-                              <button onClick={() => setContactSubmitted(false)} className="text-primary lg:text-white font-bold hover:underline">Send another</button>
+                              <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
+                              <p className="text-white/80 mb-6">We'll be in touch shortly.</p>
+                              <button onClick={() => setContactSubmitted(false)} className="text-white font-bold hover:underline">Send another</button>
                           </div>
                      ) : (
                          <form onSubmit={handleContactSubmit} className="space-y-5">
                             <div>
-                                <label className="block text-sm font-bold text-slate-900 lg:text-white mb-2">Name</label>
-                                <input type="text" className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 lg:bg-white/10 lg:border-white/30 lg:text-white lg:placeholder:text-white/60 border focus:border-primary lg:focus:border-white focus:ring-1 focus:ring-primary lg:focus:ring-white focus:outline-none transition-all" placeholder="John Doe" required />
+                                <label className="block text-sm font-bold text-white mb-2">Name</label>
+                                <input type="text" className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all" placeholder="John Doe" required />
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-slate-900 lg:text-white mb-2">Phone</label>
-                                <input type="tel" className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 lg:bg-white/10 lg:border-white/30 lg:text-white lg:placeholder:text-white/60 border focus:border-primary lg:focus:border-white focus:ring-1 focus:ring-primary lg:focus:ring-white focus:outline-none transition-all" placeholder="+27..." required />
+                                <label className="block text-sm font-bold text-white mb-2">Phone</label>
+                                <input type="tel" className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all" placeholder="+27..." required />
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-slate-900 lg:text-white mb-2">Email</label>
-                                <input type="email" className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 lg:bg-white/10 lg:border-white/30 lg:text-white lg:placeholder:text-white/60 border focus:border-primary lg:focus:border-white focus:ring-1 focus:ring-primary lg:focus:ring-white focus:outline-none transition-all" placeholder="john@example.com" required />
+                                <label className="block text-sm font-bold text-white mb-2">Email</label>
+                                <input type="email" className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all" placeholder="john@example.com" required />
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-slate-900 lg:text-white mb-2">Message</label>
-                                <textarea className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 lg:bg-white/10 lg:border-white/30 lg:text-white lg:placeholder:text-white/60 border focus:border-primary lg:focus:border-white focus:ring-1 focus:ring-primary lg:focus:ring-white focus:outline-none transition-all min-h-[120px]" placeholder="How can we help?" required></textarea>
+                                <label className="block text-sm font-bold text-white mb-2">Message</label>
+                                <textarea className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all min-h-[120px]" placeholder="How can we help?" required></textarea>
                             </div>
                             <button type="submit" className="w-full bg-[#2BB6C7] hover:brightness-110 text-white font-bold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 mt-2">
                                 <Send size={20} /> Send Message
@@ -346,19 +346,13 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             <p className="text-white/90 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">Join House of Learning today and take the first step towards academic success.</p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <a
-                    href={LINKS.REGISTRATION}
+                    href={LINKS.MAPS}
                     target="_blank"
                     rel="noreferrer"
                     className="bg-white text-[#2A6EBB] hover:bg-gray-100 px-12 py-5 rounded-2xl font-bold text-lg shadow-xl transition-all"
                 >
-                    Book Now
+                    Visit Us
                 </a>
-                <button
-                    onClick={() => setActiveView('locations')}
-                    className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-12 py-5 rounded-2xl font-bold text-lg shadow-sm transition-all"
-                >
-                    Contact Us
-                </button>
             </div>
         </div>
     </div>

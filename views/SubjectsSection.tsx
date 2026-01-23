@@ -193,14 +193,6 @@ export const SubjectsSection = () => {
                         <p className="text-slate-800 text-sm font-medium leading-relaxed max-w-sm">{sub.desc}</p>
                     </div>
                 </div>
-
-                {/* 10% White Footer Section */}
-                <div className="bg-white p-5 flex items-center justify-between border-t border-gray-100">
-                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">View Syllabus</span>
-                     <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-slate-900 group-hover:text-white transition-all">
-                        <span className="material-symbols-outlined text-lg">arrow_forward</span>
-                     </div>
-                </div>
              </div>
            ))}
         </div>
