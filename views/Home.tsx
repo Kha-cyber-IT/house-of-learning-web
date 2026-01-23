@@ -163,41 +163,41 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             </div>
         </div>
 
-        {/* WHY CHOOSE US (BENTO) */}
+        {/* WHY CHOOSE US (BENTO - Updated Green Styling) */}
         <div className="mb-32">
             <div className="text-center mb-16">
                 <h2 className="text-4xl font-extrabold font-display mb-4 text-slate-900">Why Choose Us?</h2>
                 <p className="text-slate-500 text-lg font-medium">We don't just teach subjects; we teach students how to learn.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-auto md:h-[500px]">
-                <div className="md:col-span-2 md:row-span-2 bento-card flex flex-col justify-center">
-                    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8">
+                <div className="md:col-span-2 md:row-span-2 bg-primary p-8 rounded-3xl flex flex-col justify-center text-slate-900 shadow-xl">
+                    <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8">
                         <span className="material-symbols-outlined text-primary text-4xl">workspace_premium</span>
                     </div>
                     <h4 className="text-3xl font-bold font-display mb-4 text-slate-900">Personalized Learning</h4>
-                    <p className="text-slate-500 text-lg leading-relaxed">We develop individualized learning plans for each student, ensuring that we address their specific needs, learning styles, and academic goals.</p>
+                    <p className="text-slate-900 text-lg leading-relaxed font-medium">We develop individualized learning plans for each student, ensuring that we address their specific needs, learning styles, and academic goals.</p>
                 </div>
-                <div className="bento-card flex flex-col items-start">
-                    <div className="w-12 h-12 rounded-xl bg-accent-emerald/10 flex items-center justify-center mb-6">
-                        <span className="material-symbols-outlined text-accent-emerald text-2xl">groups</span>
+                <div className="bg-primary p-8 rounded-3xl flex flex-col items-start text-slate-900 shadow-xl">
+                    <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center mb-6">
+                        <span className="material-symbols-outlined text-primary text-2xl">groups</span>
                     </div>
                     <h4 className="text-xl font-bold font-display mb-2 text-slate-900">Experienced Tutors</h4>
-                    <p className="text-slate-500 text-sm leading-relaxed">Professional and vetted tutors dedicated to your success.</p>
+                    <p className="text-slate-900 text-sm leading-relaxed font-medium">Professional and vetted tutors dedicated to your success.</p>
                 </div>
-                <div className="bento-card flex flex-col items-start">
-                    <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-6">
-                        <span className="material-symbols-outlined text-amber-600 text-2xl">star_rate</span>
+                <div className="bg-primary p-8 rounded-3xl flex flex-col items-start text-slate-900 shadow-xl">
+                    <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center mb-6">
+                        <span className="material-symbols-outlined text-primary text-2xl">star_rate</span>
                     </div>
                     <h4 className="text-xl font-bold font-display mb-2 text-slate-900">Proven Results</h4>
-                    <p className="text-slate-500 text-sm leading-relaxed">100% success rate with students moving to the next grade.</p>
+                    <p className="text-slate-900 text-sm leading-relaxed font-medium">100% success rate with students moving to the next grade.</p>
                 </div>
-                <div className="md:col-span-2 bento-card flex items-center gap-8">
-                    <div className="w-20 h-20 rounded-3xl bg-blue-50 flex-shrink-0 flex items-center justify-center">
-                        <span className="material-symbols-outlined text-blue-600 text-5xl">library_books</span>
+                <div className="md:col-span-2 bg-primary p-8 rounded-3xl flex items-center gap-8 text-slate-900 shadow-xl">
+                    <div className="w-20 h-20 rounded-3xl bg-white flex-shrink-0 flex items-center justify-center">
+                        <span className="material-symbols-outlined text-primary text-5xl">library_books</span>
                     </div>
                     <div>
                         <h4 className="text-2xl font-bold font-display mb-2 text-slate-900">Comprehensive Coverage</h4>
-                        <p className="text-slate-500 text-base leading-relaxed">Maths, Sciences, Languages, and Commerce subjects for all levels.</p>
+                        <p className="text-slate-900 text-base leading-relaxed font-medium">Maths, Sciences, Languages, and Commerce subjects for all levels.</p>
                     </div>
                 </div>
             </div>
@@ -219,7 +219,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                         className={`p-8 rounded-2xl flex flex-col transition-all duration-300 ${
                             plan.popular
                                 ? 'bg-primary border-2 border-primary shadow-xl scale-105 z-10 text-slate-900'
-                                : 'bg-white border border-gray-100 hover:border-gray-200 hover:shadow-lg'
+                                : 'bg-white border-2 border-primary hover:shadow-lg'
                         }`}
                     >
                         {plan.popular && (
@@ -268,49 +268,31 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             </div>
         </div>
 
-        {/* TESTIMONIALS (Success Stories) */}
+        {/* TESTIMONIALS (Student Success - Restored & Updated) */}
         <div className="mb-32">
-            <div className="py-6">
-              <h3 className="px-4 mb-4 text-lg font-bold leading-tight text-slate-900">Success Stories</h3>
-              <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 no-scrollbar">
-
-                <div className="flex w-[280px] shrink-0 snap-start flex-col gap-4 rounded-xl bg-blue-50 p-5 shadow-sm border border-blue-100">
-                  <div className="flex items-center gap-1 text-primary">
-                    <span className="material-symbols-outlined text-lg fill-current">star</span>
-                    <span className="material-symbols-outlined text-lg fill-current">star</span>
-                    <span className="material-symbols-outlined text-lg fill-current">star</span>
-                    <span className="material-symbols-outlined text-lg fill-current">star</span>
-                    <span className="material-symbols-outlined text-lg fill-current">star</span>
-                  </div>
-                  <p className="text-sm font-medium leading-relaxed text-slate-900">"I was struggling with Calculus for months. My tutor explained concepts in a way that finally clicked!"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="size-10 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDtiW4-AzEMB4mLJspPYCaBNcj5wreZaqGNBjoEPHR8GAf0LtnBrXf3RjXBk_GJfVjifOUvlRW4g3cEb9f09F7DmcklBIUBbRQC3Ch4h6a851Ksf_mTmyHcVckKoMjX5osMyWrS1Kq2RZcZvbbDJibJeX8MbH_4JYsryWS0kl11YP2I49td6Mo5z5LAuEgztdxHqB_wjDM16fc2pVtaW9sA94dCfJbBBxHrEX-nUJSzYpPcdu1_fTvx2MzNZsZXmc_9l4-Scw45nw")' }}></div>
-                    <div>
-                      <p className="text-sm font-bold text-slate-900">Sarah J.</p>
-                      <p className="text-xs text-slate-500">High School Student</p>
+             <div className="text-center mb-16">
+                <h2 className="text-4xl font-extrabold font-display mb-4 text-slate-900">Student Success</h2>
+            </div>
+            <div className="max-w-4xl mx-auto flex justify-center">
+                {homeTestimonials.map((testimonial) => (
+                    <div key={testimonial.id} className="bg-primary rounded-xl p-10 text-center relative max-w-2xl w-full shadow-lg">
+                        <span className="material-symbols-outlined text-4xl text-slate-900 absolute top-8 left-8">format_quote</span>
+                        <p className="text-xl text-slate-900 leading-relaxed font-medium italic mb-6 relative z-10">"{testimonial.content}"</p>
+                        <div className="flex flex-col items-center">
+                            <div className="w-12 h-12 rounded-full bg-white text-primary flex items-center justify-center font-bold text-lg mb-3">
+                                {testimonial.name.charAt(0)}
+                            </div>
+                            <h4 className="font-bold text-slate-900">{testimonial.name}</h4>
+                            <div className="flex text-slate-900 gap-1 mt-1">
+                                <Star size={14} fill="currentColor" />
+                                <Star size={14} fill="currentColor" />
+                                <Star size={14} fill="currentColor" />
+                                <Star size={14} fill="currentColor" />
+                                <Star size={14} fill="currentColor" />
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-
-                <div className="flex w-[280px] shrink-0 snap-start flex-col gap-4 rounded-xl bg-blue-50 p-5 shadow-sm border border-blue-100">
-                  <div className="flex items-center gap-1 text-primary">
-                    <span className="material-symbols-outlined text-lg fill-current">star</span>
-                    <span className="material-symbols-outlined text-lg fill-current">star</span>
-                    <span className="material-symbols-outlined text-lg fill-current">star</span>
-                    <span className="material-symbols-outlined text-lg fill-current">star</span>
-                    <span className="material-symbols-outlined text-lg fill-current">star</span>
-                  </div>
-                  <p className="text-sm font-medium leading-relaxed text-slate-900">"Found an amazing Spanish tutor for my son. His grades improved significantly in just one month."</p>
-                  <div className="flex items-center gap-3">
-                    <div className="size-10 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuB4LeJph-SqtlXX5YmBDg9BloogBMMNnSyb6BK7NmokA5E5Be7aWbwMF7kJrx3W1qitqBwtyaUWftCbW-GkB1QmDTbWw8YuDBtn8PiG6GLZAPS4Bydn1FvhYu9U553VYo4TatfEqSr2DKhosXl4ogcrTPsEvZhDitlMqybKeKw5yus8GwXyg_pJ84QmFGkSWiBrazTVdaUczwoLXxzlFyfUNcxArJtGhJxnEVa1OdLX7v2ptXurDB77i2ymcWZqniw-yc3xi2SWbw")' }}></div>
-                    <div>
-                      <p className="text-sm font-bold text-slate-900">Michael T.</p>
-                      <p className="text-xs text-slate-500">Parent</p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
+                ))}
             </div>
         </div>
 
