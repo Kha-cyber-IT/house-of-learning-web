@@ -123,8 +123,8 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
         {/* SERVICES GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
             <div className="card-service rounded-2xl border-accent-blue p-8 flex flex-col">
-                <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-8">
-                    <span className="material-symbols-outlined text-blue-700 text-3xl">person</span>
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-8">
+                    <span className="material-symbols-outlined text-blue-700 text-2xl md:text-3xl">person</span>
                 </div>
                 <h3 className="text-2xl font-bold font-display mb-4 text-slate-900">Private Tutoring</h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-8">Exclusive one-on-one attention tailored to your unique learning style and pace.</p>
@@ -136,8 +136,8 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 <button onClick={() => setActiveView('services')} className="w-full py-3.5 bg-slate-50 text-slate-700 hover:bg-blue-600 hover:text-white transition-all rounded-xl font-bold text-sm">Learn More</button>
             </div>
             <div className="card-service rounded-2xl border-accent-emerald p-8 flex flex-col">
-                <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mb-8">
-                    <span className="material-symbols-outlined text-emerald-700 text-3xl">school</span>
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mb-8">
+                    <span className="material-symbols-outlined text-emerald-700 text-2xl md:text-3xl">school</span>
                 </div>
                 <h3 className="text-2xl font-bold font-display mb-4 text-slate-900">Structured Programs</h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-8">Curriculum-aligned learning paths designed to build solid foundations for all grades.</p>
@@ -149,8 +149,8 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 <button onClick={() => setActiveView('services')} className="w-full py-3.5 bg-slate-50 text-slate-700 hover:bg-emerald-600 hover:text-white transition-all rounded-xl font-bold text-sm">View Programs</button>
             </div>
             <div className="card-service rounded-2xl border-accent-indigo p-8 flex flex-col">
-                <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-8">
-                    <span className="material-symbols-outlined text-indigo-700 text-3xl">menu_book</span>
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-8">
+                    <span className="material-symbols-outlined text-indigo-700 text-2xl md:text-3xl">menu_book</span>
                 </div>
                 <h3 className="text-2xl font-bold font-display mb-4 text-slate-900">Exam Prep</h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-8">Intensive preparation strategies, past papers, and mock exams to maximize results.</p>
@@ -171,29 +171,29 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-auto md:h-[500px]">
                 <div className="md:col-span-2 md:row-span-2 bg-primary p-8 rounded-3xl flex flex-col justify-center text-slate-900 shadow-xl">
-                    <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8">
-                        <span className="material-symbols-outlined text-primary text-4xl">workspace_premium</span>
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white flex items-center justify-center mb-8">
+                        <span className="material-symbols-outlined text-primary text-3xl md:text-4xl">workspace_premium</span>
                     </div>
                     <h4 className="text-3xl font-bold font-display mb-4 text-slate-900">Personalized Learning</h4>
                     <p className="text-slate-900 text-lg leading-relaxed font-medium">We develop individualized learning plans for each student, ensuring that we address their specific needs, learning styles, and academic goals.</p>
                 </div>
                 <div className="bg-primary p-8 rounded-3xl flex flex-col items-start text-slate-900 shadow-xl">
-                    <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center mb-6">
-                        <span className="material-symbols-outlined text-primary text-2xl">groups</span>
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white flex items-center justify-center mb-6">
+                        <span className="material-symbols-outlined text-primary text-xl md:text-2xl">groups</span>
                     </div>
                     <h4 className="text-xl font-bold font-display mb-2 text-slate-900">Experienced Tutors</h4>
                     <p className="text-slate-900 text-sm leading-relaxed font-medium">Professional and vetted tutors dedicated to your success.</p>
                 </div>
                 <div className="bg-primary p-8 rounded-3xl flex flex-col items-start text-slate-900 shadow-xl">
-                    <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center mb-6">
-                        <span className="material-symbols-outlined text-primary text-2xl">star_rate</span>
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white flex items-center justify-center mb-6">
+                        <span className="material-symbols-outlined text-primary text-xl md:text-2xl">star_rate</span>
                     </div>
                     <h4 className="text-xl font-bold font-display mb-2 text-slate-900">Proven Results</h4>
                     <p className="text-slate-900 text-sm leading-relaxed font-medium">100% success rate with students moving to the next grade.</p>
                 </div>
                 <div className="md:col-span-2 bg-primary p-8 rounded-3xl flex items-center gap-8 text-slate-900 shadow-xl">
-                    <div className="w-20 h-20 rounded-3xl bg-white flex-shrink-0 flex items-center justify-center">
-                        <span className="material-symbols-outlined text-primary text-5xl">library_books</span>
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-3xl bg-white flex-shrink-0 flex items-center justify-center">
+                        <span className="material-symbols-outlined text-primary text-4xl md:text-5xl">library_books</span>
                     </div>
                     <div>
                         <h4 className="text-2xl font-bold font-display mb-2 text-slate-900">Comprehensive Coverage</h4>

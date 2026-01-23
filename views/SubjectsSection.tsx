@@ -142,8 +142,8 @@ export const SubjectsSection = () => {
                 key={key}
                 className={`card-base p-10 rounded-2xl flex flex-col items-start gap-6 border shadow-xl transition-all duration-300 ${data.cardClass}`}
               >
-                 <div className={`size-14 rounded-2xl flex items-center justify-center ${data.iconBg}`}>
-                    <span className="material-symbols-outlined text-4xl">{data.icon}</span>
+                 <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center ${data.iconBg}`}>
+                    <span className="material-symbols-outlined text-3xl md:text-4xl">{data.icon}</span>
                  </div>
                  <div className="flex-grow">
                     <h3 className="text-2xl font-bold mb-3 text-slate-900 capitalize font-heading">{data.title}</h3>
@@ -174,7 +174,7 @@ export const SubjectsSection = () => {
 
                     {/* Background Decoration */}
                     <div className="absolute -right-6 -top-6 opacity-10 rotate-12">
-                        <span className="material-symbols-outlined text-[140px] text-black/5 select-none">
+                        <span className="material-symbols-outlined text-[80px] md:text-[140px] text-black/5 select-none">
                             {sub.icon}
                         </span>
                     </div>
@@ -183,7 +183,7 @@ export const SubjectsSection = () => {
                         <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-slate-900 mb-6 border border-black/5">
                            <span className="material-symbols-outlined text-2xl">school</span>
                         </div>
-                        <h4 className="text-3xl font-bold text-slate-900 mb-3 font-display tracking-tight">{sub.title}</h4>
+                        <h4 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 font-display tracking-tight">{sub.title}</h4>
                         <p className="text-slate-800 text-sm font-medium leading-relaxed max-w-sm">{sub.desc}</p>
                     </div>
                 </div>
