@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Menu, X, BookOpen } from 'lucide-react';
 import { LINKS } from '../constants';
 import { ViewState } from '../types';
@@ -16,15 +16,6 @@ export const Navigation: React.FC<NavigationProps> = ({
   activeView, 
   setActiveView 
 }) => {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleNavClick = (viewId: string) => {
     setIsOpen(false);
@@ -35,101 +26,94 @@ export const Navigation: React.FC<NavigationProps> = ({
     { id: 'home', label: 'Home' },
     { id: 'stories', label: 'Stories' },
     { id: 'tutors', label: 'Our Tutors' },
-    { id: 'locations', label: 'Contact' },
-    { id: 'about', label: 'About' },
     { id: 'services', label: 'Services' },
+    { id: 'about', label: 'About' },
+    { id: 'locations', label: 'Contact' },
   ];
 
   return (
     <>
-      <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
-          scrolled || isOpen
-            ? 'glass-nav py-3 border-white/5 shadow-lg'
-            : 'bg-transparent py-5 border-transparent'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          {/* Logo */}
-          <button 
-            onClick={() => handleNavClick('home')}
-            className="group flex items-center gap-3 transition-opacity hover:opacity-90"
-          >
-            <div className={`p-2 rounded-xl text-white shadow-lg transition-colors ${scrolled ? 'bg-lime-600' : 'bg-lime-600/90'}`}>
-                <BookOpen size={24} strokeWidth={2.5} />
-            </div>
-            <span className="text-xl md:text-2xl font-heading font-bold text-white tracking-tight">
-                House of Learning
-            </span>
-          </button>
+      <nav className="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-xl border-b border-gray-200/50">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            {menuItems.map((item) => (
+              {/* Brand */}
               <button
-                key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  activeView === item.id
-                    ? 'text-white bg-white/10'
-                    : 'text-slate-300 hover:text-white hover:bg-white/5'
-                }`}
+                onClick={() => handleNavClick('home')}
+                className="flex items-center gap-3 group"
               >
-                {item.label}
+                  <div className="text-primary h-8 w-8 flex items-center justify-center bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                      <BookOpen size={20} strokeWidth={2.5} />
+                  </div>
+                  <h2 className="text-slate-900 text-xl font-bold font-display tracking-tight">House of Learning</h2>
               </button>
-            ))}
-            <a 
-              href={LINKS.REGISTRATION}
-              target="_blank"
-              rel="noreferrer"
-              className="ml-4 bg-lime-600 hover:bg-lime-500 text-white text-sm font-bold py-2.5 px-6 rounded-lg transition-all shadow-lg shadow-lime-600/20 hover:scale-105 active:scale-95"
-            >
-              Book Now
-            </a>
-          </nav>
 
-          {/* Mobile Toggle */}
-          <button 
-            onClick={() => setIsOpen(!isOpen)} 
-            className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </header>
+              {/* Desktop Links */}
+              <div className="hidden md:flex items-center gap-8">
+                  {menuItems.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => handleNavClick(item.id)}
+                      className={`text-sm font-semibold transition-colors ${
+                        activeView === item.id
+                          ? 'text-primary'
+                          : 'text-slate-600 hover:text-primary'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+              </div>
 
-      {/* Mobile Menu */}
-      <div 
-        className={`fixed inset-0 z-40 bg-slate-950/98 backdrop-blur-xl md:hidden transition-all duration-300 flex flex-col items-center justify-center ${
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="space-y-6 text-center w-full px-8">
-          {menuItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className={`block w-full text-2xl font-heading font-bold transition-colors py-2 ${
-                activeView === item.id 
-                  ? 'text-lime-500'
-                  : 'text-white hover:text-lime-400'
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-          <div className="pt-8 w-full flex justify-center">
-            <a 
-                href={LINKS.REGISTRATION}
-                target="_blank"
-                rel="noreferrer"
-                className="w-full max-w-xs bg-lime-600 text-white text-lg font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 hover:bg-lime-500 transition-colors"
-            >
-                Book a Session
-            </a>
+              {/* Actions */}
+              <div className="flex items-center gap-4">
+                  <a
+                    href={LINKS.REGISTRATION}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="bg-slate-900 text-white hover:bg-slate-800 px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-slate-900/10"
+                  >
+                      Book Now
+                  </a>
+
+                  {/* Mobile Toggle */}
+                  <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="md:hidden text-slate-600 hover:text-primary transition-colors p-1"
+                  >
+                    {isOpen ? <X size={24} /> : <Menu size={24} />}
+                  </button>
+              </div>
           </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      {isOpen && (
+        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-24 px-6 md:hidden">
+            <div className="flex flex-col items-center gap-6">
+                {menuItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavClick(item.id)}
+                    className={`text-2xl font-bold font-display ${
+                      activeView === item.id
+                        ? 'text-primary'
+                        : 'text-slate-900 hover:text-primary'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <a
+                    href={LINKS.REGISTRATION}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-4 w-full max-w-xs bg-slate-900 text-white hover:bg-slate-800 py-4 rounded-xl text-lg font-bold transition-all text-center shadow-xl"
+                >
+                    Book a Session
+                </a>
+            </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

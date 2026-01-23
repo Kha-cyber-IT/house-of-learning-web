@@ -1,47 +1,51 @@
 
 import React from 'react';
-import { GlassCard } from '../components/GlassCard';
 
 export const About: React.FC = () => {
   return (
-    <div className="space-y-16 animate-fade-in max-w-4xl mx-auto">
+    <section className="px-6 lg:px-20 py-24 bg-[#fcfdfb] space-y-16 animate-fade-in max-w-4xl mx-auto" id="about">
       
       <div className="text-center space-y-4">
-        <h2 className="text-4xl font-heading font-bold text-foreground">About Us</h2>
+        <h2 className="text-4xl font-heading font-bold text-slate-900">About Us</h2>
         <div className="h-1.5 w-20 bg-primary mx-auto rounded-full"></div>
       </div>
 
       <div className="space-y-12">
         
         {/* Intro */}
-        <section className="prose prose-lg prose-invert mx-auto">
-          <p className="text-lg leading-relaxed text-muted-foreground text-center">
+        <div className="prose prose-lg mx-auto">
+          <p className="text-lg leading-relaxed text-slate-500 text-center">
               House of Learning is dedicated to helping learners improve in their schoolwork and grow academically. We guide learners to discover their vision for the future, what they want to study, and who they want to become. We believe that everything is possible, and there is always room for improvement. Our goal is to help every learner build confidence, develop strong study habits, and realize their true potential.
           </p>
-        </section>
+        </div>
 
         {/* Mission & Vision */}
         <div className="grid md:grid-cols-2 gap-8">
-            <GlassCard className="p-8 flex flex-col justify-center text-center" variant="blue">
-                <h3 className="text-2xl font-bold font-heading mb-4 text-white">Our Mission</h3>
-                <p className="text-blue-100">
+            <div className="bg-white/60 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col justify-center text-center">
+                <div className="w-12 h-12 bg-[#80ec13]/10 flex items-center justify-center rounded-xl mb-4 border border-[#80ec13]/20 mx-auto">
+                    <span className="material-symbols-outlined text-[#65a30d]">lightbulb</span>
+                </div>
+                <h3 className="text-2xl font-bold font-heading mb-4 text-slate-900">Our Mission</h3>
+                <p className="text-slate-500">
                 To educate every learner to achieve their academic best and empower them to reach their full potential.
                 </p>
-            </GlassCard>
+            </div>
 
-            <GlassCard className="p-8 flex flex-col justify-center text-center" variant="blue">
-                <h3 className="text-2xl font-bold font-heading mb-4 text-white">Our Vision</h3>
-                <p className="text-blue-100">
+            <div className="bg-white/60 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col justify-center text-center">
+                <div className="w-12 h-12 bg-[#80ec13]/10 flex items-center justify-center rounded-xl mb-4 border border-[#80ec13]/20 mx-auto">
+                    <span className="material-symbols-outlined text-[#65a30d]">visibility</span>
+                </div>
+                <h3 className="text-2xl font-bold font-heading mb-4 text-slate-900">Our Vision</h3>
+                <p className="text-slate-500">
                 To ensure that learners excel academically in all subjects and build a bright future.
                 </p>
-            </GlassCard>
+            </div>
         </div>
 
         {/* Why We Exist */}
-        <section>
-          <div className="p-8 md:p-10 bg-card border border-border rounded-3xl shadow-sm">
-            <h3 className="text-2xl font-bold text-primary mb-8 font-heading uppercase tracking-wide border-b border-border pb-4">Why We Exist</h3>
-            <div className="space-y-5 text-muted-foreground leading-relaxed">
+        <div className="p-8 md:p-10 bg-white border border-gray-200 rounded-3xl shadow-sm">
+            <h3 className="text-2xl font-bold text-primary mb-8 font-heading uppercase tracking-wide border-b border-gray-100 pb-4">Why We Exist</h3>
+            <div className="space-y-5 text-slate-500 leading-relaxed">
               <p>
                 We exist because there is a real need in Eldorado Park. As an organization rooted in the community, we understand the challenges learners face every day.
               </p>
@@ -64,10 +68,9 @@ export const About: React.FC = () => {
                 We assist learners with exam preparation, revision, and understanding key concepts across different subjects.
               </p>
             </div>
-          </div>
-        </section>
+        </div>
 
       </div>
-    </div>
+    </section>
   );
 };

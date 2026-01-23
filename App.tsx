@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
 import { RegistrationBanner } from './components/RegistrationBanner';
@@ -22,12 +21,7 @@ function App() {
   }, [activeView]);
 
   return (
-    <div className="min-h-screen font-sans bg-background text-foreground relative overflow-hidden flex flex-col">
-      
-      {/* Background with Overlay */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background"></div>
-      </div>
+    <div className="min-h-screen font-sans text-slate-900 bg-surface-gray">
       
       <Navigation 
         isOpen={isMenuOpen} 
@@ -36,17 +30,13 @@ function App() {
         setActiveView={setActiveView}
       />
 
-      <main className="flex-grow w-full flex flex-col items-center pt-24 md:pt-32 pb-12">
-        <div className="w-full max-w-7xl px-4 md:px-6">
-          
+      <main className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
           {activeView === 'home' && <Home setActiveView={setActiveView} />}
           {activeView === 'about' && <About />}
           {activeView === 'tutors' && <Tutors />}
           {activeView === 'stories' && <Stories />}
           {activeView === 'locations' && <Contact />}
           {activeView === 'services' && <Services />}
-
-        </div>
       </main>
       
       <Footer setActiveView={setActiveView} />
