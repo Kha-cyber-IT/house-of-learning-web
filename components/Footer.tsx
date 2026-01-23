@@ -65,7 +65,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
               <span className="font-heading font-bold text-xl text-white">House of Learning</span>
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
-              Igniting passion for learning since 2020. We match every student with experienced and professional tutors.
+              Igniting passion for learning since 2020. We aim to match every student with experienced and professional tutors.
             </p>
             <div className="flex gap-3">
               <a 

@@ -14,7 +14,7 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <div id="contact" className="py-8 md:py-12 animate-fade-in max-w-7xl mx-auto px-4 md:px-8">
+    <div id="contact" className="py-8 md:py-12 animate-fade-in w-full max-w-[1920px] mx-auto px-4 md:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <p className="text-lime-400 font-medium mb-2 text-sm uppercase tracking-wide">Contact Us</p>
