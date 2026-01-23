@@ -303,33 +303,33 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                  </div>
 
                  {/* Right Column: Form */}
-                 <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8">
+                 <div className="bg-white rounded-t-3xl p-8 lg:bg-transparent lg:p-0 lg:rounded-none">
                      {contactSubmitted ? (
                           <div className="text-center py-12">
-                              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 text-white">
+                              <div className="w-16 h-16 bg-green-100 lg:bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600 lg:text-white">
                                   <CheckCircle size={32} />
                               </div>
-                              <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                              <p className="text-white/80 mb-6">We'll be in touch shortly.</p>
-                              <button onClick={() => setContactSubmitted(false)} className="text-white font-bold hover:underline">Send another</button>
+                              <h3 className="text-2xl font-bold text-slate-900 lg:text-white mb-2">Message Sent!</h3>
+                              <p className="text-slate-500 lg:text-white/80 mb-6">We'll be in touch shortly.</p>
+                              <button onClick={() => setContactSubmitted(false)} className="text-primary lg:text-white font-bold hover:underline">Send another</button>
                           </div>
                      ) : (
                          <form onSubmit={handleContactSubmit} className="space-y-5">
                             <div>
-                                <label className="block text-sm font-bold text-white mb-2">Name</label>
-                                <input type="text" className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all" placeholder="John Doe" required />
+                                <label className="block text-sm font-bold text-slate-900 lg:text-white mb-2">Name</label>
+                                <input type="text" className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 lg:bg-white/10 lg:border-white/30 lg:text-white lg:placeholder:text-white/60 border focus:border-primary lg:focus:border-white focus:ring-1 focus:ring-primary lg:focus:ring-white focus:outline-none transition-all" placeholder="John Doe" required />
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-white mb-2">Phone</label>
-                                <input type="tel" className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all" placeholder="+27..." required />
+                                <label className="block text-sm font-bold text-slate-900 lg:text-white mb-2">Phone</label>
+                                <input type="tel" className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 lg:bg-white/10 lg:border-white/30 lg:text-white lg:placeholder:text-white/60 border focus:border-primary lg:focus:border-white focus:ring-1 focus:ring-primary lg:focus:ring-white focus:outline-none transition-all" placeholder="+27..." required />
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-white mb-2">Email</label>
-                                <input type="email" className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all" placeholder="john@example.com" required />
+                                <label className="block text-sm font-bold text-slate-900 lg:text-white mb-2">Email</label>
+                                <input type="email" className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 lg:bg-white/10 lg:border-white/30 lg:text-white lg:placeholder:text-white/60 border focus:border-primary lg:focus:border-white focus:ring-1 focus:ring-primary lg:focus:ring-white focus:outline-none transition-all" placeholder="john@example.com" required />
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-white mb-2">Message</label>
-                                <textarea className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all min-h-[120px]" placeholder="How can we help?" required></textarea>
+                                <label className="block text-sm font-bold text-slate-900 lg:text-white mb-2">Message</label>
+                                <textarea className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 lg:bg-white/10 lg:border-white/30 lg:text-white lg:placeholder:text-white/60 border focus:border-primary lg:focus:border-white focus:ring-1 focus:ring-primary lg:focus:ring-white focus:outline-none transition-all min-h-[120px]" placeholder="How can we help?" required></textarea>
                             </div>
                             <button type="submit" className="w-full bg-[#2BB6C7] hover:brightness-110 text-white font-bold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 mt-2">
                                 <Send size={20} /> Send Message

@@ -70,7 +70,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                     href={LINKS.REGISTRATION}
                     target="_blank"
                     rel="noreferrer"
-                    className="bg-slate-900 text-white hover:bg-slate-800 px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-slate-900/10"
+                    className="hidden lg:block bg-slate-900 text-white hover:bg-slate-800 px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-slate-900/10"
                   >
                       Book Now
                   </a>

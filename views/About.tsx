@@ -43,9 +43,9 @@ export const About: React.FC = () => {
         </div>
 
         {/* Why We Exist */}
-        <div className="p-8 md:p-10 bg-white border border-gray-200 rounded-3xl shadow-sm">
-            <h3 className="text-2xl font-bold text-primary mb-8 font-heading uppercase tracking-wide border-b border-gray-100 pb-4">Why We Exist</h3>
-            <div className="space-y-5 text-slate-500 leading-relaxed">
+        <div className="p-8 md:p-10 bg-[#2A6EBB] text-white shadow-lg rounded-3xl border border-transparent">
+            <h3 className="text-2xl font-bold text-white mb-8 font-heading uppercase tracking-wide border-b border-white/20 pb-4">Why We Exist</h3>
+            <div className="space-y-5 text-white/90 leading-relaxed">
               <p>
                 We exist because there is a real need in Eldorado Park. As an organization rooted in the community, we understand the challenges learners face every day.
               </p>
