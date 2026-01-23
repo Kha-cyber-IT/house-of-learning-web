@@ -212,22 +212,41 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 <h2 className="text-4xl font-extrabold font-display mb-4 text-slate-900">Transparent Pricing</h2>
                 <p className="text-slate-500 text-lg font-medium">Choose the plan that best fits your goals.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
                 {pricingPlans.map((plan) => (
-                    <div key={plan.id} className={`card-service p-8 rounded-2xl flex flex-col ${plan.popular ? 'border-primary ring-1 ring-primary' : 'border-gray-100'}`}>
-                        {plan.popular && <span className="self-start bg-primary text-white text-xs font-bold px-3 py-1 rounded-full mb-4">POPULAR</span>}
+                    <div
+                        key={plan.id}
+                        className={`p-8 rounded-2xl flex flex-col transition-all duration-300 ${
+                            plan.popular
+                                ? 'bg-primary border-2 border-primary shadow-xl scale-105 z-10 text-slate-900'
+                                : 'bg-white border border-gray-100 hover:border-gray-200 hover:shadow-lg'
+                        }`}
+                    >
+                        {plan.popular && (
+                            <span className="self-start bg-slate-900 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
+                                MOST POPULAR
+                            </span>
+                        )}
                         <div className="mb-6">
-                            <h3 className="text-xl font-bold font-display text-slate-900">{plan.name}</h3>
-                            <p className="text-slate-500 text-sm mt-2">{plan.description}</p>
+                            <h3 className={`text-xl font-bold font-display ${plan.popular ? 'text-slate-900' : 'text-slate-900'}`}>
+                                {plan.name}
+                            </h3>
+                            <p className={`text-sm mt-2 ${plan.popular ? 'text-slate-800 font-medium' : 'text-slate-500'}`}>
+                                {plan.description}
+                            </p>
                         </div>
                         <div className="mb-8">
-                            <span className="text-4xl font-bold text-slate-900">{plan.price}</span>
-                            <span className="text-slate-500 text-sm"> {plan.period}</span>
+                            <span className={`text-4xl font-bold ${plan.popular ? 'text-slate-900' : 'text-slate-900'}`}>
+                                {plan.price}
+                            </span>
+                            <span className={`text-sm ${plan.popular ? 'text-slate-800' : 'text-slate-500'}`}>
+                                {' '}{plan.period}
+                            </span>
                         </div>
                         <ul className="space-y-3 mb-8 flex-grow">
                             {plan.features.map((feature, i) => (
-                                <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
-                                    <Check size={16} className="text-primary mt-0.5" />
+                                <li key={i} className={`flex items-start gap-3 text-sm ${plan.popular ? 'text-slate-800 font-semibold' : 'text-slate-600'}`}>
+                                    <Check size={16} className={`${plan.popular ? 'text-slate-900' : 'text-primary'} mt-0.5`} />
                                     <span>{feature}</span>
                                 </li>
                             ))}
@@ -236,7 +255,11 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                             href={LINKS.WHATSAPP}
                             target="_blank"
                             rel="noreferrer"
-                            className={`w-full py-3 rounded-xl font-bold text-sm text-center transition-all ${plan.popular ? 'bg-primary text-white hover:bg-lime-600' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}
+                            className={`w-full py-3.5 rounded-xl font-bold text-sm text-center transition-all ${
+                                plan.popular
+                                    ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-lg shadow-slate-900/20'
+                                    : 'bg-slate-50 text-slate-700 hover:bg-primary hover:text-white'
+                            }`}
                         >
                             Choose Plan
                         </a>
