@@ -6,10 +6,11 @@ const subjectData = {
     title: 'Mathematics',
     desc: 'Foundational algebra, calculus, and advanced statistical analysis.',
     icon: 'calculate',
-    // Blue Theme Classes
-    cardClass: 'bg-blue-50/50 border-blue-100 shadow-blue-900/5 hover:shadow-blue-900/10 text-blue-700',
-    iconBg: 'bg-blue-100/50',
-    solidBg: 'bg-blue-600',
+    // Blue Theme (#2563EB)
+    cardClass: 'bg-[#2563EB] text-white shadow-xl',
+    iconBg: 'bg-white/20 text-white',
+    btnClass: 'bg-white text-[#2563EB]',
+    solidBg: 'bg-[#2563EB]',
     subSubjects: [
       { title: 'Pure Mathematics', desc: 'Algebra, Geometry, and Calculus mastery.' },
       { title: 'Mathematical Literacy', desc: 'Practical math applications for everyday life.' }
@@ -19,10 +20,11 @@ const subjectData = {
     title: 'Science',
     desc: 'Comprehensive physics, chemistry, and biology curriculum.',
     icon: 'science',
-    // Lime Theme Classes
-    cardClass: 'bg-lime-50/40 border-lime-100 shadow-lime-900/5 hover:shadow-lime-900/10 text-lime-700',
-    iconBg: 'bg-lime-100/50',
-    solidBg: 'bg-primary', // Use brand primary
+    // Gold Theme (#D97706)
+    cardClass: 'bg-[#D97706] text-white shadow-xl',
+    iconBg: 'bg-white/20 text-white',
+    btnClass: 'bg-white text-[#D97706]',
+    solidBg: 'bg-[#D97706]',
     subSubjects: [
       { title: 'Physical Science', desc: 'Physics and Chemistry fundamentals.' },
       { title: 'Life Sciences', desc: 'Biology and human anatomy.' }
@@ -32,10 +34,11 @@ const subjectData = {
     title: 'Commerce',
     desc: 'Accounting principles, economics, and financial systems.',
     icon: 'account_balance',
-    // Amber Theme Classes
-    cardClass: 'bg-amber-50/50 border-amber-100 shadow-amber-900/5 hover:shadow-amber-900/10 text-amber-700',
-    iconBg: 'bg-amber-100/50',
-    solidBg: 'bg-amber-500',
+    // Orange Theme (#EA580C)
+    cardClass: 'bg-[#EA580C] text-white shadow-xl',
+    iconBg: 'bg-white/20 text-white',
+    btnClass: 'bg-white text-[#EA580C]',
+    solidBg: 'bg-[#EA580C]',
     subSubjects: [
       { title: 'Accounting', desc: 'Financial recording and reporting.' },
       { title: 'Economics', desc: 'Micro and macro economic principles.' }
@@ -45,10 +48,11 @@ const subjectData = {
     title: 'Humanities',
     desc: 'History, geography, and social sciences exploration.',
     icon: 'history_edu',
-    // Purple Theme Classes
-    cardClass: 'bg-purple-50/50 border-purple-100 shadow-purple-900/5 hover:shadow-purple-900/10 text-purple-700',
-    iconBg: 'bg-purple-100/50',
-    solidBg: 'bg-purple-600',
+    // Blue Theme (#2563EB)
+    cardClass: 'bg-[#2563EB] text-white shadow-xl',
+    iconBg: 'bg-white/20 text-white',
+    btnClass: 'bg-white text-[#2563EB]',
+    solidBg: 'bg-[#2563EB]',
     subSubjects: [
       { title: 'History', desc: 'Understanding past events and societies.' },
       { title: 'Geography', desc: 'Physical environment and human impact.' }
@@ -58,10 +62,11 @@ const subjectData = {
     title: 'Business',
     desc: 'Strategic management, marketing, and leadership skills.',
     icon: 'trending_up',
-    // Slate Theme Classes
-    cardClass: 'bg-slate-50 border-slate-200 shadow-slate-900/5 hover:shadow-slate-900/10 text-slate-700',
-    iconBg: 'bg-slate-200/50',
-    solidBg: 'bg-slate-700',
+    // Gold Theme (#D97706)
+    cardClass: 'bg-[#D97706] text-white shadow-xl',
+    iconBg: 'bg-white/20 text-white',
+    btnClass: 'bg-white text-[#D97706]',
+    solidBg: 'bg-[#D97706]',
     subSubjects: [
       { title: 'Business Studies', desc: 'Corporate structure and strategy.' },
       { title: 'Business Management', desc: 'Leadership and operational skills.' }
@@ -71,10 +76,11 @@ const subjectData = {
     title: 'Languages',
     desc: 'Mastery of English Home Language and Afrikaans First Additional Language.',
     icon: 'translate',
-    // Rose Theme Classes
-    cardClass: 'bg-rose-50/50 border-rose-100 shadow-rose-900/5 hover:shadow-rose-900/10 text-rose-700',
-    iconBg: 'bg-rose-100/50',
-    solidBg: 'bg-rose-600',
+    // Orange Theme (#EA580C)
+    cardClass: 'bg-[#EA580C] text-white shadow-xl',
+    iconBg: 'bg-white/20 text-white',
+    btnClass: 'bg-white text-[#EA580C]',
+    solidBg: 'bg-[#EA580C]',
     subSubjects: [
        { title: 'English HL', desc: 'Literature, poetry, and advanced grammar.' },
        { title: 'Afrikaans FAL', desc: 'Communication skills and comprehension.' }
@@ -146,13 +152,13 @@ export const SubjectsSection = () => {
                     <span className="material-symbols-outlined text-3xl md:text-4xl">{data.icon}</span>
                  </div>
                  <div className="flex-grow">
-                    <h3 className="text-2xl font-bold mb-3 text-slate-900 capitalize font-heading">{data.title}</h3>
-                    <p className="text-slate-500 text-base leading-relaxed">{data.desc}</p>
+                    <h3 className="text-2xl font-bold mb-3 text-white capitalize font-heading">{data.title}</h3>
+                    <p className="text-white/90 text-base leading-relaxed">{data.desc}</p>
                  </div>
                  {/* This button triggers the drill-down */}
                  <button
                     onClick={() => setActiveCategory(key)}
-                    className="font-bold text-sm flex items-center gap-2 group hover:gap-3 transition-all mt-2"
+                    className={`font-bold text-sm flex items-center justify-center gap-2 group transition-all mt-2 px-6 py-3 rounded-xl shadow-sm hover:shadow-md ${data.btnClass || 'bg-white text-slate-900'}`}
                  >
                     Learn More <span className="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1">arrow_forward</span>
                  </button>
