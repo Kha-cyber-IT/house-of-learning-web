@@ -314,78 +314,82 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             </div>
         </div>
 
-        {/* CONTACT SECTION (Restored) */}
-        <div id="contact" className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-32 items-start">
-             <div>
-                  <h2 className="text-4xl font-extrabold font-display mb-6 text-slate-900">Get in Touch</h2>
-                  <p className="text-slate-500 text-lg mb-10 leading-relaxed">
-                    Have questions? We're here to help. Reach out to us via any of the channels below or fill out the form.
-                  </p>
+        {/* CONTACT SECTION (Orange AIE Style) */}
+        <div id="contact" className="mb-32">
+             <div className="bg-[#F15A29] rounded-[40px] p-8 md:p-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start shadow-xl">
+                 {/* Left Column: Info */}
+                 <div className="text-white">
+                      <h2 className="text-4xl font-extrabold font-display mb-6">Get in Touch</h2>
+                      <p className="text-white/90 text-lg mb-10 leading-relaxed font-medium">
+                        Have questions? We're here to help. Reach out to us via any of the channels below or fill out the form.
+                      </p>
 
-                  <div className="space-y-6">
-                      <div className="flex items-start gap-5">
-                          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                             <MapPin size={24} />
+                      <div className="space-y-8">
+                          <div className="flex items-start gap-5">
+                              <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white shrink-0">
+                                 <MapPin size={24} />
+                              </div>
+                              <div>
+                                  <h4 className="font-bold text-lg mb-1">Visit Us</h4>
+                                  <p className="text-white/90">Green Masjid Ext 2, Eldorado Park</p>
+                              </div>
                           </div>
-                          <div>
-                              <h4 className="font-bold text-slate-900">Visit Us</h4>
-                              <p className="text-slate-500">Green Masjid Ext 2, Eldorado Park</p>
+                          <div className="flex items-start gap-5">
+                              <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white shrink-0">
+                                 <Mail size={24} />
+                              </div>
+                              <div>
+                                  <h4 className="font-bold text-lg mb-1">Email Us</h4>
+                                  <a href={`mailto:${LINKS.EMAIL}`} className="text-white/90 hover:text-white transition-colors">{LINKS.EMAIL}</a>
+                              </div>
+                          </div>
+                          <div className="flex items-start gap-5">
+                              <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white shrink-0">
+                                 <Phone size={24} />
+                              </div>
+                              <div>
+                                  <h4 className="font-bold text-lg mb-1">Call Us</h4>
+                                  <a href={`tel:${LINKS.PHONE.replace(/\s/g, '')}`} className="text-white/90 hover:text-white transition-colors">{LINKS.PHONE}</a>
+                              </div>
                           </div>
                       </div>
-                      <div className="flex items-start gap-5">
-                          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                             <Mail size={24} />
-                          </div>
-                          <div>
-                              <h4 className="font-bold text-slate-900">Email Us</h4>
-                              <a href={`mailto:${LINKS.EMAIL}`} className="text-slate-500 hover:text-primary transition-colors">{LINKS.EMAIL}</a>
-                          </div>
-                      </div>
-                      <div className="flex items-start gap-5">
-                          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                             <Phone size={24} />
-                          </div>
-                          <div>
-                              <h4 className="font-bold text-slate-900">Call Us</h4>
-                              <a href={`tel:${LINKS.PHONE.replace(/\s/g, '')}`} className="text-slate-500 hover:text-primary transition-colors">{LINKS.PHONE}</a>
-                          </div>
-                      </div>
-                  </div>
-             </div>
+                 </div>
 
-             <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
-                 {contactSubmitted ? (
-                      <div className="text-center py-12">
-                          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
-                              <CheckCircle size={32} />
+                 {/* Right Column: Form */}
+                 <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8">
+                     {contactSubmitted ? (
+                          <div className="text-center py-12">
+                              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 text-white">
+                                  <CheckCircle size={32} />
+                              </div>
+                              <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
+                              <p className="text-white/80 mb-6">We'll be in touch shortly.</p>
+                              <button onClick={() => setContactSubmitted(false)} className="text-white font-bold hover:underline">Send another</button>
                           </div>
-                          <h3 className="text-2xl font-bold text-slate-900 mb-2">Message Sent!</h3>
-                          <p className="text-slate-500 mb-6">We'll be in touch shortly.</p>
-                          <button onClick={() => setContactSubmitted(false)} className="text-primary font-bold hover:underline">Send another</button>
-                      </div>
-                 ) : (
-                     <form onSubmit={handleContactSubmit} className="space-y-6">
-                        <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-2">Name</label>
-                            <input type="text" className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-primary focus:outline-none transition-all" placeholder="John Doe" required />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-2">Phone</label>
-                            <input type="tel" className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-primary focus:outline-none transition-all" placeholder="+27..." required />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-2">Email</label>
-                            <input type="email" className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-primary focus:outline-none transition-all" placeholder="john@example.com" required />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-2">Message</label>
-                            <textarea className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-primary focus:outline-none transition-all min-h-[120px]" placeholder="How can we help?" required></textarea>
-                        </div>
-                        <button type="submit" className="w-full bg-primary hover:bg-lime-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-lime-500/20 transition-all flex items-center justify-center gap-2">
-                            <Send size={20} /> Send Message
-                        </button>
-                     </form>
-                 )}
+                     ) : (
+                         <form onSubmit={handleContactSubmit} className="space-y-5">
+                            <div>
+                                <label className="block text-sm font-bold text-white mb-2">Name</label>
+                                <input type="text" className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all" placeholder="John Doe" required />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-bold text-white mb-2">Phone</label>
+                                <input type="tel" className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all" placeholder="+27..." required />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-bold text-white mb-2">Email</label>
+                                <input type="email" className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all" placeholder="john@example.com" required />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-bold text-white mb-2">Message</label>
+                                <textarea className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all min-h-[120px]" placeholder="How can we help?" required></textarea>
+                            </div>
+                            <button type="submit" className="w-full bg-[#2BB6C7] hover:brightness-110 text-white font-bold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 mt-2">
+                                <Send size={20} /> Send Message
+                            </button>
+                         </form>
+                     )}
+                 </div>
              </div>
         </div>
 
