@@ -304,7 +304,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                               </div>
                               <div>
                                   <h4 className="font-bold text-lg mb-1">Email Us</h4>
-                                  <a href={`mailto:${LINKS.EMAIL}`} className="text-white/90 hover:text-white transition-colors">{LINKS.EMAIL}</a>
+                                  <a href={`mailto:${LINKS.EMAIL}`} className="text-white/90 hover:text-white transition-colors break-all text-sm md:text-base">{LINKS.EMAIL}</a>
                               </div>
                           </div>
                           <div className="flex items-start gap-5">
