@@ -42,10 +42,12 @@ export const Stories: React.FC = () => {
         Success Stories
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-5 md:p-10">
-        {stories.map((story) => (
+        {stories.map((story, index) => (
           <div
             key={story.id}
-            className="bg-[#518E99] shadow-xl rounded-3xl p-10 flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300 h-full min-h-[400px]"
+            className={`bg-[#518E99] shadow-xl rounded-3xl p-10 flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300 h-full min-h-[400px] ${
+              index === stories.length - 1 && stories.length % 2 !== 0 ? 'lg:col-span-2 lg:w-3/4 lg:mx-auto' : ''
+            }`}
           >
             <div className="w-32 h-32 bg-white/20 rounded-full mb-6 flex items-center justify-center overflow-hidden flex-shrink-0 border-4 border-white/30">
                 <img src={story.image} alt={story.name} className="w-full h-full object-cover" />
