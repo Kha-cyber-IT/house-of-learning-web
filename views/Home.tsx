@@ -93,23 +93,40 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
     <div className="space-y-32">
         
         {/* HERO SECTION */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
-            <div className="max-w-2xl">
-                <h1 className="text-slate-900 text-5xl font-extrabold font-display tracking-tight leading-[1.1] mb-6">
-                    House of <br /> Learning
-                </h1>
-                <p className="text-slate-500 text-xl font-medium leading-relaxed">
-                    Unlocking potential through personalized education. We match every student with expert tutors to ignite a lifelong passion for success.
-                </p>
+        <div className="relative rounded-3xl overflow-hidden mb-20 min-h-[500px] flex items-end p-8 md:p-16">
+            {/* Layer 1: Image */}
+            <div
+                className="absolute inset-0 z-0"
+                style={{
+                    backgroundImage: "url('https://i.postimg.cc/7PjBXjJF/1769278237608.png')",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat'
+                }}
+            ></div>
+
+            {/* Layer 2: Overlay */}
+            <div className="absolute inset-0 z-0 bg-white/90"></div>
+
+            {/* Layer 3: Content */}
+            <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-8 w-full">
+                <div className="max-w-2xl">
+                    <h1 className="text-slate-900 text-5xl md:text-6xl font-extrabold font-display tracking-tight leading-[1.1] mb-6">
+                        House of <br /> Learning
+                    </h1>
+                    <p className="text-slate-600 text-xl font-medium leading-relaxed">
+                        Unlocking potential through personalized education. We match every student with expert tutors to ignite a lifelong passion for success.
+                    </p>
+                </div>
+                <a
+                    href={LINKS.REGISTRATION}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hidden md:block bg-[#2A6EBB] text-white px-8 py-4 rounded-xl text-base font-bold shadow-lg hover:bg-blue-700 transition-all"
+                >
+                    Book a Session
+                </a>
             </div>
-            <a
-                href={LINKS.REGISTRATION}
-                target="_blank"
-                rel="noreferrer"
-                className="bg-white border border-gray-200 text-slate-700 px-6 py-3 rounded-xl text-sm font-bold shadow-sm hover:border-gray-300 transition-all"
-            >
-                Book a Session
-            </a>
         </div>
 
         {/* SERVICES GRID */}
@@ -125,7 +142,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                     <li className="flex items-center gap-3 text-sm text-slate-600 font-medium"><span className="material-symbols-outlined text-accent-blue text-lg">verified</span> Flexible scheduling</li>
                     <li className="flex items-center gap-3 text-sm text-slate-600 font-medium"><span className="material-symbols-outlined text-accent-blue text-lg">verified</span> Subject specific</li>
                 </ul>
-                <button onClick={() => setActiveView('services')} className="w-full py-3.5 bg-slate-50 text-slate-700 hover:bg-blue-600 hover:text-white transition-all rounded-xl font-bold text-sm">Learn More</button>
+                <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="w-full py-3.5 bg-slate-50 text-slate-700 hover:bg-blue-600 hover:text-white transition-all rounded-xl font-bold text-sm">Learn More</button>
             </div>
             <div className="card-service rounded-2xl border-accent-emerald p-8 flex flex-col">
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-[#2A6EBB] rounded-2xl flex items-center justify-center mb-8">
@@ -138,7 +155,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                     <li className="flex items-center gap-3 text-sm text-slate-600 font-medium"><span className="material-symbols-outlined text-accent-emerald text-lg">verified</span> Foundation building</li>
                     <li className="flex items-center gap-3 text-sm text-slate-600 font-medium"><span className="material-symbols-outlined text-accent-emerald text-lg">verified</span> Consistent support</li>
                 </ul>
-                <button onClick={() => setActiveView('services')} className="w-full py-3.5 bg-slate-50 text-slate-700 hover:bg-emerald-600 hover:text-white transition-all rounded-xl font-bold text-sm">View Programs</button>
+                <button onClick={() => { setActiveView('home'); setTimeout(() => document.getElementById('browse-all-btn')?.click(), 100); }} className="w-full py-3.5 bg-slate-50 text-slate-700 hover:bg-emerald-600 hover:text-white transition-all rounded-xl font-bold text-sm">View Programs</button>
             </div>
             <div className="card-service rounded-2xl border-accent-indigo p-8 flex flex-col">
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-[#2A6EBB] rounded-2xl flex items-center justify-center mb-8">
@@ -151,7 +168,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                     <li className="flex items-center gap-3 text-sm text-slate-600 font-medium"><span className="material-symbols-outlined text-accent-indigo text-lg">verified</span> Mock exams</li>
                     <li className="flex items-center gap-3 text-sm text-slate-600 font-medium"><span className="material-symbols-outlined text-accent-indigo text-lg">verified</span> Exam strategies</li>
                 </ul>
-                <button onClick={() => setActiveView('services')} className="w-full py-3.5 bg-slate-50 text-slate-700 hover:bg-indigo-600 hover:text-white transition-all rounded-xl font-bold text-sm">Get Ready</button>
+                <a href={LINKS.REGISTRATION} target="_blank" rel="noreferrer" className="w-full py-3.5 bg-slate-50 text-slate-700 hover:bg-indigo-600 hover:text-white transition-all rounded-xl font-bold text-sm text-center block">Get Ready</a>
             </div>
         </div>
 
@@ -189,7 +206,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                     </div>
                     <div>
                         <h4 className="text-2xl font-bold font-display mb-2">Comprehensive Coverage</h4>
-                        <p className="text-white/80 md:text-slate-900 text-base leading-relaxed font-medium">Maths, Sciences, Languages, and Commerce subjects for all levels.</p>
+                        <p className="text-white/80 md:text-slate-900 text-sm md:text-base leading-relaxed font-medium">Maths, Sciences, Languages, and Commerce subjects for all levels.</p>
                     </div>
                 </div>
             </div>
@@ -199,7 +216,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
         <SubjectsSection />
 
         {/* PRICING SECTION (Restored) */}
-        <div className="mb-32">
+        <div className="mb-32" id="pricing">
              <div className="text-center mb-16">
                 <h2 className="text-4xl font-extrabold font-display mb-4 text-slate-900">Transparent Pricing</h2>
                 <p className="text-slate-500 text-lg font-medium">Choose the plan that best fits your goals.</p>
@@ -325,7 +342,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                             </div>
                             <div>
                                 <label className="block text-sm font-bold text-white mb-2">Email</label>
-                                <input type="email" className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all" placeholder="john@example.com" required />
+                                <input type="email" className="w-full px-4 py-3.5 rounded-xl bg-transparent border border-white/50 text-white placeholder:text-white/60 focus:border-white focus:ring-1 focus:ring-white focus:outline-none transition-all break-all" placeholder="john@example.com" required />
                             </div>
                             <div>
                                 <label className="block text-sm font-bold text-white mb-2">Message</label>

@@ -30,7 +30,7 @@ function App() {
         setActiveView={setActiveView}
       />
 
-      <main className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+      <main className="w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 py-16">
           {activeView === 'home' && <Home setActiveView={setActiveView} />}
           {activeView === 'about' && <About />}
           {activeView === 'tutors' && <Tutors />}

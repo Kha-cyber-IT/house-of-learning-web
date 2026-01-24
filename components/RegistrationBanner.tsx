@@ -17,11 +17,11 @@ import React, { useState, useEffect } from 'react';
     
       return (
         <div 
-          className={`fixed bottom-4 left-4 right-4 md:left-auto md:right-8 md:bottom-8 z-[80] max-w-md w-auto transform transition-all duration-700 ease-out ${
+          className={`fixed bottom-4 left-4 right-4 md:left-auto md:right-8 md:bottom-8 z-[80] max-w-[90vw] md:max-w-md w-full md:w-auto transform transition-all duration-700 ease-out ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'
           }`}
         >
-          <div className="bg-lime-600 hover:bg-lime-700 text-white rounded-xl shadow-2xl p-4 md:p-6 flex items-start space-x-4 border border-white/20">
+          <div className="bg-lime-600 hover:bg-lime-700 text-white rounded-xl shadow-2xl p-4 flex items-start space-x-3 border border-white/20">
             <a 
               href={LINKS.REGISTRATION} 
               target="_blank" 

@@ -132,6 +132,7 @@ export const SubjectsSection = () => {
           </button>
         ) : (
           <button
+            id="browse-all-btn"
             onClick={() => setActiveCategory('all')}
             className="text-primary font-bold flex items-center gap-2 group hover:gap-3 transition-all text-lg"
           >

@@ -27,6 +27,12 @@ const stories = [
     text: 'The last day I announced House of Learning I thought I accepted failure. But the help I received changed my project entirely.',
     image: 'https://i.postimg.cc/NMvyCXJY/IMG-20251209-WA0009.jpg'
   },
+  {
+    id: 5,
+    name: 'Kaynica Malan',
+    text: 'I really do appreciate the support and help you have given me. Thank you to House of Learning.',
+    image: 'https://i.postimg.cc/9QY75fZg/IMG-20251124-WA0038.jpg'
+  }
 ];
 
 export const Stories: React.FC = () => {
@@ -39,14 +45,14 @@ export const Stories: React.FC = () => {
         {stories.map((story) => (
           <div
             key={story.id}
-            className="bg-white border-[3px] border-[#C6F038] shadow-[0_10px_30px_rgba(198,240,56,0.2)] rounded-3xl p-10 flex flex-col items-center text-center hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(198,240,56,0.3)] transition-transform duration-300 h-full"
+            className="bg-[#518E99] shadow-xl rounded-3xl p-10 flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300 h-full min-h-[400px]"
           >
-            <div className="w-20 h-20 bg-[#F0FBD0] rounded-full mb-5 flex items-center justify-center overflow-hidden flex-shrink-0">
+            <div className="w-32 h-32 bg-white/20 rounded-full mb-6 flex items-center justify-center overflow-hidden flex-shrink-0 border-4 border-white/30">
                 <img src={story.image} alt={story.name} className="w-full h-full object-cover" />
             </div>
 
-            <h3 className="text-[22px] font-bold text-[#1A1A1A] mb-4 font-heading">{story.name}</h3>
-            <p className="text-lg leading-relaxed text-[#4A4A4A] text-left">{story.text}</p>
+            <h3 className="text-[26px] font-bold text-white mb-6 font-heading">{story.name}</h3>
+            <p className="text-xl leading-relaxed text-white/90 text-center italic">"{story.text}"</p>
           </div>
         ))}
       </div>

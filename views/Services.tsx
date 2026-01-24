@@ -66,8 +66,8 @@ export const Services: React.FC = () => {
     <div className="animate-fade-in max-w-7xl mx-auto space-y-16 pb-12">
       <div className="text-center max-w-3xl mx-auto">
         <p className="text-lime-400 font-bold text-sm uppercase tracking-widest mb-3">What We Offer</p>
-        <h2 className="font-heading font-bold text-3xl md:text-5xl text-white mb-6">
-          Our Services
+        <h2 className="font-heading font-bold text-3xl md:text-5xl mb-6">
+          <span className="text-lime-400">What We Offer</span> <span className="text-[#2A6EBB]">Services</span>
         </h2>
         <p className="text-slate-400 text-lg">
           Comprehensive tutoring services designed to help every student reach their full potential.
@@ -99,9 +99,6 @@ export const Services: React.FC = () => {
                 <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-6">
                   {service.description}
                 </p>
-                <div className={`flex items-center ${categoryTextColors[service.category]} font-semibold text-sm group-hover:gap-2 transition-all`}>
-                    Read More <ArrowRight className="h-4 w-4 ml-1" />
-                </div>
               </div>
             </div>
           );
