@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
-import { RegistrationBanner } from './components/RegistrationBanner';
+import { WhatsAppButton } from './components/WhatsAppButton';
 import { Footer } from './components/Footer';
 import { Home } from './views/Home';
 import { About } from './views/About';
@@ -41,7 +41,7 @@ function App() {
       
       <Footer setActiveView={setActiveView} />
 
-      <RegistrationBanner />
+      <WhatsAppButton />
       
     </div>
   );
