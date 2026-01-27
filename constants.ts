@@ -95,5 +95,5 @@ export const LINKS = {
   WHATSAPP: 'https://wa.me/message/6TDMAKDMZLLUL1',
   MAPS: 'https://maps.app.goo.gl/5xWNMKTK4Dngt2Ha9?g_st=ac',
   EMAIL: 'houseoflearning153@gmail.com',
-  PHONE: '071 271 6011'
+  PHONE: '072 584 7369'
 };
