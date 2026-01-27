@@ -18,7 +18,7 @@ export const TUTORS: Tutor[] = [
   {
     id: 'jabulani',
     name: 'Jabulani Baloyi',
-    role: 'Mathematics Grade 1-12',
+    role: 'Principal',
     image: 'https://i.postimg.cc/9QDnLzSd/IMG-20251124-WA0053.jpg',
     description: [
       "Jabulani is the co-founder of House of Learning. He tutors Mathematics from grade 1-12."
@@ -27,7 +27,7 @@ export const TUTORS: Tutor[] = [
   {
     id: 'alisandre',
     name: 'Alisandre',
-    role: 'Accounting and Economics',
+    role: 'Tutoring Assist',
     image: 'https://i.postimg.cc/Vvs7nNnF/IMG-20251124-WA0050.jpg',
     description: [
       "My name is Alisandre and I tutor Accounting and Economics at House of Learning. I enjoy helping students better understand topics they struggle with and seeing them improve."
