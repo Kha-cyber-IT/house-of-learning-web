@@ -103,10 +103,10 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
         {/* HERO SECTION */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
             <div className="max-w-2xl">
-                <h1 className="text-slate-900 text-5xl font-extrabold font-display tracking-tight leading-[1.1] mb-6">
+                <h1 className="text-slate-900 text-4xl md:text-5xl font-extrabold font-display tracking-tight leading-[1.1] mb-6">
                     House of <br /> Learning
                 </h1>
-                <p className="text-slate-500 text-xl font-medium leading-relaxed">
+                <p className="text-slate-500 text-lg md:text-xl font-medium leading-relaxed">
                     Unlocking potential through personalized education. We match every student with expert tutors to ignite a lifelong passion for success.
                 </p>
             </div>
@@ -126,7 +126,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-8">
                     <span className="material-symbols-outlined text-blue-700 text-3xl">person</span>
                 </div>
-                <h3 className="text-2xl font-bold font-display mb-4 text-slate-900">Private Tutoring</h3>
+                <h3 className="text-xl md:text-2xl font-bold font-display mb-4 text-slate-900">Private Tutoring</h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-8">Exclusive one-on-one attention tailored to your unique learning style and pace.</p>
                 <ul className="space-y-4 mb-10 flex-grow">
                     <li className="flex items-center gap-3 text-sm text-slate-600 font-medium"><span className="material-symbols-outlined text-accent-blue text-lg">verified</span> Personalized plans</li>
@@ -139,7 +139,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mb-8">
                     <span className="material-symbols-outlined text-emerald-700 text-3xl">school</span>
                 </div>
-                <h3 className="text-2xl font-bold font-display mb-4 text-slate-900">Structured Programs</h3>
+                <h3 className="text-xl md:text-2xl font-bold font-display mb-4 text-slate-900">Structured Programs</h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-8">Curriculum-aligned learning paths designed to build solid foundations for all grades.</p>
                 <ul className="space-y-4 mb-10 flex-grow">
                     <li className="flex items-center gap-3 text-sm text-slate-600 font-medium"><span className="material-symbols-outlined text-accent-emerald text-lg">verified</span> Grade R to 12</li>
@@ -152,7 +152,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-8">
                     <span className="material-symbols-outlined text-indigo-700 text-3xl">menu_book</span>
                 </div>
-                <h3 className="text-2xl font-bold font-display mb-4 text-slate-900">Exam Prep</h3>
+                <h3 className="text-xl md:text-2xl font-bold font-display mb-4 text-slate-900">Exam Prep</h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-8">Intensive preparation strategies, past papers, and mock exams to maximize results.</p>
                 <ul className="space-y-4 mb-10 flex-grow">
                     <li className="flex items-center gap-3 text-sm text-slate-600 font-medium"><span className="material-symbols-outlined text-accent-indigo text-lg">verified</span> Past papers</li>
@@ -166,7 +166,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
         {/* WHY CHOOSE US (BENTO - Updated Green Styling) */}
         <div className="mb-32">
             <div className="text-center mb-16">
-                <h2 className="text-4xl font-extrabold font-display mb-4 text-slate-900">Why Choose Us?</h2>
+                <h2 className="text-3xl md:text-4xl font-extrabold font-display mb-4 text-slate-900">Why Choose Us?</h2>
                 <p className="text-slate-500 text-lg font-medium">We don't just teach subjects; we teach students how to learn.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-auto md:h-[500px]">
@@ -174,30 +174,30 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                     <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8">
                         <span className="material-symbols-outlined text-primary text-4xl">workspace_premium</span>
                     </div>
-                    <h4 className="text-3xl font-bold font-display mb-4 text-white md:text-slate-900">Personalized Learning</h4>
-                    <p className="text-white md:text-slate-900 text-lg leading-relaxed font-medium">We develop individualized learning plans for each student, ensuring that we address their specific needs, learning styles, and academic goals.</p>
+                    <h4 className="text-2xl md:text-3xl font-bold font-display mb-4 text-white md:text-slate-900">Personalized Learning</h4>
+                    <p className="text-white md:text-slate-900 text-base md:text-lg leading-relaxed font-medium">We develop individualized learning plans for each student, ensuring that we address their specific needs, learning styles, and academic goals.</p>
                 </div>
                 <div className="bg-[#0f172a] md:bg-primary p-8 rounded-3xl flex flex-col items-start text-white md:text-slate-900 shadow-xl">
                     <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center mb-6">
                         <span className="material-symbols-outlined text-primary text-2xl">groups</span>
                     </div>
-                    <h4 className="text-xl font-bold font-display mb-2 text-white md:text-slate-900">Experienced Tutors</h4>
-                    <p className="text-white md:text-slate-900 text-sm leading-relaxed font-medium">Professional and vetted tutors dedicated to your success.</p>
+                    <h4 className="text-lg md:text-xl font-bold font-display mb-2 text-white md:text-slate-900">Experienced Tutors</h4>
+                    <p className="text-white md:text-slate-900 text-xs md:text-sm leading-relaxed font-medium">Professional and vetted tutors dedicated to your success.</p>
                 </div>
                 <div className="bg-[#0f172a] md:bg-primary p-8 rounded-3xl flex flex-col items-start text-white md:text-slate-900 shadow-xl">
                     <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center mb-6">
                         <span className="material-symbols-outlined text-primary text-2xl">star_rate</span>
                     </div>
-                    <h4 className="text-xl font-bold font-display mb-2 text-white md:text-slate-900">Proven Results</h4>
-                    <p className="text-white md:text-slate-900 text-sm leading-relaxed font-medium">100% success rate with students moving to the next grade.</p>
+                    <h4 className="text-lg md:text-xl font-bold font-display mb-2 text-white md:text-slate-900">Proven Results</h4>
+                    <p className="text-white md:text-slate-900 text-xs md:text-sm leading-relaxed font-medium">100% success rate with students moving to the next grade.</p>
                 </div>
                 <div className="md:col-span-2 bg-[#0f172a] md:bg-primary p-8 rounded-3xl flex items-center gap-8 text-white md:text-slate-900 shadow-xl">
                     <div className="w-20 h-20 rounded-3xl bg-white flex-shrink-0 flex items-center justify-center">
                         <span className="material-symbols-outlined text-primary text-5xl">library_books</span>
                     </div>
                     <div>
-                        <h4 className="text-2xl font-bold font-display mb-2 text-white md:text-slate-900">Comprehensive Coverage</h4>
-                        <p className="text-white md:text-slate-900 text-base leading-relaxed font-medium">Maths, Sciences, Languages, and Commerce subjects for all levels.</p>
+                        <h4 className="text-xl md:text-2xl font-bold font-display mb-2 text-white md:text-slate-900">Comprehensive Coverage</h4>
+                        <p className="text-white md:text-slate-900 text-sm md:text-base leading-relaxed font-medium">Maths, Sciences, Languages, and Commerce subjects for all levels.</p>
                     </div>
                 </div>
             </div>
@@ -377,20 +377,20 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
 
         {/* CLOSING CTA */}
         <div className="bg-slate-100/50 rounded-[40px] p-16 text-center border border-gray-200/60 shadow-sm">
-            <h2 className="text-4xl font-extrabold font-display mb-6 text-slate-900 leading-tight">Ready to Excel?</h2>
-            <p className="text-slate-500 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">Join House of Learning today and take the first step towards academic success.</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold font-display mb-6 text-slate-900 leading-tight">Ready to Excel?</h2>
+            <p className="text-slate-500 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">Join House of Learning today and take the first step towards academic success.</p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <a
                     href={LINKS.REGISTRATION}
                     target="_blank"
                     rel="noreferrer"
-                    className="bg-primary hover:bg-lime-600 text-white px-12 py-5 rounded-2xl font-bold text-lg shadow-xl shadow-lime-500/20 transition-all"
+                    className="bg-[#2A6EBB] hover:bg-[#2563EB] text-white px-12 py-5 rounded-2xl font-bold text-lg shadow-xl shadow-blue-500/20 transition-all"
                 >
                     Book Now
                 </a>
                 <button
                     onClick={() => setActiveView('locations')}
-                    className="bg-white border border-gray-200 text-slate-800 px-12 py-5 rounded-2xl font-bold text-lg shadow-sm hover:border-gray-300 transition-all"
+                    className="bg-[#2A6EBB] hover:bg-[#2563EB] text-white px-12 py-5 rounded-2xl font-bold text-lg shadow-xl shadow-blue-500/20 transition-all"
                 >
                     Contact Us
                 </button>

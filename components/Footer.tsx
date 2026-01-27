@@ -19,24 +19,24 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
                     <h2 className="text-slate-600 text-lg font-bold font-display">House of Learning</h2>
                 </div>
                 <p className="text-slate-500 text-sm font-medium">© {new Date().getFullYear()} House of Learning. All rights reserved.</p>
-                <div className="flex gap-8">
+                <div className="flex gap-4">
                     <button
                         onClick={() => setActiveView('home')}
-                        className="text-slate-400 hover:text-primary transition-colors"
+                        className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-primary transition-all shadow-sm"
                         aria-label="Home"
                     >
                         <span className="material-symbols-outlined">public</span>
                     </button>
                     <a
                         href={`mailto:${LINKS.EMAIL}`}
-                        className="text-slate-400 hover:text-primary transition-colors"
+                        className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-primary transition-all shadow-sm"
                         aria-label="Email"
                     >
                         <span className="material-symbols-outlined">mail</span>
                     </a>
                     <a
                         href={`tel:${LINKS.PHONE.replace(/\s/g, '')}`}
-                        className="text-slate-400 hover:text-primary transition-colors"
+                        className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-primary transition-all shadow-sm"
                         aria-label="Call Us"
                     >
                         <span className="material-symbols-outlined">call</span>
@@ -45,7 +45,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
                          href={LINKS.WHATSAPP}
                          target="_blank"
                          rel="noreferrer"
-                         className="text-slate-400 hover:text-primary transition-colors"
+                         className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-primary transition-all shadow-sm"
                          aria-label="WhatsApp"
                     >
                         <span className="material-symbols-outlined">chat</span>
