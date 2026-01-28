@@ -21,7 +21,7 @@ export const TUTORS: Tutor[] = [
     role: 'Mathematics Grade 1-12',
     image: 'https://i.postimg.cc/9QDnLzSd/IMG-20251124-WA0053.jpg',
     description: [
-      "Jabulani is the co-founder of House of Learning. He tutors Mathematics from grade 1-12."
+      "Jabulani is the Principal of House of Learning. I tutors Mathematics from grade 1-12."
     ]
   },
   {
@@ -95,5 +95,5 @@ export const LINKS = {
   WHATSAPP: 'https://wa.me/message/6TDMAKDMZLLUL1',
   MAPS: 'https://maps.app.goo.gl/5xWNMKTK4Dngt2Ha9?g_st=ac',
   EMAIL: 'houseoflearning153@gmail.com',
-  PHONE: '071 271 6011'
+  PHONE: '072 584 7369'
 };
