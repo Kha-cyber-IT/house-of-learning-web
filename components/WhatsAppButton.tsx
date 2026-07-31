@@ -18,12 +18,15 @@ export const WhatsAppButton: React.FC = () => {
       href={LINKS.WHATSAPP}
       target="_blank"
       rel="noreferrer"
-      className={`fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#128C7E] text-white p-3 md:p-4 rounded-full shadow-lg transition-all duration-500 ease-out hover:scale-110 hover:shadow-xl flex items-center justify-center ${
+      className={`fixed bottom-6 right-4 md:bottom-8 md:right-8 z-50 bg-[#25D366] text-white p-3.5 md:p-4 rounded-full shadow-lg shadow-[#25D366]/30 transition-all duration-500 ease-out hover:bg-[#20bd5a] hover:scale-110 hover:shadow-2xl hover:shadow-[#25D366]/50 flex items-center justify-center group ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
       }`}
       aria-label="Chat on WhatsApp"
     >
-      <MessageCircle className="w-6 h-6 md:w-8 md:h-8" />
+      {/* Premium touch: A subtle, continuous pulse ring behind the button */}
+      <span className="absolute w-full h-full rounded-full bg-[#25D366] animate-ping opacity-30 group-hover:hidden"></span>
+      
+      <MessageCircle className="w-6 h-6 md:w-7 md:h-7 relative z-10" />
     </a>
   );
 };
