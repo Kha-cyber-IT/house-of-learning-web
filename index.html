@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>House of Learning</title>
+    
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -14,11 +15,10 @@
             theme: {
                 extend: {
                     colors: {
-                        // UPDATED to match your logo (258259.jpg)
-                        "primary": "#b48c36", // The Gold from the logo
-                        "primary-dark": "#967226", 
-                        "brand-navy": "#0b1b3d", // The deep Navy from the logo
-                        "surface-gray": "#fcfcfc",
+                        /* Updated to match your House logo (258259.jpg) */
+                        "primary": "#b48c36", // Gold
+                        "brand-navy": "#0b1b3d", // Deep Navy
+                        "surface-gray": "#f8fafc", // A much cleaner, modern off-white background
                     },
                     fontFamily: {
                         "sans": ["Inter", "sans-serif"],
@@ -43,17 +43,19 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
         }
+        
         body {
-            @apply bg-surface-gray text-brand-navy;
-            /* Updated to a very soft, warm background so the logo blends beautifully */
-            background-image: radial-gradient(at top left, #ffffff 0%, transparent 40%),
-                              radial-gradient(at bottom right, #fef9eb 0%, transparent 40%);
+            /* Cleaned up background to make the white cards and logo pop */
+            @apply bg-surface-gray text-brand-navy antialiased;
         }
+        
+        /* Scaled down the card styles so they look sharp and not massive on mobile */
         .card-service {
-            @apply bg-white border-t-2 border-primary transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1;
+            @apply bg-white border-t-2 border-primary transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 rounded-xl;
         }
+        
         .bento-card {
-            @apply bg-white border border-gray-100 rounded-2xl p-8 transition-all duration-300 shadow-sm hover:shadow-md;
+            @apply bg-white border border-gray-100 rounded-xl p-6 transition-all duration-300 shadow-sm hover:shadow-md;
         }
     </style>
     
@@ -68,7 +70,7 @@
     }
     </script>
 </head>
-<body class="font-sans min-h-screen selection:bg-primary selection:text-white">
+<body class="font-sans min-h-screen">
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
 </body>
