@@ -33,30 +33,32 @@ export const Navigation: React.FC<NavigationProps> = ({
 
   return (
     <>
-      <nav className="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-xl border-b border-gray-200/50">
+      <nav className="sticky top-0 z-50 w-full bg-white border-b border-neutral-100 shadow-sm">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
 
-              {/* Brand */}
+              {/* Brand - Book icon hidden on mobile for maximum minimal clarity */}
               <button
                 onClick={() => handleNavClick('home')}
-                className="flex items-center gap-3 group"
+                className="flex items-center gap-2 group"
               >
-                  <div className="text-primary h-8 w-8 flex items-center justify-center bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
-                      <BookOpen size={20} strokeWidth={2.5} />
+                  <div className="hidden md:flex text-black group-hover:text-[#b48c36] transition-colors">
+                      <BookOpen size={24} strokeWidth={2.5} />
                   </div>
-                  <h2 className="text-slate-900 text-xl font-bold font-display tracking-tight">House of Learning</h2>
+                  <h2 className="text-black text-xl font-black uppercase tracking-tighter">
+                      House of Learning
+                  </h2>
               </button>
 
-              {/* Desktop Links */}
+              {/* Desktop Links - Minimalist text only */}
               <div className="hidden md:flex items-center gap-8">
                   {menuItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => handleNavClick(item.id)}
-                      className={`text-sm font-semibold transition-colors ${
+                      className={`text-sm font-bold transition-all ${
                         activeView === item.id
-                          ? 'text-primary'
-                          : 'text-slate-600 hover:text-primary'
+                          ? 'text-[#b48c36]' // Highlight active in Gold
+                          : 'text-neutral-500 hover:text-black'
                       }`}
                     >
                       {item.label}
@@ -66,51 +68,57 @@ export const Navigation: React.FC<NavigationProps> = ({
 
               {/* Actions */}
               <div className="flex items-center gap-4">
+                  {/* Desktop CTA - Strict Black & White style */}
                   <a
                     href={LINKS.REGISTRATION}
                     target="_blank"
                     rel="noreferrer"
-                    className="hidden lg:block bg-slate-900 text-white hover:bg-slate-800 px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-slate-900/10"
+                    className="hidden lg:block bg-black text-white hover:bg-neutral-800 px-6 py-2.5 text-sm font-bold transition-colors"
                   >
                       Book Now
                   </a>
 
-                  {/* Mobile Toggle */}
+                  {/* Mobile Toggle Button */}
                   <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="md:hidden text-slate-600 hover:text-primary transition-colors p-1"
+                    className="md:hidden text-black hover:text-[#b48c36] transition-colors z-50 relative"
                   >
-                    {isOpen ? <X size={30} /> : <Menu size={30} />}
+                    {isOpen ? <X size={28} /> : <Menu size={28} strokeWidth={2.5} />}
                   </button>
               </div>
           </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Modern Mobile Menu Overlay - Full screen, text-based, no cards */}
       {isOpen && (
-        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-24 px-6 md:hidden">
-            <div className="flex flex-col items-center gap-4">
+        <div className="fixed inset-0 z-40 bg-white pt-28 px-8 md:hidden flex flex-col animate-fade-in overflow-y-auto">
+            <div className="flex flex-col gap-6">
                 {menuItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleNavClick(item.id)}
-                    className={`w-full h-[44px] flex items-center justify-center text-base font-bold font-display transition-colors ${
+                    className={`text-left text-3xl font-black tracking-tight transition-colors ${
                       activeView === item.id
-                        ? 'text-primary bg-primary/5 rounded-lg'
-                        : 'text-slate-900 hover:text-primary hover:bg-slate-50 rounded-lg'
+                        ? 'text-[#b48c36]' // Gold
+                        : 'text-black hover:text-[#b48c36]'
                     }`}
                   >
                     {item.label}
                   </button>
                 ))}
-                <a
-                    href={LINKS.REGISTRATION}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-4 w-full h-[44px] flex items-center justify-center bg-slate-900 text-white hover:bg-slate-800 rounded-xl text-base font-bold transition-all shadow-xl"
-                >
-                    Book a Session
-                </a>
+                
+                {/* Mobile CTA - Styled as a sleek text link rather than a blocky card */}
+                <div className="border-t border-neutral-100 mt-4 pt-8">
+                    <a
+                        href={LINKS.REGISTRATION}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center justify-between w-full text-2xl font-black tracking-tight text-black hover:text-[#b48c36] transition-colors"
+                    >
+                        Book a Session 
+                        <span className="text-xl">↗</span>
+                    </a>
+                </div>
             </div>
         </div>
       )}
