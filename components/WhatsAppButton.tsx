@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { MessageCircle } from 'lucide-react';
-import { LINKS } from '../constants';
+import React, { useState, useEffect } from "react";
+import { MessageCircle } from "lucide-react";
+import { LINKS } from "../constants";
 
 export const WhatsAppButton: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Small delay for entrance animation
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 1000);
+    const timer = setTimeout(() => setVisible(true), 800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -17,16 +14,60 @@ export const WhatsAppButton: React.FC = () => {
     <a
       href={LINKS.WHATSAPP}
       target="_blank"
-      rel="noreferrer"
-      className={`fixed bottom-6 right-4 md:bottom-8 md:right-8 z-50 bg-[#25D366] text-white p-3.5 md:p-4 rounded-full shadow-lg shadow-[#25D366]/30 transition-all duration-500 ease-out hover:bg-[#20bd5a] hover:scale-110 hover:shadow-2xl hover:shadow-[#25D366]/50 flex items-center justify-center group ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
-      }`}
+      rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
+      className={`
+        fixed
+        bottom-5
+        right-5
+        md:bottom-8
+        md:right-8
+        z-50
+
+        w-14
+        h-14
+        md:w-16
+        md:h-16
+
+        rounded-full
+        bg-[#25D366]
+        text-white
+
+        flex
+        items-center
+        justify-center
+
+        shadow-xl
+        shadow-[#25D366]/30
+
+        transition-all
+        duration-500
+        ease-out
+
+        hover:scale-110
+        hover:bg-[#22c55e]
+        hover:shadow-2xl
+        hover:shadow-[#25D366]/50
+
+        focus:outline-none
+        focus:ring-4
+        focus:ring-[#25D366]/40
+
+        ${
+          visible
+            ? "translate-y-0 opacity-100"
+            : "translate-y-16 opacity-0"
+        }
+      `}
     >
-      {/* Premium touch: A subtle, continuous pulse ring behind the button */}
-      <span className="absolute w-full h-full rounded-full bg-[#25D366] animate-ping opacity-30 group-hover:hidden"></span>
-      
-      <MessageCircle className="w-6 h-6 md:w-7 md:h-7 relative z-10" />
+      {/* Soft pulse */}
+      <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-20 animate-ping"></span>
+
+      {/* Icon */}
+      <MessageCircle
+        className="relative z-10 w-6 h-6 md:w-7 md:h-7"
+        strokeWidth={2.2}
+      />
     </a>
   );
 };
