@@ -1,5 +1,3 @@
-
-
 import { Tutor, Testimonial } from './types';
 
 export const TUTORS: Tutor[] = [
@@ -21,7 +19,7 @@ export const TUTORS: Tutor[] = [
     role: 'Mathematics Grade 1-12',
     image: 'https://i.postimg.cc/9QDnLzSd/IMG-20251124-WA0053.jpg',
     description: [
-      "Jabulani is the co-founder of House of Learning. He tutors Mathematics from grade 1-12."
+      "Jabulani is the co-founder of House of Learning. He tutors Mathematics from Grade 1-12."
     ]
   },
   {
@@ -39,7 +37,7 @@ export const TUTORS: Tutor[] = [
     role: 'Primary Mathematics & English',
     image: 'https://i.postimg.cc/4ysYsh9Z/IMG-20251209-WA0013.jpg',
     description: [
-      "I enjoy tutoring because I get to make learning feel less stressful and more approachable. I love seeing students have those ‘ohh, I get it now’ moments. Helping someone understand something they were struggling with is incredibly rewarding for me, and working with the kids honestly brightens up my day."
+      "I enjoy tutoring because I get to make learning feel less stressful and more approachable. I love seeing students have those 'I get it now' moments. Helping someone understand something they were struggling with is incredibly rewarding for me, and working with the kids honestly brightens up my day."
     ]
   }
 ];
@@ -50,9 +48,9 @@ export const STORIES: Testimonial[] = [
     name: 'Neo Nkadimeng',
     image: 'https://i.postimg.cc/gJ3hGsXK/Smart-Select-20251123-152747-Whats-App.jpg',
     text: [
-      "Since joining the programme, I’ve experienced incredible support; academically and personally. House of Learning has played a major role in helping me understand my strengths, improve my weaknesses and build confidence in my schoolwork.",
-      "I’ve seen consistent and noticeable growth in my academics and the progress has been nothing short of drastic. I’ve achieved results I never expected and each milestone has motivated me to push myself even further.",
-      "Overall, my journey with House of Learning has been transformative and I’m excited to continue growing and achieving even more."
+      "Since joining the programme, I've experienced incredible support academically and personally. House of Learning has played a major role in helping me understand my strengths, improve my weaknesses and build confidence in my schoolwork.",
+      "I've seen consistent and noticeable growth in my academics and the progress has been nothing short of drastic. I've achieved results I never expected and each milestone has motivated me to push myself even further.",
+      "Overall, my journey with House of Learning has been transformative and I'm excited to continue growing and achieving even more."
     ]
   },
   {
@@ -60,8 +58,8 @@ export const STORIES: Testimonial[] = [
     name: 'Trevor Nemaflohoni',
     image: 'https://i.postimg.cc/T2JQ0TH4/IMG-20251124-WA0018.jpg',
     text: [
-      "Attending extra classes this year has been a game-changer for me. The extra help has really helped me understand topics previously struggled with, and it's reflected in my grades. My average jumped from 48% to 61%.",
-      "I'm grateful to my teachers for their dedication and patience; they've not only helped me improve academically but also boosted my confidence."
+      "Attending extra classes this year has been a game-changer for me. The extra help has really helped me understand topics I previously struggled with, and it's reflected in my grades. My average jumped from 48% to 61%.",
+      "I'm grateful to my teachers for their dedication and patience. They've not only helped me improve academically but also boosted my confidence."
     ]
   },
   {
@@ -69,7 +67,7 @@ export const STORIES: Testimonial[] = [
     name: 'Leyondre Walters',
     image: 'https://i.postimg.cc/R0nxJWGv/IMG-20251124-WA0019.jpg',
     text: [
-      "House of Learning helped me improve and enhance my ability of tackling a question paper. The tutors at House of Learning made me feel welcomed and comfortable. They were there to motivate me when I felt like giving up."
+      "House of Learning helped me improve my ability to tackle question papers. The tutors made me feel welcomed and comfortable, and they were there to motivate me whenever I felt like giving up."
     ]
   },
   {
@@ -77,7 +75,7 @@ export const STORIES: Testimonial[] = [
     name: 'Keabetsoe Musekwa',
     image: 'https://i.postimg.cc/NMvyCXJY/IMG-20251209-WA0009.jpg',
     text: [
-      "The first day I attended at house of learning I thought I wouldn't be interested in bettering my grades, but I soon realized that the help I was getting was for my own good. The tutors helped me be strict in keeping my grades up."
+      "The first day I attended House of Learning, I thought I wouldn't be interested in improving my grades. I soon realized the support I was receiving was helping me build a better future. The tutors encouraged me to stay disciplined and keep my grades up."
     ]
   },
   {
@@ -85,15 +83,19 @@ export const STORIES: Testimonial[] = [
     name: 'Kaynica Malan',
     image: 'https://i.postimg.cc/9QY75fZg/IMG-20251124-WA0038.jpg',
     text: [
-      "I really do appreciate the support and help you have given me. Thank you to House of Learning."
+      "I truly appreciate all the support and guidance I received. Thank you to everyone at House of Learning."
     ]
   }
 ];
 
 export const LINKS = {
   REGISTRATION: 'https://form.svhrt.com/6924b8ec6968f8f5185446aa',
+
   WHATSAPP: 'https://wa.me/message/6TDMAKDMZLLUL1',
-  MAPS: 'https://maps.app.goo.gl/5xWNMKTK4Dngt2Ha9?g_st=ac',
+
+  MAPS: 'https://share.google/vz40QazI8Sei6MuBO',
+
   EMAIL: 'houseoflearning153@gmail.com',
+
   PHONE: '072 584 7369'
 };
