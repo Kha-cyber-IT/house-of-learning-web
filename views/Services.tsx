@@ -42,7 +42,7 @@ const iconMap = {
 
 export const Services = () => {
   return (
-    <div className="bg-[#20241F] py-12 md:py-20">
+    <div className="w-full bg-[#20241F] py-8 md:py-20">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
         .font-display { font-family: 'Fraunces', serif; }
@@ -50,7 +50,7 @@ export const Services = () => {
         .font-label { font-family: 'IBM Plex Mono', monospace; }
       `}</style>
 
-      <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-10 font-body">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-10 font-body">
 
         {/* Hero */}
         <div className="max-w-3xl mb-14 md:mb-20">
