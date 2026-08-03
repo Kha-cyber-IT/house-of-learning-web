@@ -278,55 +278,57 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
 
       {/* PRICING SECTION (contained cards — not full-bleed) */}
       <div className="mb-32" id="pricing">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold font-display mb-4 text-slate-900">Transparent Pricing</h2>
-          <p className="text-slate-500 text-lg font-medium">Choose the plan that best fits your goals.</p>
+        <div className="text-center mb-10 md:mb-14">
+          <h2 className="text-3xl md:text-4xl font-extrabold font-display mb-3" style={{ color: COLORS.paper }}>Transparent Pricing</h2>
+          <p className="text-sm md:text-base font-medium" style={{ color: COLORS.muted }}>Choose the plan that best fits your goals.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 items-stretch">
           {pricingPlans.map((plan) => (
             <div
               key={plan.id}
-              className={`p-8 rounded-2xl flex flex-col transition-all duration-300 ${
-                plan.popular ? 'shadow-xl scale-105 z-10' : 'bg-white hover:shadow-lg'
+              className={`p-6 rounded-2xl flex flex-col transition-all duration-300 hover:-translate-y-1 ${
+                plan.popular ? 'shadow-xl md:scale-105 md:z-10' : 'bg-white hover:shadow-lg'
               }`}
               style={
                 plan.popular
                   ? { backgroundColor: COLORS.honey, border: `2px solid ${COLORS.honey}` }
-                  : { border: `2px solid ${plan.accent}55` }
+                  : { border: `1.5px solid ${plan.accent}40` }
               }
             >
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center mb-6"
-                style={{ backgroundColor: plan.popular ? COLORS.inkDeep : `${plan.accent}1A`, color: plan.popular ? COLORS.honey : plan.accent }}
-              >
-                <plan.icon size={22} />
+              <div className="flex items-center justify-between mb-4">
+                <div
+                  className="w-10 h-10 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: plan.popular ? COLORS.inkDeep : `${plan.accent}1A`, color: plan.popular ? COLORS.honey : plan.accent }}
+                >
+                  <plan.icon size={18} />
+                </div>
+                {plan.popular && (
+                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full tracking-wide" style={{ backgroundColor: COLORS.inkDeep, color: COLORS.paper }}>
+                    POPULAR
+                  </span>
+                )}
               </div>
 
-              {plan.popular && (
-                <span className="self-start text-xs font-bold px-3 py-1 rounded-full mb-4" style={{ backgroundColor: COLORS.inkDeep, color: COLORS.paper }}>
-                  MOST POPULAR
-                </span>
-              )}
-              <div className="mb-6">
-                <h3 className="text-xl font-bold font-display text-slate-900">
+              <div className="mb-4">
+                <h3 className="text-lg font-bold font-display text-slate-900">
                   {plan.name}
                 </h3>
-                <p className={`text-sm mt-2 ${plan.popular ? 'text-slate-800 font-medium' : 'text-slate-500'}`}>
+                <p className={`text-xs mt-1 ${plan.popular ? 'text-slate-800 font-medium' : 'text-slate-500'}`}>
                   {plan.description}
                 </p>
               </div>
-              <div className="mb-8">
-                <span className="text-4xl font-bold text-slate-900">
+              <div className="mb-5">
+                <span className="text-3xl font-bold text-slate-900">
                   {plan.price}
                 </span>
-                <span className={`text-sm ${plan.popular ? 'text-slate-800' : 'text-slate-500'}`}>
+                <span className={`text-xs ${plan.popular ? 'text-slate-800' : 'text-slate-500'}`}>
                   {' '}{plan.period}
                 </span>
               </div>
-              <ul className="space-y-3 mb-8 flex-grow">
+              <ul className="space-y-2 mb-6 flex-grow">
                 {plan.features.map((feature, i) => (
-                  <li key={i} className={`flex items-start gap-3 text-sm ${plan.popular ? 'text-slate-800 font-semibold' : 'text-slate-600'}`}>
-                    <Check size={16} className="mt-0.5" style={{ color: plan.popular ? COLORS.inkDeep : plan.accent }} />
+                  <li key={i} className={`flex items-start gap-2 text-xs md:text-sm ${plan.popular ? 'text-slate-800 font-semibold' : 'text-slate-600'}`}>
+                    <Check size={14} className="mt-0.5 shrink-0" style={{ color: plan.popular ? COLORS.inkDeep : plan.accent }} />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -335,7 +337,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 href={LINKS.WHATSAPP}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full py-3.5 rounded-xl font-bold text-sm text-center transition-all"
+                className="w-full py-2.5 rounded-xl font-bold text-xs md:text-sm text-center transition-all"
                 style={
                   plan.popular
                     ? { backgroundColor: COLORS.inkDeep, color: COLORS.paper }
