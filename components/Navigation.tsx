@@ -3,6 +3,15 @@ import { Menu, X, BookOpen } from "lucide-react";
 import { LINKS } from "../constants";
 import { ViewState } from "../types";
 
+const COLORS = {
+  ink: "#20241F",
+  secondary: "#23302A",
+  border: "#3A423A",
+  paper: "#F7F2E7",
+  muted: "#B9C2B8",
+  honey: "#D9A441",
+};
+
 interface NavigationProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -33,7 +42,10 @@ export const Navigation: React.FC<NavigationProps> = ({
   return (
     <>
       {/* ================= NAVIGATION ================= */}
-      <nav className="sticky top-0 z-50 w-full border-b border-neutral-200/70 bg-white/90 backdrop-blur-md">
+      <nav
+        className="sticky top-0 z-50 w-full border-b backdrop-blur-md"
+        style={{ backgroundColor: `${COLORS.ink}E6`, borderColor: COLORS.border }}
+      >
         <div className="mx-auto flex max-w-[1200px] items-center justify-between px-5 lg:px-10 py-3">
 
           {/* Logo */}
@@ -41,12 +53,18 @@ export const Navigation: React.FC<NavigationProps> = ({
             onClick={() => handleNavClick("home")}
             className="flex items-center gap-2 group"
           >
-            <div className="hidden md:flex text-black transition-colors group-hover:text-[#b48c36]">
+            <div
+              className="hidden md:flex transition-colors"
+              style={{ color: COLORS.honey }}
+            >
               <BookOpen size={22} strokeWidth={2.4} />
             </div>
 
-            <h1 className="text-lg md:text-xl font-extrabold tracking-tight text-black">
-              HOUSE OF LEARNING
+            <h1
+              className="text-lg md:text-xl font-bold tracking-tight font-display"
+              style={{ color: COLORS.paper }}
+            >
+              House of Learning
             </h1>
           </button>
 
@@ -56,16 +74,22 @@ export const Navigation: React.FC<NavigationProps> = ({
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`relative pb-1 text-[14px] font-medium tracking-wide transition-colors duration-200 ${
-                  activeView === item.id
-                    ? "text-[#b48c36]"
-                    : "text-neutral-600 hover:text-black"
-                }`}
+                className="relative pb-1 text-[14px] font-medium tracking-wide transition-colors duration-200"
+                style={{ color: activeView === item.id ? COLORS.honey : COLORS.muted }}
+                onMouseEnter={(e) => {
+                  if (activeView !== item.id) e.currentTarget.style.color = COLORS.paper;
+                }}
+                onMouseLeave={(e) => {
+                  if (activeView !== item.id) e.currentTarget.style.color = COLORS.muted;
+                }}
               >
                 {item.label}
 
                 {activeView === item.id && (
-                  <span className="absolute left-0 -bottom-1 h-[2px] w-full rounded-full bg-[#b48c36]" />
+                  <span
+                    className="absolute left-0 -bottom-1 h-[2px] w-full rounded-full"
+                    style={{ backgroundColor: COLORS.honey }}
+                  />
                 )}
               </button>
             ))}
@@ -79,7 +103,8 @@ export const Navigation: React.FC<NavigationProps> = ({
               href={LINKS.REGISTRATION}
               target="_blank"
               rel="noreferrer"
-              className="hidden lg:flex items-center rounded-lg bg-black px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-800"
+              className="hidden lg:flex items-center rounded-lg px-5 py-2.5 text-sm font-semibold transition hover:brightness-105"
+              style={{ backgroundColor: COLORS.honey, color: COLORS.ink }}
             >
               Book Now
             </a>
@@ -87,7 +112,10 @@ export const Navigation: React.FC<NavigationProps> = ({
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-black transition hover:text-[#b48c36]"
+              className="md:hidden transition-colors"
+              style={{ color: COLORS.paper }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.honey)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.paper)}
             >
               {isOpen ? (
                 <X size={28} strokeWidth={2.3} />
@@ -101,11 +129,12 @@ export const Navigation: React.FC<NavigationProps> = ({
 
       {/* ================= MOBILE MENU ================= */}
       <div
-        className={`fixed inset-0 z-40 bg-white transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 transition-all duration-300 md:hidden ${
           isOpen
             ? "opacity-100 visible"
             : "opacity-0 invisible pointer-events-none"
         }`}
+        style={{ backgroundColor: COLORS.ink }}
       >
         <div className="pt-24 px-8">
 
@@ -115,29 +144,33 @@ export const Navigation: React.FC<NavigationProps> = ({
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`flex items-center justify-between py-3 text-left text-xl font-semibold tracking-tight transition-colors ${
-                  activeView === item.id
-                    ? "text-[#b48c36]"
-                    : "text-black hover:text-[#b48c36]"
-                }`}
+                className="flex items-center justify-between py-3 text-left text-xl font-semibold tracking-tight transition-colors font-display"
+                style={{ color: activeView === item.id ? COLORS.honey : COLORS.paper }}
+                onMouseEnter={(e) => {
+                  if (activeView !== item.id) e.currentTarget.style.color = COLORS.honey;
+                }}
+                onMouseLeave={(e) => {
+                  if (activeView !== item.id) e.currentTarget.style.color = COLORS.paper;
+                }}
               >
                 {item.label}
 
                 {activeView === item.id && (
-                  <span className="text-[#b48c36]">•</span>
+                  <span style={{ color: COLORS.honey }}>•</span>
                 )}
               </button>
             ))}
 
             {/* Divider */}
-            <div className="my-6 border-t border-neutral-200" />
+            <div className="my-6 border-t" style={{ borderColor: COLORS.border }} />
 
             {/* Mobile CTA */}
             <a
               href={LINKS.REGISTRATION}
               target="_blank"
               rel="noreferrer"
-              className="rounded-lg bg-black py-3 text-center text-white font-semibold transition hover:bg-neutral-800"
+              className="rounded-lg py-3 text-center font-semibold transition hover:brightness-105"
+              style={{ backgroundColor: COLORS.honey, color: COLORS.ink }}
             >
               Book a Session
             </a>
@@ -147,3 +180,4 @@ export const Navigation: React.FC<NavigationProps> = ({
     </>
   );
 };
+
