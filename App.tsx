@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
 import { WhatsAppButton } from './components/WhatsAppButton';
@@ -21,7 +20,7 @@ function App() {
   }, [activeView]);
 
   return (
-    <div className="min-h-screen font-sans text-slate-900 bg-surface-gray">
+    <div className="min-h-screen font-sans text-brand-navy bg-surface-gray">
       
       <Navigation 
         isOpen={isMenuOpen} 
