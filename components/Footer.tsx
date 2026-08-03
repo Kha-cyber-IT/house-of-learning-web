@@ -1,7 +1,16 @@
 import React from "react";
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle, MapPin } from "lucide-react";
 import { LINKS } from "../constants";
 import { ViewState } from "../types";
+
+const COLORS = {
+  ink: "#20241F",
+  secondary: "#23302A",
+  border: "#3A423A",
+  paper: "#F7F2E7",
+  muted: "#B9C2B8",
+  honey: "#D9A441",
+};
 
 interface FooterProps {
   setActiveView: (view: ViewState) => void;
@@ -14,33 +23,41 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
   };
 
   return (
-    <footer className="bg-black text-white pt-10 pb-5">
+    <footer style={{ backgroundColor: COLORS.ink, color: COLORS.paper }} className="pt-16 pb-6">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Brand */}
-        <h2 className="text-2xl font-black tracking-tight">
-          HOUSE OF LEARNING
+        <h2 className="text-2xl font-bold tracking-tight font-display" style={{ color: COLORS.paper }}>
+          House of Learning
         </h2>
 
-        <p className="mt-2 max-w-md text-sm text-gray-400">
+        <div className="w-12 h-[3px] rounded-full mt-4 mb-4" style={{ backgroundColor: COLORS.honey }}></div>
+
+        <p className="max-w-md text-sm leading-relaxed" style={{ color: COLORS.muted }}>
           Personalized education with individual attention, empowering
           students anywhere, anytime.
         </p>
 
         {/* Footer Links */}
-        <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-3">
+        <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-3">
 
           {/* Academics */}
           <div>
-            <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.2em]">
+            <h3
+              className="mb-4 text-xs font-bold uppercase tracking-[0.2em] font-label"
+              style={{ color: COLORS.honey }}
+            >
               Academics
             </h3>
 
-            <ul className="space-y-2 text-sm text-gray-400">
+            <ul className="space-y-3 text-sm">
               <li>
                 <button
                   onClick={() => handleClick("services")}
-                  className="hover:text-white transition-colors"
+                  className="transition-colors"
+                  style={{ color: COLORS.muted }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.honey)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.muted)}
                 >
                   All Subjects
                 </button>
@@ -49,7 +66,10 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
               <li>
                 <button
                   onClick={() => handleClick("services")}
-                  className="hover:text-white transition-colors"
+                  className="transition-colors"
+                  style={{ color: COLORS.muted }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.honey)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.muted)}
                 >
                   Online Programs
                 </button>
@@ -58,7 +78,10 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
               <li>
                 <button
                   onClick={() => handleClick("services")}
-                  className="hover:text-white transition-colors"
+                  className="transition-colors"
+                  style={{ color: COLORS.muted }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.honey)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.muted)}
                 >
                   Tuition
                 </button>
@@ -68,15 +91,21 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
 
           {/* Company */}
           <div>
-            <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.2em]">
+            <h3
+              className="mb-4 text-xs font-bold uppercase tracking-[0.2em] font-label"
+              style={{ color: COLORS.honey }}
+            >
               Company
             </h3>
 
-            <ul className="space-y-2 text-sm text-gray-400">
+            <ul className="space-y-3 text-sm">
               <li>
                 <button
                   onClick={() => handleClick("about")}
-                  className="hover:text-white transition-colors"
+                  className="transition-colors"
+                  style={{ color: COLORS.muted }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.honey)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.muted)}
                 >
                   About Us
                 </button>
@@ -85,7 +114,10 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
               <li>
                 <button
                   onClick={() => handleClick("tutors")}
-                  className="hover:text-white transition-colors"
+                  className="transition-colors"
+                  style={{ color: COLORS.muted }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.honey)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.muted)}
                 >
                   Our Tutors
                 </button>
@@ -94,7 +126,10 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
               <li>
                 <button
                   onClick={() => handleClick("stories")}
-                  className="hover:text-white transition-colors"
+                  className="transition-colors"
+                  style={{ color: COLORS.muted }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.honey)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.muted)}
                 >
                   Success Stories
                 </button>
@@ -103,8 +138,11 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
           </div>
 
           {/* Contact */}
-          <div>
-            <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.2em]">
+          <div className="col-span-2 md:col-span-1">
+            <h3
+              className="mb-4 text-xs font-bold uppercase tracking-[0.2em] font-label"
+              style={{ color: COLORS.honey }}
+            >
               Contact
             </h3>
 
@@ -114,14 +152,34 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
                 href={LINKS.WHATSAPP}
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 transition hover:bg-zinc-800"
+                aria-label="Chat on WhatsApp"
+                className="flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 hover:-translate-y-0.5"
+                style={{ backgroundColor: COLORS.secondary, borderColor: COLORS.border, color: COLORS.muted }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = COLORS.honey;
+                  e.currentTarget.style.color = COLORS.honey;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = COLORS.border;
+                  e.currentTarget.style.color = COLORS.muted;
+                }}
               >
                 <MessageCircle size={18} />
               </a>
 
               <a
                 href={`mailto:${LINKS.EMAIL}`}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 transition hover:bg-zinc-800"
+                aria-label="Email us"
+                className="flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 hover:-translate-y-0.5"
+                style={{ backgroundColor: COLORS.secondary, borderColor: COLORS.border, color: COLORS.muted }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = COLORS.honey;
+                  e.currentTarget.style.color = COLORS.honey;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = COLORS.border;
+                  e.currentTarget.style.color = COLORS.muted;
+                }}
               >
                 <Mail size={18} />
               </a>
@@ -132,14 +190,15 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
         </div>
 
         {/* Bottom */}
-        <div className="mt-8 border-t border-zinc-800 pt-4">
+        <div className="mt-12 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3" style={{ borderTop: `1px solid ${COLORS.border}` }}>
 
-          <p className="text-xs text-gray-500">
+          <p className="text-xs" style={{ color: COLORS.muted }}>
             © 2026 House of Learning. All rights reserved.
           </p>
 
-          <p className="mt-2 text-xs text-gray-500">
-            📍 Eldorado Park Ext 2, Tennis Courts by the Women's Forum
+          <p className="flex items-center gap-1.5 text-xs" style={{ color: COLORS.muted }}>
+            <MapPin size={14} style={{ color: COLORS.honey }} />
+            Eldorado Park Ext 2, Tennis Courts by the Women's Forum
           </p>
 
         </div>
@@ -148,3 +207,4 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
     </footer>
   );
 };
+
