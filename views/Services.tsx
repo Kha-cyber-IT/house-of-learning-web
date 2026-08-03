@@ -42,7 +42,7 @@ const iconMap = {
 
 export const Services = () => {
   return (
-    <div className="bg-[#20241F] py-20">
+    <div className="bg-[#20241F] py-12 md:py-20">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
         .font-display { font-family: 'Fraunces', serif; }
@@ -50,17 +50,17 @@ export const Services = () => {
         .font-label { font-family: 'IBM Plex Mono', monospace; }
       `}</style>
 
-      <div className="max-w-5xl mx-auto px-6 font-body">
+      <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-10 font-body">
 
         {/* Hero */}
-        <div className="max-w-2xl mb-16">
+        <div className="max-w-3xl mb-14 md:mb-20">
           <p className="font-label text-[#D9A441] text-xs uppercase tracking-[0.25em] mb-4">
             What We Offer
           </p>
-          <h2 className="font-display font-semibold text-4xl md:text-6xl text-[#F7F2E7] leading-tight">
+          <h2 className="font-display font-semibold text-4xl sm:text-5xl md:text-6xl text-[#F7F2E7] leading-[1.1]">
             What We Offer <span className="text-[#D9A441]">Services</span>
           </h2>
-          <p className="text-[#B9C2B8] text-lg mt-6">
+          <p className="text-[#B9C2B8] text-base md:text-lg mt-4 md:mt-6 max-w-2xl">
             Comprehensive tutoring services designed to help every student reach their full potential.
           </p>
         </div>
@@ -72,27 +72,27 @@ export const Services = () => {
             return (
               <div
                 key={service.id}
-                className="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-10 border-b border-[#3A423A] items-start"
+                className="group grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 py-10 md:py-14 border-b border-[#3A423A] items-start"
                 data-testid={`card-service-${service.id}`}
               >
                 <div className="md:col-span-2 flex md:flex-col items-center md:items-start gap-4">
                   <span className="font-label text-sm text-[#6E796E]">{service.id}</span>
                   <div
-                    className="w-11 h-11 rounded-full flex items-center justify-center shrink-0"
+                    className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
                     style={{ backgroundColor: service.accent }}
                   >
-                    <IconComponent className="h-5 w-5 text-white" />
+                    <IconComponent className="h-6 w-6 text-white" />
                   </div>
                 </div>
 
                 <div className="md:col-span-7">
-                  <h3 className="font-display font-semibold text-2xl text-[#F7F2E7] mb-1">
+                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-[#F7F2E7] mb-1">
                     {service.title}
                   </h3>
                   <p className="font-label text-[10px] uppercase tracking-widest mb-3" style={{ color: service.accent }}>
                     {service.subtitle}
                   </p>
-                  <p className="text-[#B9C2B8] text-sm leading-relaxed max-w-lg">
+                  <p className="text-[#B9C2B8] text-[15px] leading-7 max-w-none md:max-w-lg">
                     {service.description}
                   </p>
                 </div>
@@ -112,14 +112,14 @@ export const Services = () => {
         </div>
 
         {/* Why choose us — inline row, no panel/cards */}
-        <div className="mt-20">
+        <div className="mt-20 md:mt-24">
           <h3 className="font-display font-semibold text-2xl md:text-3xl text-[#F7F2E7] mb-3">
             Why Choose House of Learning?
           </h3>
           <p className="text-[#B9C2B8] max-w-xl mb-10">
             We're committed to providing the best educational support for every student.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
             {features.map((feature, index) => (
               <div key={index} className="flex gap-4 md:block md:border-l md:border-[#3A423A] md:pl-6">
                 <feature.icon className="h-5 w-5 text-[#D9A441] shrink-0 mt-1 md:mb-4" />
@@ -137,10 +137,10 @@ export const Services = () => {
         </div>
 
         {/* CTA — plain band, not a card */}
-        <div className="mt-20 pt-12 border-t border-[#3A423A] flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+        <div className="mt-14 md:mt-20 pt-10 md:pt-12 border-t border-[#3A423A] flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div>
             <h3 className="font-display font-semibold text-3xl md:text-4xl text-[#F7F2E7] mb-2">
-              Ready to start?
+              Let's Build Your Academic Success
             </h3>
             <p className="text-[#B9C2B8]">
               Contact us today to schedule your first session.
