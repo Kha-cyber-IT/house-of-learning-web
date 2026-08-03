@@ -15,10 +15,10 @@
             theme: {
                 extend: {
                     colors: {
-                        /* Updated to match your House logo (258259.jpg) */
-                        "primary": "#b48c36", // Gold
-                        "brand-navy": "#0b1b3d", // Deep Navy
-                        "surface-gray": "#f8fafc", // A much cleaner, modern off-white background
+                        /* Updated to the House of Learning ink / paper / gold system */
+                        "primary": "#D9A441", // Gold accent
+                        "brand-navy": "#F7F2E7", // Repurposed: main light text color (paper) on the dark background
+                        "surface-gray": "#20241F", // Repurposed: main dark background (ink), replaces the old off-white
                     },
                     fontFamily: {
                         "sans": ["Inter", "sans-serif"],
@@ -45,7 +45,7 @@
         }
         
         body {
-            /* Cleaned up background to make the white cards and logo pop */
+            /* Now renders as ink background with paper text instead of off-white/navy */
             @apply bg-surface-gray text-brand-navy antialiased;
         }
         
