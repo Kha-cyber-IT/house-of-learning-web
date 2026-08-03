@@ -1,5 +1,14 @@
-
 import React from 'react';
+import { Quote } from 'lucide-react';
+
+const COLORS = {
+  ink: '#20241F',
+  secondary: '#23302A',
+  border: '#3A423A',
+  paper: '#F7F2E7',
+  muted: '#B9C2B8',
+  honey: '#D9A441',
+};
 
 // Updated Success Stories Data (as per request, using existing images)
 const stories = [
@@ -37,27 +46,67 @@ const stories = [
 
 export const Stories: React.FC = () => {
   return (
-    <div className="animate-fade-in max-w-[1200px] mx-auto py-12">
-      <h2 className="text-center text-[36px] font-bold text-[#C6F038] mb-10 font-heading">
-        Success Stories
-      </h2>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-5 md:p-10">
-        {stories.map((story, index) => (
-          <div
-            key={story.id}
-            className={`bg-[#518E99] shadow-xl rounded-3xl p-10 flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300 h-full min-h-[400px] ${
-              index === stories.length - 1 && stories.length % 2 !== 0 ? 'lg:col-span-2 lg:w-3/4 lg:mx-auto' : ''
-            }`}
+    <section
+      className="animate-fade-in py-16 md:py-24 px-4"
+      style={{ backgroundColor: COLORS.ink }}
+    >
+      <div className="max-w-[1200px] mx-auto">
+        <div className="text-center mb-14">
+          <p
+            className="font-label text-xs uppercase tracking-[0.25em] mb-4 font-bold"
+            style={{ color: COLORS.honey }}
           >
-            <div className="w-32 h-32 bg-white/20 rounded-full mb-6 flex items-center justify-center overflow-hidden flex-shrink-0 border-4 border-white/30">
-                <img src={story.image} alt={story.name} className="w-full h-full object-cover" />
-            </div>
+            Success Stories
+          </p>
+          <h2
+            className="text-4xl md:text-5xl font-bold font-display"
+            style={{ color: COLORS.paper }}
+          >
+            Success Stories
+          </h2>
+        </div>
 
-            <h3 className="text-[26px] font-bold text-white mb-6 font-heading">{story.name}</h3>
-            <p className="text-xl leading-relaxed text-white/90 text-center italic">"{story.text}"</p>
-          </div>
-        ))}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {stories.map((story, index) => (
+            <div
+              key={story.id}
+              className={`relative overflow-hidden rounded-3xl p-10 flex flex-col items-center text-center h-full min-h-[400px] border transition-all duration-300 hover:-translate-y-1 ${
+                index === stories.length - 1 && stories.length % 2 !== 0 ? 'lg:col-span-2 lg:w-3/4 lg:mx-auto' : ''
+              }`}
+              style={{ backgroundColor: COLORS.secondary, borderColor: COLORS.border }}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = COLORS.honey)}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = COLORS.border)}
+            >
+              <Quote
+                size={72}
+                className="absolute top-6 left-6 opacity-[0.08] pointer-events-none"
+                style={{ color: COLORS.honey }}
+                fill={COLORS.honey}
+              />
+
+              <div
+                className="relative w-36 h-36 md:w-40 md:h-40 rounded-full mb-6 flex items-center justify-center overflow-hidden flex-shrink-0 border-4"
+                style={{ borderColor: `${COLORS.honey}55` }}
+              >
+                <img src={story.image} alt={story.name} className="w-full h-full object-cover" />
+              </div>
+
+              <h3
+                className="text-2xl font-bold mb-6 font-display relative"
+                style={{ color: COLORS.paper }}
+              >
+                {story.name}
+              </h3>
+              <p
+                className="text-xl leading-relaxed italic relative"
+                style={{ color: COLORS.muted }}
+              >
+                "{story.text}"
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
