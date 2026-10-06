@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Clock,
   Star,
@@ -35,6 +35,9 @@ const COLORS = {
   honeyHover: '#D79D35',
   pine: '#1E4A3F',
   lake: '#2B5876',
+  clay: '#C2623F',
+  terra: '#A84F31',
+  terraDeep: '#8A3F26',
   sage: '#4F8F67',
   denim: '#3F78A0',
   plum: '#8E5A7A',
@@ -116,6 +119,40 @@ const HOME_CSS = `
   .hl-field::placeholder { color: ${COLORS.paper}99; }
   .hl-field:focus { outline: none; border-color: ${COLORS.honey}; box-shadow: 0 0 0 3px ${COLORS.honey}40; }
   .hl-btn:focus-visible, .hl-field:focus-visible { outline: 2px solid ${COLORS.honey}; outline-offset: 2px; }
+
+  /* scroll reveal + card tilt */
+  .hl-reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .hl-reveal.is-in { opacity: 1; transform: none; }
+  .hl-tilt { transition: transform .2s ease-out; will-change: transform; }
+
+  /* 3D book stack (pure CSS, no libraries) */
+  .hl-scene { position: relative; width: 240px; height: 240px; perspective: 900px; }
+  .hl-float { animation: hl-float 6s ease-in-out infinite; }
+  .hl-stack { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; animation: hl-spin 22s linear infinite; }
+  .hl-book { position: absolute; left: 50%; top: 50%; width: var(--w); height: var(--t);
+    margin-left: calc(var(--w) / -2); margin-top: calc(var(--t) / -2);
+    transform-style: preserve-3d; transform: translateY(var(--y)) rotateY(var(--r)); }
+  .hl-face { position: absolute; }
+  .hl-pages { background: repeating-linear-gradient(180deg, ${COLORS.paper} 0 3px, #E4DAC3 3px 4px); }
+  .hl-cover { background: var(--c); }
+  .hl-spine { background: var(--c); filter: brightness(.78); }
+  .hl-f-front, .hl-f-back { width: var(--w); height: var(--t); }
+  .hl-f-front { transform: translateZ(calc(var(--d) / 2)); }
+  .hl-f-back { transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); }
+  .hl-f-left, .hl-f-right { width: var(--d); height: var(--t); left: calc((var(--w) - var(--d)) / 2); }
+  .hl-f-right { transform: rotateY(90deg) translateZ(calc(var(--w) / 2)); }
+  .hl-f-left { transform: rotateY(-90deg) translateZ(calc(var(--w) / 2)); }
+  .hl-f-top, .hl-f-bottom { width: var(--w); height: var(--d); top: calc((var(--t) - var(--d)) / 2); }
+  .hl-f-top { transform: rotateX(90deg) translateZ(calc(var(--t) / 2)); }
+  .hl-f-bottom { transform: rotateX(-90deg) translateZ(calc(var(--t) / 2)); }
+  @keyframes hl-spin { from { transform: rotateX(-20deg) rotateY(0deg); } to { transform: rotateX(-20deg) rotateY(360deg); } }
+  @keyframes hl-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hl-stack { animation: none; transform: rotateX(-20deg) rotateY(-30deg); }
+    .hl-float { animation: none; }
+    .hl-reveal { opacity: 1; transform: none; transition: none; }
+    .hl-tilt { transition: none; }
+  }
   @media (hover: hover) {
     .hl-honey-btn:hover { background-color: ${COLORS.honeyHover}; }
     .hl-card-btn:hover, .hl-plan-btn:hover { background-color: var(--accent); color: #fff; }
@@ -143,6 +180,109 @@ const FullBleedSection: React.FC<{
   >
     <div className={`px-5 py-14 md:px-16 md:py-20 ${innerClassName}`}>{children}</div>
   </section>
+);
+
+// Fades/slides content in once as it scrolls into view.
+const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: number }> = ({
+  children,
+  className = '',
+  delay = 0,
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setVisible(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`hl-reveal ${visible ? 'is-in' : ''} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Subtle 3D tilt that follows a mouse. Ignored for touch/pen and reduced motion.
+const Tilt: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const onMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse' || !ref.current) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const r = ref.current.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    ref.current.style.transform = `perspective(900px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg) translateY(-4px)`;
+  };
+  const onLeave = () => {
+    if (ref.current) ref.current.style.transform = '';
+  };
+
+  return (
+    <div ref={ref} onPointerMove={onMove} onPointerLeave={onLeave} className={`hl-tilt ${className}`}>
+      {children}
+    </div>
+  );
+};
+
+// Rotating stack of three books — decorative only.
+const BOOKS = [
+  { c: COLORS.clay, w: 212, y: 40, r: 0 },
+  { c: COLORS.sage, w: 190, y: 2, r: 16 },
+  { c: COLORS.honey, w: 168, y: -36, r: -12 },
+];
+
+const HeroBooks: React.FC = () => (
+  <div className="hl-scene hl-float" aria-hidden="true">
+    <div
+      className="absolute inset-6 rounded-full blur-3xl opacity-30"
+      style={{ background: COLORS.honey }}
+    />
+    <div className="hl-stack">
+      {BOOKS.map((b, i) => (
+        <div
+          key={i}
+          className="hl-book"
+          style={
+            {
+              '--w': `${b.w}px`,
+              '--t': '34px',
+              '--d': '150px',
+              '--y': `${b.y}px`,
+              '--r': `${b.r}deg`,
+              '--c': b.c,
+            } as React.CSSProperties
+          }
+        >
+          <div className="hl-face hl-f-front hl-pages" />
+          <div className="hl-face hl-f-back hl-pages" />
+          <div className="hl-face hl-f-right hl-pages" />
+          <div className="hl-face hl-f-left hl-spine" />
+          <div className="hl-face hl-f-top hl-cover" />
+          <div className="hl-face hl-f-bottom hl-cover" />
+        </div>
+      ))}
+    </div>
+  </div>
 );
 
 export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
@@ -214,7 +354,13 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
           }}
         />
 
+        {/* 3D books: centred above the text on phones, right side on desktop */}
+        <div className="absolute z-10 pointer-events-none left-1/2 -translate-x-1/2 top-6 scale-[0.7] origin-top md:left-auto md:translate-x-0 md:right-16 md:top-1/2 md:-translate-y-1/2 md:scale-100 md:origin-center">
+          <HeroBooks />
+        </div>
+
         <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-8 w-full max-w-6xl mx-auto">
+          <div className="h-40 md:hidden" aria-hidden="true" />
           <div className="max-w-2xl">
             <h1
               className="text-5xl sm:text-6xl md:text-7xl font-extrabold font-display tracking-tight leading-[1.05] mb-5"
@@ -242,14 +388,15 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
 
       {/* SERVICES */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-        {serviceCards.map((card) => {
+        {serviceCards.map((card, idx) => {
           const btnClass =
             'hl-btn hl-card-btn w-full py-3.5 rounded-xl font-bold text-sm text-center block transition-colors';
           const accentVar = { ['--accent' as string]: card.color } as React.CSSProperties;
           return (
+            <Reveal key={card.title} delay={idx * 120} className="h-full">
+            <Tilt className="h-full">
             <div
-              key={card.title}
-              className="card-service rounded-2xl p-6 md:p-8 flex flex-col"
+              className="card-service rounded-2xl p-6 md:p-8 flex flex-col h-full"
               style={{ border: `2px solid ${card.color}33` }}
             >
               <div
@@ -280,6 +427,8 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 </button>
               )}
             </div>
+            </Tilt>
+            </Reveal>
           );
         })}
       </div>
@@ -610,7 +759,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
 
       {/* CLOSING CTA */}
       <FullBleedSection
-        background={`linear-gradient(135deg, ${COLORS.lake} 0%, ${COLORS.denim} 100%)`}
+        background={`linear-gradient(135deg, ${COLORS.terra} 0%, ${COLORS.terraDeep} 100%)`}
         className="text-center shadow-xl"
         innerClassName="max-w-6xl mx-auto"
       >
@@ -632,7 +781,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             target="_blank"
             rel="noreferrer"
             className="hl-btn px-10 md:px-12 py-4 md:py-5 rounded-2xl font-bold text-lg shadow-xl transition-opacity hover:opacity-90"
-            style={{ backgroundColor: COLORS.paper, color: COLORS.lake }}
+            style={{ backgroundColor: COLORS.paper, color: COLORS.terraDeep }}
           >
             Visit Us
           </a>
@@ -641,3 +790,4 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
     </div>
   );
 };
+          
