@@ -292,9 +292,9 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             We don't just teach subjects; we teach students how to learn.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:gap-6 h-auto md:h-[500px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:auto-rows-fr">
           <div
-            className="md:col-span-2 md:row-span-2 p-6 md:p-10 rounded-2xl md:rounded-3xl flex flex-col justify-center shadow-xl"
+            className="md:col-span-2 lg:row-span-2 p-6 md:p-10 rounded-2xl md:rounded-3xl flex flex-col justify-center shadow-xl"
             style={{ backgroundColor: COLORS.ink, color: COLORS.paper }}
           >
             <div
@@ -343,7 +343,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
           </div>
 
           <div
-            className="md:col-span-2 p-6 md:p-8 rounded-2xl md:rounded-3xl flex items-center gap-5 md:gap-8 shadow-xl"
+            className="md:col-span-2 p-6 md:p-8 rounded-2xl md:rounded-3xl flex items-center gap-5 md:gap-8 shadow-xl min-w-0"
             style={{ backgroundColor: COLORS.inkDeep, color: COLORS.paper }}
           >
             <div
