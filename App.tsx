@@ -19,29 +19,38 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeView]);
 
+  // Home manages its own full-bleed sections; other views keep the padded container.
+  const isHome = activeView === 'home';
+
   return (
-    <div className="min-h-screen font-sans text-brand-navy bg-surface-gray">
-      
-      <Navigation 
-        isOpen={isMenuOpen} 
-        setIsOpen={setIsMenuOpen} 
+    <div className="min-h-screen w-full overflow-x-hidden font-sans text-brand-navy bg-surface-gray">
+
+      <Navigation
+        isOpen={isMenuOpen}
+        setIsOpen={setIsMenuOpen}
         activeView={activeView}
         setActiveView={setActiveView}
       />
 
-      <main className="w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 py-16">
-          {activeView === 'home' && <Home setActiveView={setActiveView} />}
-          {activeView === 'about' && <About />}
-          {activeView === 'tutors' && <Tutors />}
-          {activeView === 'stories' && <Stories />}
-          {activeView === 'locations' && <Contact />}
-          {activeView === 'services' && <Services />}
+      <main
+        className={
+          isHome
+            ? 'w-full'
+            : 'w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 py-16'
+        }
+      >
+        {activeView === 'home' && <Home setActiveView={setActiveView} />}
+        {activeView === 'about' && <About />}
+        {activeView === 'tutors' && <Tutors />}
+        {activeView === 'stories' && <Stories />}
+        {activeView === 'locations' && <Contact />}
+        {activeView === 'services' && <Services />}
       </main>
-      
+
       <Footer setActiveView={setActiveView} />
 
       <WhatsAppButton />
-      
+
     </div>
   );
 }
