@@ -21,9 +21,10 @@ interface HomeProps {
 
 // ---- HL Tutoring brand ----
 const C = {
-  mainGreen: '#4CA771', // New global background
+  mainGreen: '#4CA771', // Global background
   cardYellow: '#F9CE69', // Services & Subjects cards
-  lightBlue: '#D9EFF7', // Accent text color
+  lightBlue: '#D9EFF7', // Accent text color (Subheadings/Paragraphs)
+  lightMint: '#C0E6BA', // Soft accent (Used for 'Why choose us' cards)
   navy: '#123B63',
   blue: '#2A6592',
   gold: '#C9A04A',
@@ -31,9 +32,7 @@ const C = {
   ink: '#14213D',
 };
 
-const LOGO = '/hl-logo.png'; // Ensure this points to your crest file locally
 const HERO_PHOTO = 'https://i.postimg.cc/nzXtG4RT/IMG-20261006-WA0027.png';
-
 const FORM_ENDPOINT = '';
 
 interface Plan {
@@ -101,6 +100,11 @@ const CSS = `
     box-sizing: border-box;
   }
 
+  /* Apply Gill Sans globally */
+  html, body, button, input, textarea, a, p, h1, h2, h3, h4, h5, h6, span, div {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  }
+
   html, body {
     width: 100%;
     max-width: 100%;
@@ -119,6 +123,7 @@ const CSS = `
   .hl-page-content {
     background-color: ${C.mainGreen};
     min-height: 100vh;
+    width: 100%;
   }
 
   .hl-gold-btn {
@@ -143,7 +148,6 @@ const CSS = `
     position: relative;
     width: 100%;
     overflow: hidden;
-    /* Removes the gap between navbar and hero */
     margin-top: 0 !important; 
     padding-top: 0 !important;
   }
@@ -159,7 +163,6 @@ const CSS = `
     z-index: 0;
   }
 
-  /* Fade hero image directly into the main green background */
   .hl-photo::after {
     content: '';
     position: absolute;
@@ -179,7 +182,7 @@ const CSS = `
   }
 
   /* ---------------------------------------------------------------------- */
-  /* SNAP SCROLL (Mobile Horizontal Swipe)                                  */
+  /* SNAP SCROLL                                                            */
   /* ---------------------------------------------------------------------- */
 
   .hl-snap {
@@ -233,18 +236,7 @@ const CSS = `
       padding-bottom: 24px;
     }
 
-    .hl-hero-copy img.hl-logo-img {
-      width: 90px;
-      height: 90px;
-      object-fit: contain;
-      border-radius: 16px;
-      background: #fff;
-      padding: 4px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      margin-bottom: 16px;
-    }
-
-    .hl-page-content { padding-bottom: 80px; }
+    .hl-page-content { padding-bottom: 40px; }
   }
 
   @media (min-width: 768px) {
@@ -261,16 +253,6 @@ const CSS = `
         rgba(76, 167, 113, 0.8) 45%,
         rgba(76, 167, 113, 0.2) 100%
       );
-    }
-
-    .hl-hero-copy img.hl-logo-img {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-      border-radius: 20px;
-      background: #fff;
-      padding: 6px;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
     }
 
     .hl-snap {
@@ -321,7 +303,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
   const [pricingSlide, setPricingSlide] = useState(0);
   const [showForm, setShowForm] = useState(false);
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-  const [openPlan, setOpenPlan] = useState<string | null>(null); // Only open one pricing plan at a time
+  const [openPlan, setOpenPlan] = useState<string | null>(null);
 
   const services = [
     {
@@ -393,35 +375,35 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
   };
 
   return (
-    <div className="hl-page-content w-full max-w-full overflow-x-hidden space-y-10 md:space-y-20 pb-20 md:pb-10">
+    <div className="hl-page-content overflow-x-hidden space-y-10 md:space-y-20 pb-10">
       <style>{CSS}</style>
 
       {/* ---------------------------------------------------------------- */}
       {/* HERO                                                             */}
       {/* ---------------------------------------------------------------- */}
 
-      <section className="hl-hero-container w-full max-w-full relative md:mx-auto md:max-w-6xl md:rounded-b-3xl md:mt-4">
+      <section className="hl-hero-container">
         <div className="hl-photo" style={{ backgroundImage: `url('${HERO_PHOTO}')` }} />
-        <div className="hl-hero-copy w-full px-5 md:px-16 pt-24 pb-8 md:py-20 text-center md:text-left">
-          
-          <img src={LOGO} alt="HL Tutoring Logo" className="hl-logo-img mx-auto md:mx-0" />
+        
+        <div className="w-full max-w-6xl mx-auto relative z-10 px-5 md:px-16">
+          <div className="hl-hero-copy w-full pt-20 pb-8 md:py-20 text-center md:text-left">
+            <h1 className="mt-4 md:mt-6 text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-white">
+              Tutoring that helps every <span style={{ color: C.cardYellow }}>learner thrive</span>
+            </h1>
 
-          <h1 className="mt-4 md:mt-6 text-3xl md:text-5xl font-extrabold font-display tracking-tight leading-tight text-white">
-            Tutoring that helps every <span style={{ color: C.cardYellow }}>learner thrive</span>
-          </h1>
+            <p className="mt-3 text-[16px] md:text-lg leading-relaxed max-w-md mx-auto md:mx-0" style={{ color: C.lightBlue }}>
+              A non-profit tutoring organisation matching each student with expert tutors, Grade R to 12.
+            </p>
 
-          <p className="mt-3 text-[15px] md:text-lg leading-relaxed max-w-md mx-auto md:mx-0" style={{ color: C.lightBlue }}>
-            A non-profit tutoring organisation matching each student with expert tutors, Grade R to 12.
-          </p>
-
-          <a
-            href={LINKS.REGISTRATION}
-            target="_blank"
-            rel="noreferrer"
-            className="hl-btn hl-gold-btn mt-6 md:mt-8 inline-block w-full md:w-auto px-8 py-3.5 rounded-xl text-base font-bold shadow-lg"
-          >
-            Book a Session
-          </a>
+            <a
+              href={LINKS.REGISTRATION}
+              target="_blank"
+              rel="noreferrer"
+              className="hl-btn hl-gold-btn mt-6 md:mt-8 inline-block w-full md:w-auto px-8 py-3.5 rounded-xl text-base font-bold shadow-lg"
+            >
+              Book a Session
+            </a>
+          </div>
         </div>
       </section>
 
@@ -441,7 +423,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 <span className="material-symbols-outlined text-2xl" style={{ color: C.navy }}>{s.icon}</span>
               </div>
 
-              <h3 className="text-xl font-bold font-display mb-2">{s.title}</h3>
+              <h3 className="text-xl font-bold mb-2">{s.title}</h3>
               <p className="text-sm leading-relaxed mb-4 opacity-90">{s.text}</p>
 
               <ul className="space-y-2 mb-6 flex-grow">
@@ -479,20 +461,24 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       </div>
 
       {/* ---------------------------------------------------------------- */}
-      {/* WHY CHOOSE US                                                    */}
+      {/* WHY CHOOSE US (Using Light Mint accent)                          */}
       {/* ---------------------------------------------------------------- */}
 
       <div className="w-full px-4 md:max-w-6xl md:mx-auto">
         <div className="text-center mb-6 md:mb-10">
-          <h2 className="text-2xl md:text-4xl font-extrabold font-display mb-2 text-white">Why choose us</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-white">Why choose us</h2>
           <p className="text-sm md:text-base" style={{ color: C.lightBlue }}>Teaching students how to learn, not just subjects.</p>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
           {why.map((w) => (
-            <div key={w.title} className="rounded-2xl p-4 md:p-6 bg-white/10 border border-white/20 text-white text-center">
-              <span className="material-symbols-outlined text-3xl mb-2" style={{ color: C.cardYellow }}>{w.icon}</span>
-              <h4 className="text-base font-bold font-display mb-1">{w.title}</h4>
+            <div 
+              key={w.title} 
+              className="rounded-2xl p-4 md:p-6 text-center shadow-md"
+              style={{ background: C.lightMint, color: C.ink }}
+            >
+              <span className="material-symbols-outlined text-3xl mb-2" style={{ color: C.navy }}>{w.icon}</span>
+              <h4 className="text-base font-bold mb-1">{w.title}</h4>
               <p className="text-xs md:text-sm opacity-80 leading-relaxed">{w.text}</p>
             </div>
           ))}
@@ -503,11 +489,9 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       {/* SUBJECTS                                                         */}
       {/* ---------------------------------------------------------------- */}
 
-      {/* Wrapping Subjects in the Yellow accent to match instructions */}
       <div className="w-full min-w-0" style={{ background: C.cardYellow, color: C.ink, padding: '2rem 0' }}>
         <div className="md:max-w-6xl md:mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-extrabold font-display text-center mb-6">Our Subjects</h2>
-          {/* Ensure SubjectsSection inherits current dark text safely */}
+          <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6">Our Subjects</h2>
           <div className="text-[#14213D]">
              <SubjectsSection />
           </div>
@@ -515,16 +499,15 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       </div>
 
       {/* ---------------------------------------------------------------- */}
-      {/* PRICING (Now Horizontal Scroll on Mobile & Shorter)              */}
+      {/* PRICING (Horizontal Scroll on Mobile)                            */}
       {/* ---------------------------------------------------------------- */}
 
       <Band id="pricing" className="text-white">
         <div className="text-center mb-6 md:mb-10">
-          <h2 className="text-2xl md:text-4xl font-extrabold font-display mb-2">Transparent Pricing</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-2">Transparent Pricing</h2>
           <p className="text-sm md:text-base" style={{ color: C.lightBlue }}>Choose the plan that fits your goals.</p>
         </div>
 
-        {/* Both Mobile & Desktop use the snap grid layout now */}
         <div className="w-full min-w-0 px-0">
           <div className="hl-snap md:px-0" onScroll={(e) => onSnapScroll(e, setPricingSlide)}>
             {plans.map((p) => {
@@ -547,7 +530,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                   
                   <div className="flex items-center gap-3 mb-3">
                     <p.icon size={20} style={{ color: p.popular ? C.navy : C.cardYellow }} />
-                    <h3 className="text-lg font-bold font-display">{p.name}</h3>
+                    <h3 className="text-lg font-bold">{p.name}</h3>
                   </div>
 
                   <div className="mb-4">
@@ -613,7 +596,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
 
       <Band id="contact" className="text-white" innerClassName="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="min-w-0">
-          <h2 className="text-2xl md:text-4xl font-extrabold font-display mb-3">Get in touch</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-3">Get in touch</h2>
           <p className="mb-6 text-sm md:text-base leading-relaxed" style={{ color: C.lightBlue }}>
             Questions? Call, message us on WhatsApp or send an email.
           </p>
@@ -664,26 +647,6 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
           )}
         </div>
       </Band>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* MOBILE BOTTOM BAR (WHATSAPP ONLY)                                */}
-      {/* ---------------------------------------------------------------- */}
-
-      <div
-        className="md:hidden fixed bottom-0 inset-x-0 z-40 px-4 py-3 border-t bg-[#FAF7F0] shadow-[0_-4px_20px_rgba(0,0,0,0.15)]"
-        style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)' }}
-      >
-        <a
-          href={LINKS.WHATSAPP}
-          target="_blank"
-          rel="noreferrer"
-          className="hl-btn flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-sm"
-          style={{ background: '#25D366', color: '#fff' }}
-        >
-          <MessageCircle size={20} />
-          <span>Chat on WhatsApp</span>
-        </a>
-      </div>
     </div>
   );
 };
