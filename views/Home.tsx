@@ -1,4 +1,3 @@
-```tsx
 import React, { useState } from 'react';
 import {
   Clock,
@@ -100,7 +99,7 @@ const plans: Plan[] = [
 ];
 
 /* -------------------------------------------------------------------------- */
-/*                                   STYLES                                   */
+/*                                    STYLES                                  */
 /* -------------------------------------------------------------------------- */
 
 const CSS = `
@@ -237,7 +236,7 @@ const CSS = `
   }
 
   /* ---------------------------------------------------------------------- */
-  /* MOBILE                                                                */
+  /* MOBILE                                                                 */
   /* ---------------------------------------------------------------------- */
 
   @media (max-width: 767px) {
@@ -534,7 +533,7 @@ const PlanRow: React.FC<{ p: Plan }> = ({ p }) => {
 };
 
 /* -------------------------------------------------------------------------- */
-/*                                CONTACT ROW                                 */
+/*                                 CONTACT ROW                                */
 /* -------------------------------------------------------------------------- */
 
 const ContactRow: React.FC<{
@@ -1343,19 +1342,3 @@ ${data.message}`;
     </div>
   );
 };
-```
-
-### Main fixes in this version
-
-* **No `100vw` mobile overflow** from the `Band`.
-* Better sizing on **320px–380px phones**.
-* Hero image is controlled instead of relying on `38vh`.
-* Service cards fit the screen better.
-* Reduced mobile padding and spacing.
-* Prevented long text from forcing containers wider.
-* Added `min-width: 0` where flex/grid children can cause overflow.
-* Fixed the service carousel calculation from `14px` to the actual `12px` gap.
-* Mobile bottom bar is slightly smaller and less intrusive.
-* Desktop layout remains substantially the same.
-* Images are constrained with `max-width: 100%`.
-* Added global `box-sizing: border-box` and horizontal overflow protection.
