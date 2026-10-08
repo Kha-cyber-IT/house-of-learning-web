@@ -133,11 +133,18 @@ const CSS = `
     font-family: 'Material Symbols Outlined' !important;
   }
 
+  html, body { overflow-x: clip; }
+
   .hl-page-content {
     background-color: ${C.mainGreen};
     min-height: 100vh;
-    width: 100%;
-    max-width: 100%;
+    /* Full-bleed breakout: escapes any centred/padded parent wrapper */
+    width: 100vw;
+    max-width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     overflow-x: clip; /* clip instead of hidden: no sticky/scroll side effects */
   }
 
@@ -186,8 +193,8 @@ const CSS = `
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(76, 167, 113, 0.3) 0%,
-      rgba(76, 167, 113, 0.8) 60%,
+      rgba(76, 167, 113, 0.78) 0%,
+      rgba(76, 167, 113, 0.9) 60%,
       ${C.mainGreen} 100%
     );
   }
@@ -266,9 +273,9 @@ const CSS = `
     .hl-photo::after {
       background: linear-gradient(
         95deg,
-        rgba(76, 167, 113, 0.95) 0%,
-        rgba(76, 167, 113, 0.8) 45%,
-        rgba(76, 167, 113, 0.2) 100%
+        rgba(76, 167, 113, 0.96) 0%,
+        rgba(76, 167, 113, 0.88) 50%,
+        rgba(76, 167, 113, 0.75) 100%
       );
     }
 
@@ -418,7 +425,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
         <div className="hl-photo" style={{ backgroundImage: `url('${HERO_PHOTO}')` }} />
 
         <Container className="relative z-10">
-          <div className="hl-hero-copy w-full pt-20 pb-8 md:py-20 text-center md:text-left">
+          <div className="hl-hero-copy w-full pt-10 pb-8 md:py-14 text-center md:text-left">
             <h1 className="mt-4 md:mt-6 text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-white max-w-2xl mx-auto md:mx-0">
               Tutoring that helps every <span style={{ color: C.cardYellow }}>learner thrive</span>
             </h1>
