@@ -4,7 +4,6 @@ import {
   Star,
   Calendar,
   Check,
-  MapPin,
   Mail,
   Phone,
   Send,
@@ -100,16 +99,16 @@ const CSS = `
     box-sizing: border-box;
   }
 
-  /* Apply Gill Sans globally */
-  html, body, button, input, textarea, a, p, h1, h2, h3, h4, h5, h6, span, div {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  /* FULL-WIDTH FIX: undo the default Vite/CRA "#root { max-width; margin: 0 auto; padding }" */
+  html, body, #root, #__next {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left;
   }
 
   html, body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    margin: 0;
     background-color: ${C.mainGreen};
     color: #ffffff;
   }
@@ -120,10 +119,26 @@ const CSS = `
     -webkit-tap-highlight-color: transparent;
   }
 
+  /* Gill Sans, scoped to this page. Icon fonts are excluded so Material Symbols still render as icons. */
+  .hl-page-content,
+  .hl-page-content button,
+  .hl-page-content input,
+  .hl-page-content textarea,
+  .hl-page-content a,
+  .hl-page-content :where(p, h1, h2, h3, h4, h5, h6, li, div, span):not(.material-symbols-outlined) {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  .hl-page-content .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined' !important;
+  }
+
   .hl-page-content {
     background-color: ${C.mainGreen};
     min-height: 100vh;
     width: 100%;
+    max-width: 100%;
+    overflow-x: clip; /* clip instead of hidden: no sticky/scroll side effects */
   }
 
   .hl-gold-btn {
@@ -136,9 +151,13 @@ const CSS = `
     color: #fff;
   }
 
-  .hl-row {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  .hl-btn {
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
   }
+  .hl-btn:hover { filter: brightness(0.95); }
+  .hl-btn:active { transform: scale(0.98); }
+  .hl-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
   /* ---------------------------------------------------------------------- */
   /* HERO                                                                   */
@@ -148,8 +167,6 @@ const CSS = `
     position: relative;
     width: 100%;
     overflow: hidden;
-    margin-top: 0 !important; 
-    padding-top: 0 !important;
   }
 
   .hl-photo {
@@ -191,9 +208,11 @@ const CSS = `
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    padding: 4px 16px 16px;
-    margin: 0 -16px;
+    /* top padding stops the "Most Chosen" badge being clipped by the scroller */
+    padding: 16px 20px 16px;
+    scroll-padding: 0 20px;
     overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
   .hl-snap::-webkit-scrollbar {
@@ -201,8 +220,8 @@ const CSS = `
   }
 
   .hl-snap > * {
-    flex: 0 0 calc(100% - 40px);
-    width: calc(100% - 40px);
+    flex: 0 0 calc(100% - 56px);
+    width: calc(100% - 56px);
     max-width: 340px;
     scroll-snap-align: center;
   }
@@ -221,7 +240,7 @@ const CSS = `
     font-size: 16px;
   }
 
-  .hl-field::placeholder { color: rgba(255, 255, 255, 0.7); }
+  .hl-field::placeholder { color: rgba(255, 255, 255, 0.75); }
   .hl-field:focus-visible { outline: 2px solid ${C.cardYellow}; }
 
   /* ---------------------------------------------------------------------- */
@@ -235,8 +254,6 @@ const CSS = `
       align-items: flex-end;
       padding-bottom: 24px;
     }
-
-    .hl-page-content { padding-bottom: 40px; }
   }
 
   @media (min-width: 768px) {
@@ -259,8 +276,8 @@ const CSS = `
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       overflow: visible;
-      padding: 0;
-      margin: 0;
+      padding: 16px 0 0;
+      scroll-padding: 0;
       gap: 24px;
     }
 
@@ -273,9 +290,18 @@ const CSS = `
 `;
 
 /* -------------------------------------------------------------------------- */
-/* BAND WRAPPER                                                               */
+/* LAYOUT HELPERS                                                             */
 /* -------------------------------------------------------------------------- */
 
+/** Content container: centred and capped, but sections themselves are full-bleed. */
+const Container: React.FC<{ className?: string; children: React.ReactNode }> = ({
+  className = '',
+  children,
+}) => (
+  <div className={`w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12 ${className}`}>{children}</div>
+);
+
+/** Full-width band (edge to edge) with a centred inner container. */
 const Band: React.FC<{
   id?: string;
   className?: string;
@@ -286,11 +312,9 @@ const Band: React.FC<{
   <section
     id={id}
     style={background ? { background } : undefined}
-    className={`relative w-full max-w-full md:mx-auto md:max-w-6xl md:rounded-3xl overflow-hidden ${className}`}
+    className={`relative w-full ${className}`}
   >
-    <div className={`w-full px-4 py-8 md:px-16 md:py-16 ${innerClassName}`}>
-      {children}
-    </div>
+    <Container className={`py-8 md:py-16 ${innerClassName}`}>{children}</Container>
   </section>
 );
 
@@ -322,7 +346,11 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       cta: 'View programs',
       onClick: () => {
         setActiveView('home');
-        setTimeout(() => document.getElementById('browse-all-btn')?.click(), 100);
+        setTimeout(() => {
+          const btn = document.getElementById('browse-all-btn');
+          if (btn) btn.click();
+          else document.getElementById('subjects')?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
       },
     },
     {
@@ -342,12 +370,16 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
     { icon: 'library_books', title: 'Wide Coverage', text: 'Maths, Sciences, and Languages.' },
   ];
 
-  const onSnapScroll = (e: React.UIEvent<HTMLDivElement>, setter: typeof setSlide) => {
+  const onSnapScroll = (
+    e: React.UIEvent<HTMLDivElement>,
+    setter: React.Dispatch<React.SetStateAction<number>>
+  ) => {
     const el = e.currentTarget;
     const first = el.firstElementChild as HTMLElement | null;
     if (first) {
-      const gap = parseFloat(getComputedStyle(el).gap) || 16;
-      setter(Math.round(el.scrollLeft / (first.offsetWidth + gap)));
+      const gap = parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap) || 16;
+      const idx = Math.round(el.scrollLeft / (first.offsetWidth + gap));
+      setter(Math.max(0, idx));
     }
   };
 
@@ -375,7 +407,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
   };
 
   return (
-    <div className="hl-page-content overflow-x-hidden space-y-10 md:space-y-20 pb-10">
+    <div className="hl-page-content space-y-10 md:space-y-20 pb-10">
       <style>{CSS}</style>
 
       {/* ---------------------------------------------------------------- */}
@@ -384,14 +416,17 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
 
       <section className="hl-hero-container">
         <div className="hl-photo" style={{ backgroundImage: `url('${HERO_PHOTO}')` }} />
-        
-        <div className="w-full max-w-6xl mx-auto relative z-10 px-5 md:px-16">
+
+        <Container className="relative z-10">
           <div className="hl-hero-copy w-full pt-20 pb-8 md:py-20 text-center md:text-left">
-            <h1 className="mt-4 md:mt-6 text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-white">
+            <h1 className="mt-4 md:mt-6 text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-white max-w-2xl mx-auto md:mx-0">
               Tutoring that helps every <span style={{ color: C.cardYellow }}>learner thrive</span>
             </h1>
 
-            <p className="mt-3 text-[16px] md:text-lg leading-relaxed max-w-md mx-auto md:mx-0" style={{ color: C.lightBlue }}>
+            <p
+              className="mt-3 text-[16px] md:text-xl leading-relaxed max-w-md md:max-w-xl mx-auto md:mx-0"
+              style={{ color: C.lightBlue }}
+            >
               A non-profit tutoring organisation matching each student with expert tutors, Grade R to 12.
             </p>
 
@@ -399,117 +434,141 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
               href={LINKS.REGISTRATION}
               target="_blank"
               rel="noreferrer"
-              className="hl-btn hl-gold-btn mt-6 md:mt-8 inline-block w-full md:w-auto px-8 py-3.5 rounded-xl text-base font-bold shadow-lg"
+              className="hl-btn hl-gold-btn mt-6 md:mt-8 inline-block w-full md:w-auto px-8 py-3.5 rounded-xl text-base font-bold shadow-lg text-center"
             >
               Book a Session
             </a>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ---------------------------------------------------------------- */}
       {/* SERVICES (Yellow Cards)                                          */}
       {/* ---------------------------------------------------------------- */}
 
-      <div className="w-full min-w-0 md:max-w-6xl md:mx-auto px-0 md:px-4">
-        <div className="hl-snap px-4 md:px-0" onScroll={(e) => onSnapScroll(e, setSlide)}>
-          {services.map((s) => (
-            <div
-              key={s.title}
-              className="rounded-2xl p-6 flex flex-col shadow-lg"
-              style={{ background: C.cardYellow, color: C.ink }}
-            >
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
-                <span className="material-symbols-outlined text-2xl" style={{ color: C.navy }}>{s.icon}</span>
+      <section className="w-full min-w-0">
+        <div className="w-full max-w-7xl mx-auto md:px-8 lg:px-12">
+          <div className="hl-snap" onScroll={(e) => onSnapScroll(e, setSlide)}>
+            {services.map((s) => (
+              <div
+                key={s.title}
+                className="rounded-2xl p-6 flex flex-col shadow-lg"
+                style={{ background: C.cardYellow, color: C.ink }}
+              >
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
+                  <span className="material-symbols-outlined text-2xl" style={{ color: C.navy }}>
+                    {s.icon}
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold mb-2">{s.title}</h3>
+                <p className="text-sm leading-relaxed mb-4 opacity-90">{s.text}</p>
+
+                <ul className="space-y-2 mb-6 flex-grow">
+                  {s.items.map((i) => (
+                    <li key={i} className="flex items-center gap-2 text-sm font-medium">
+                      <Check size={16} style={{ color: C.navy }} />
+                      <span>{i}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {s.href ? (
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hl-btn hl-blue-btn block w-full py-3 rounded-xl font-bold text-sm text-center"
+                  >
+                    {s.cta}
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={s.onClick}
+                    className="hl-btn hl-blue-btn w-full py-3 rounded-xl font-bold text-sm text-center"
+                  >
+                    {s.cta}
+                  </button>
+                )}
               </div>
+            ))}
+          </div>
 
-              <h3 className="text-xl font-bold mb-2">{s.title}</h3>
-              <p className="text-sm leading-relaxed mb-4 opacity-90">{s.text}</p>
-
-              <ul className="space-y-2 mb-6 flex-grow">
-                {s.items.map((i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm font-medium">
-                    <Check size={16} style={{ color: C.navy }} />
-                    <span>{i}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {s.href ? (
-                <a href={s.href} target="_blank" rel="noreferrer" className="hl-btn hl-blue-btn w-full py-3 rounded-xl font-bold text-sm text-center">
-                  {s.cta}
-                </a>
-              ) : (
-                <button type="button" onClick={s.onClick} className="hl-btn hl-blue-btn w-full py-3 rounded-xl font-bold text-sm text-center">
-                  {s.cta}
-                </button>
-              )}
-            </div>
-          ))}
+          {/* Slide indicators for mobile */}
+          <div className="flex justify-center gap-2 mt-2 md:hidden">
+            {services.map((_, i) => (
+              <span
+                key={i}
+                className="h-2 rounded-full transition-all"
+                style={{
+                  width: slide === i ? 24 : 8,
+                  background: slide === i ? C.cardYellow : 'rgba(255,255,255,0.3)',
+                }}
+              />
+            ))}
+          </div>
         </div>
-        
-        {/* Slide indicators for mobile */}
-        <div className="flex justify-center gap-2 mt-4 md:hidden">
-          {services.map((_, i) => (
-            <span
-              key={i}
-              className="h-2 rounded-full transition-all"
-              style={{ width: slide === i ? 24 : 8, background: slide === i ? C.cardYellow : 'rgba(255,255,255,0.3)' }}
-            />
-          ))}
-        </div>
-      </div>
+      </section>
 
       {/* ---------------------------------------------------------------- */}
       {/* WHY CHOOSE US (Using Light Mint accent)                          */}
       {/* ---------------------------------------------------------------- */}
 
-      <div className="w-full px-4 md:max-w-6xl md:mx-auto">
-        <div className="text-center mb-6 md:mb-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-white">Why choose us</h2>
-          <p className="text-sm md:text-base" style={{ color: C.lightBlue }}>Teaching students how to learn, not just subjects.</p>
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
-          {why.map((w) => (
-            <div 
-              key={w.title} 
-              className="rounded-2xl p-4 md:p-6 text-center shadow-md"
-              style={{ background: C.lightMint, color: C.ink }}
-            >
-              <span className="material-symbols-outlined text-3xl mb-2" style={{ color: C.navy }}>{w.icon}</span>
-              <h4 className="text-base font-bold mb-1">{w.title}</h4>
-              <p className="text-xs md:text-sm opacity-80 leading-relaxed">{w.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* SUBJECTS                                                         */}
-      {/* ---------------------------------------------------------------- */}
-
-      <div className="w-full min-w-0" style={{ background: C.cardYellow, color: C.ink, padding: '2rem 0' }}>
-        <div className="md:max-w-6xl md:mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6">Our Subjects</h2>
-          <div className="text-[#14213D]">
-             <SubjectsSection />
+      <section className="w-full">
+        <Container>
+          <div className="text-center mb-6 md:mb-10">
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-white">Why choose us</h2>
+            <p className="text-sm md:text-base" style={{ color: C.lightBlue }}>
+              Teaching students how to learn, not just subjects.
+            </p>
           </div>
-        </div>
-      </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+            {why.map((w) => (
+              <div
+                key={w.title}
+                className="rounded-2xl p-4 md:p-6 text-center shadow-md"
+                style={{ background: C.lightMint, color: C.ink }}
+              >
+                <span className="material-symbols-outlined text-3xl mb-2" style={{ color: C.navy }}>
+                  {w.icon}
+                </span>
+                <h4 className="text-base font-bold mb-1">{w.title}</h4>
+                <p className="text-xs md:text-sm opacity-80 leading-relaxed">{w.text}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* SUBJECTS (full-bleed yellow band)                                */}
+      {/* ---------------------------------------------------------------- */}
+
+      <section id="subjects" className="w-full min-w-0" style={{ background: C.cardYellow, color: C.ink }}>
+        <Container className="py-8 md:py-14">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6">Our Subjects</h2>
+          <div style={{ color: C.ink }}>
+            <SubjectsSection />
+          </div>
+        </Container>
+      </section>
 
       {/* ---------------------------------------------------------------- */}
       {/* PRICING (Horizontal Scroll on Mobile)                            */}
       {/* ---------------------------------------------------------------- */}
 
-      <Band id="pricing" className="text-white">
-        <div className="text-center mb-6 md:mb-10">
+      <Band id="pricing" className="text-white" innerClassName="!px-0 md:!px-8 lg:!px-12">
+        <div className="text-center mb-6 md:mb-10 px-4">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-2">Transparent Pricing</h2>
-          <p className="text-sm md:text-base" style={{ color: C.lightBlue }}>Choose the plan that fits your goals.</p>
+          <p className="text-sm md:text-base" style={{ color: C.lightBlue }}>
+            Choose the plan that fits your goals.
+          </p>
         </div>
 
-        <div className="w-full min-w-0 px-0">
-          <div className="hl-snap md:px-0" onScroll={(e) => onSnapScroll(e, setPricingSlide)}>
+        <div className="w-full min-w-0">
+          <div className="hl-snap" onScroll={(e) => onSnapScroll(e, setPricingSlide)}>
             {plans.map((p) => {
               const isOpen = openPlan === p.id;
               return (
@@ -519,15 +578,15 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                   style={{
                     background: p.popular ? '#fff' : 'rgba(255,255,255,0.1)',
                     color: p.popular ? C.ink : '#fff',
-                    border: p.popular ? 'none' : '1px solid rgba(255,255,255,0.2)'
+                    border: p.popular ? '1px solid #fff' : '1px solid rgba(255,255,255,0.2)',
                   }}
                 >
                   {p.popular && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full bg-[#123B63] text-white shadow-md">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full bg-[#123B63] text-white shadow-md whitespace-nowrap">
                       Most Chosen
                     </span>
                   )}
-                  
+
                   <div className="flex items-center gap-3 mb-3">
                     <p.icon size={20} style={{ color: p.popular ? C.navy : C.cardYellow }} />
                     <h3 className="text-lg font-bold">{p.name}</h3>
@@ -535,13 +594,15 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
 
                   <div className="mb-4">
                     <span className="text-3xl font-bold">{p.price}</span>
-                    <span className="text-xs opacity-75">{p.period}</span>
+                    <span className="text-xs opacity-75"> {p.period}</span>
                   </div>
-                  
+
                   <p className="text-xs mb-4 opacity-80 min-h-[32px]">{p.description}</p>
 
                   <button
+                    type="button"
                     onClick={() => setOpenPlan(isOpen ? null : p.id)}
+                    aria-expanded={isOpen}
                     className="text-xs font-bold underline underline-offset-4 mb-4 text-left"
                     style={{ color: p.popular ? C.navy : C.cardYellow }}
                   >
@@ -552,7 +613,11 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                     <ul className="space-y-2 mb-5 flex-grow">
                       {p.features.map((f) => (
                         <li key={f} className="flex items-start gap-2 text-xs">
-                          <Check size={14} className="mt-0.5 shrink-0" style={{ color: p.popular ? C.navy : C.cardYellow }} />
+                          <Check
+                            size={14}
+                            className="mt-0.5 shrink-0"
+                            style={{ color: p.popular ? C.navy : C.cardYellow }}
+                          />
                           <span>{f}</span>
                         </li>
                       ))}
@@ -567,7 +632,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                       className="hl-btn w-full py-2.5 rounded-xl font-bold text-sm text-center block"
                       style={{
                         background: p.popular ? C.cardYellow : C.navy,
-                        color: p.popular ? C.ink : '#fff'
+                        color: p.popular ? C.ink : '#fff',
                       }}
                     >
                       Select Plan
@@ -578,12 +643,15 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             })}
           </div>
 
-          <div className="flex justify-center gap-2 mt-4 md:hidden">
+          <div className="flex justify-center gap-2 mt-2 md:hidden">
             {plans.map((_, i) => (
               <span
                 key={i}
                 className="h-2 rounded-full transition-all"
-                style={{ width: pricingSlide === i ? 24 : 8, background: pricingSlide === i ? C.cardYellow : 'rgba(255,255,255,0.3)' }}
+                style={{
+                  width: pricingSlide === i ? 24 : 8,
+                  background: pricingSlide === i ? C.cardYellow : 'rgba(255,255,255,0.3)',
+                }}
               />
             ))}
           </div>
@@ -602,22 +670,37 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
           </p>
 
           <div className="space-y-4">
-            <a href={`tel:${LINKS.PHONE.replace(/\s/g, '')}`} className="flex items-center gap-4 p-3 rounded-xl bg-white/10 border border-white/20">
+            <a
+              href={`tel:${LINKS.PHONE.replace(/\s/g, '')}`}
+              className="flex items-center gap-4 p-3 rounded-xl bg-white/10 border border-white/20"
+            >
               <Phone size={20} style={{ color: C.cardYellow }} />
               <span className="font-semibold text-sm">{LINKS.PHONE}</span>
             </a>
-            <a href={LINKS.WHATSAPP} target="_blank" rel="noreferrer" className="flex items-center gap-4 p-3 rounded-xl bg-white/10 border border-white/20">
+            <a
+              href={LINKS.WHATSAPP}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-4 p-3 rounded-xl bg-white/10 border border-white/20"
+            >
               <MessageCircle size={20} style={{ color: C.cardYellow }} />
               <span className="font-semibold text-sm">Chat on WhatsApp</span>
             </a>
-            <a href={`mailto:${LINKS.EMAIL}`} className="flex items-center gap-4 p-3 rounded-xl bg-white/10 border border-white/20">
+            <a
+              href={`mailto:${LINKS.EMAIL}`}
+              className="flex items-center gap-4 p-3 rounded-xl bg-white/10 border border-white/20"
+            >
               <Mail size={20} style={{ color: C.cardYellow }} />
               <span className="font-semibold text-sm break-all">{LINKS.EMAIL}</span>
             </a>
           </div>
 
           {!showForm && (
-            <button onClick={() => setShowForm(true)} className="hl-btn hl-gold-btn md:hidden mt-6 w-full py-3.5 rounded-xl font-bold">
+            <button
+              type="button"
+              onClick={() => setShowForm(true)}
+              className="hl-btn hl-gold-btn md:hidden mt-6 w-full py-3.5 rounded-xl font-bold"
+            >
               Send an email instead
             </button>
           )}
@@ -629,17 +712,47 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
               <CheckCircle size={40} className="mx-auto mb-3" style={{ color: C.cardYellow }} />
               <h3 className="text-xl font-bold mb-1">Message Sent</h3>
               <p className="text-sm opacity-80 mb-4">We'll be in touch shortly.</p>
-              <button onClick={() => setStatus('idle')} className="text-sm font-bold underline" style={{ color: C.cardYellow }}>
+              <button
+                type="button"
+                onClick={() => setStatus('idle')}
+                className="text-sm font-bold underline"
+                style={{ color: C.cardYellow }}
+              >
                 Send another
               </button>
             </div>
           ) : (
             <form onSubmit={submit} className="space-y-3">
-              <input name="name" className="hl-field" placeholder="Your name" required />
-              <input name="phone" type="tel" className="hl-field" placeholder="Phone (+27...)" required />
-              <input name="email" type="email" className="hl-field" placeholder="Email" required />
+              <input name="name" className="hl-field" placeholder="Your name" autoComplete="name" required />
+              <input
+                name="phone"
+                type="tel"
+                className="hl-field"
+                placeholder="Phone (+27...)"
+                autoComplete="tel"
+                required
+              />
+              <input
+                name="email"
+                type="email"
+                className="hl-field"
+                placeholder="Email"
+                autoComplete="email"
+                required
+              />
               <textarea name="message" className="hl-field min-h-[100px]" placeholder="How can we help?" required />
-              <button type="submit" disabled={status === 'sending'} className="hl-btn hl-gold-btn w-full font-bold py-3.5 rounded-xl flex items-center justify-center gap-2">
+
+              {status === 'error' && (
+                <p className="text-sm font-semibold" style={{ color: C.cardYellow }} role="alert">
+                  Something went wrong sending your message. Please try again or use WhatsApp.
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className="hl-btn hl-gold-btn w-full font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 disabled:opacity-70"
+              >
                 <Send size={18} />
                 {status === 'sending' ? 'Sending...' : 'Send message'}
               </button>
