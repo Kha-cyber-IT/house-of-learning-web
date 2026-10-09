@@ -1,54 +1,46 @@
-/* Global CSS Variables */
-:root {
-  --radius: 0.75rem;
-  --background: 108 7% 13%; /* #20241F ink */
-  --foreground: 41 50% 94%; /* #F7F2E7 paper */
-  --border: 120 6% 24%; /* #3A423A */
-  --card: 108 7% 13%; /* #20241F ink */
-  --card-foreground: 41 50% 94%; /* #F7F2E7 paper */
-  --sidebar: 108 7% 13%; /* #20241F ink */
-  --sidebar-foreground: 41 50% 94%; /* #F7F2E7 paper */
-  --primary: 39 67% 55%; /* #D9A441 gold */
-  --primary-foreground: 108 12% 16%; /* #23302A ink-deep */
-  --secondary: 152 16% 16%; /* #23302A */
-  --secondary-foreground: 41 50% 94%; /* #F7F2E7 paper */
-  --muted: 152 16% 16%; /* #23302A */
-  --muted-foreground: 114 8% 74%; /* #B9C2B8 */
-  --accent: 152 16% 16%; /* #23302A */
-  --accent-foreground: 41 50% 94%; /* #F7F2E7 paper */
-  --destructive: 0 62% 30%;
-  --destructive-foreground: 210 40% 98%;
-  --input: 120 6% 24%; /* #3A423A */
-  --ring: 39 67% 55%; /* #D9A441 gold */
-}
-
+/* Global CSS Variables
+   HL Tutoring palette (same as Home.tsx):
+   green #4CA771 · yellow #F9CE69 · light blue #D9EFF7 · mint #C0E6BA · navy #123B63 · ink #14213D */
+:root,
 .dark {
-  --background: 108 7% 13%; /* #20241F ink */
-  --foreground: 41 50% 94%; /* #F7F2E7 paper */
-  --border: 120 6% 24%; /* #3A423A */
-  --card: 108 7% 13%; /* #20241F ink */
-  --card-foreground: 41 50% 94%; /* #F7F2E7 paper */
-  --sidebar: 108 7% 13%; /* #20241F ink */
-  --sidebar-foreground: 41 50% 94%; /* #F7F2E7 paper */
-  --primary: 39 67% 55%; /* #D9A441 gold */
-  --primary-foreground: 108 12% 16%; /* #23302A ink-deep */
-  --secondary: 152 16% 16%; /* #23302A */
-  --secondary-foreground: 41 50% 94%; /* #F7F2E7 paper */
-  --muted: 152 16% 16%; /* #23302A */
-  --muted-foreground: 114 8% 74%; /* #B9C2B8 */
-  --accent: 152 16% 16%; /* #23302A */
-  --accent-foreground: 41 50% 94%; /* #F7F2E7 paper */
+  --radius: 0.75rem;
+  --background: 144 37% 48%; /* #4CA771 green */
+  --foreground: 0 0% 100%; /* white */
+  --border: 144 30% 60%; /* soft green line */
+  --card: 210 69% 23%; /* #123B63 navy */
+  --card-foreground: 0 0% 100%; /* white */
+  --sidebar: 210 69% 23%; /* #123B63 navy */
+  --sidebar-foreground: 0 0% 100%; /* white */
+  --primary: 42 92% 69%; /* #F9CE69 yellow */
+  --primary-foreground: 221 51% 16%; /* #14213D ink */
+  --secondary: 112 47% 82%; /* #C0E6BA mint */
+  --secondary-foreground: 221 51% 16%; /* #14213D ink */
+  --muted: 196 65% 91%; /* #D9EFF7 light blue */
+  --muted-foreground: 196 65% 91%; /* #D9EFF7 light blue (text on the green page) */
+  --accent: 42 92% 69%; /* #F9CE69 yellow */
+  --accent-foreground: 221 51% 16%; /* #14213D ink */
   --destructive: 0 62% 30%;
   --destructive-foreground: 210 40% 98%;
-  --input: 120 6% 24%; /* #3A423A */
-  --ring: 39 67% 55%; /* #D9A441 gold */
+  --input: 144 30% 60%;
+  --ring: 42 92% 69%; /* #F9CE69 yellow */
 }
 
 /* Base resets */
 html {
   scroll-behavior: smooth;
   height: 100%;
-  scroll-padding-top: 100px;
+  scroll-padding-top: 80px;
+}
+
+/* FULL-WIDTH: remove any default Vite/CRA "#root { max-width; margin: 0 auto; padding }" */
+html,
+body,
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
 body {
@@ -56,45 +48,54 @@ body {
   min-height: 100%;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Custom Glass Effects */
 .liquid-glass {
-  background: rgba(32, 36, 31, 0.7);
+  background: rgba(18, 59, 99, 0.7); /* navy */
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* Updated Glass Card - Cleaner, Modern */
+/* Glass card: navy glass with a gold edge on hover / touch */
 .glass-card-lime {
-  background: rgba(35, 48, 42, 0.6); /* #23302A/60 - darker for better text contrast */
+  background: rgba(18, 59, 99, 0.75); /* navy */
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
-.glass-card-lime:hover {
-  background: rgba(35, 48, 42, 0.8);
-  border-color: rgba(217, 164, 65, 0.4); /* #D9A441 gold */
-  transform: translateY(-2px);
+.glass-card-lime:hover,
+.glass-card-lime:active {
+  background: rgba(18, 59, 99, 0.9);
+  border-color: rgba(249, 206, 105, 0.8); /* #F9CE69 yellow */
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
 }
 
+@media (hover: hover) {
+  .glass-card-lime:hover {
+    transform: translateY(-2px);
+  }
+}
+
 .glass-card-story {
-  background: linear-gradient(135deg, rgba(35, 48, 42, 0.8) 0%, rgba(32, 36, 31, 0.9) 100%);
+  background: linear-gradient(135deg, rgba(42, 101, 146, 0.85) 0%, rgba(18, 59, 99, 0.95) 100%); /* blue → navy */
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
 }
 
 .glass-nav {
-  background: rgba(32, 36, 31, 0.9);
+  background: rgba(18, 59, 99, 0.95); /* navy */
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .animate-fade-in {
@@ -104,6 +105,11 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-fade-in { animation: none; }
 }
 
 /* Typography Enhancements */
@@ -124,17 +130,17 @@ body {
   text-shadow: 0 4px 8px rgba(0,0,0,0.6);
 }
 
-/* New Gradient Text Utilities */
+/* Gradient Text Utilities */
 .text-gradient-primary {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  background-image: linear-gradient(to right, #e8bd6b, #D9A441); /* Gold gradient */
+  background-image: linear-gradient(to right, #F9CE69, #F2B84B); /* Yellow gradient */
 }
 
 .text-gradient-gold {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  background-image: linear-gradient(to right, #fbbf24, #d97706);
+  background-image: linear-gradient(to right, #F9CE69, #C9A04A);
 }
