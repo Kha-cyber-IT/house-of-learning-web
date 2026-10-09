@@ -1,172 +1,257 @@
-import React from 'react';
-import { GraduationCap, UserCheck, FileText, Target, Users, BookOpen, ArrowUpRight } from "lucide-react";
+import React from "react";
+import { GraduationCap, UserCheck, FileText, Target, Users, BookOpen, ArrowUpRight, Mail, Phone } from "lucide-react";
+import { LINKS } from "../constants";
 
-const services = [
+// Same palette as Home.tsx
+const C = {
+  mainGreen: "#4CA771",
+  cardYellow: "#F9CE69",
+  lightBlue: "#D9EFF7",
+  lightMint: "#C0E6BA",
+  navy: "#123B63",
+  blue: "#2A6592",
+  ink: "#14213D",
+  goldTouch: "#F2B84B",
+};
+
+const BRAND_NAME = "HL Tutoring";
+
+// A card colour set: background, text, accent, plus what it turns into on touch / hover (gold).
+const mk = (bg: string, fg: string, accent: string, hover = C.cardYellow) => ({
+  bg,
+  fg,
+  accent,
+  hover,
+  hoverFg: C.ink,
+  hoverAccent: C.navy,
+});
+
+type CardColor = ReturnType<typeof mk>;
+
+const cardVars = (c: CardColor) =>
+  ({
+    "--card-bg": c.bg,
+    "--card-hover": c.hover,
+    "--card-fg": c.fg,
+    "--card-fg-hover": c.hoverFg,
+    "--card-accent": c.accent,
+    "--card-accent-hover": c.hoverAccent,
+  }) as React.CSSProperties;
+
+const services: {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: React.ElementType;
+  color: CardColor;
+}[] = [
   {
     id: "01",
     title: "Tutoring Program",
     subtitle: "Gain Academic Confidence",
-    description: "Our curriculum and educational sessions completely revolve around the abilities and experiences of each student. We identify and target the gaps in learning to ensure complete academic confidence.",
-    icon: "graduation",
-    accent: "#6F8F6A",
+    description:
+      "Our curriculum and educational sessions completely revolve around the abilities and experiences of each student. We identify and target the gaps in learning to ensure complete academic confidence.",
+    icon: GraduationCap,
+    color: mk(C.cardYellow, C.ink, C.navy, C.goldTouch),
   },
   {
     id: "02",
     title: "Private Tutoring",
     subtitle: "Overcome Learning Challenges",
-    description: "We take a comprehensive and collaborative approach in creating a plan and program that is right for every student. Adjusting to different personalities and specific academic needs, we always find what works best.",
-    icon: "user",
-    accent: "#3E6C86",
+    description:
+      "We take a comprehensive and collaborative approach in creating a plan and program that is right for every student. Adjusting to different personalities and specific academic needs, we always find what works best.",
+    icon: UserCheck,
+    color: mk(C.navy, "#FFFFFF", C.cardYellow),
   },
   {
     id: "03",
     title: "Test & Exam Preparation",
     subtitle: "Achieve Your Best Results",
-    description: "We take a comprehensive and collaborative approach in creating a plan and program that is right for every student. Adjusting to different personalities and specific academic needs, we always find what works best.",
-    icon: "file",
-    accent: "#8B5D6B",
+    description:
+      "Past papers, mock exams and exam strategies that help every learner walk into tests prepared and confident, and get the best results they can.",
+    icon: FileText,
+    color: mk(C.lightMint, C.ink, C.navy),
   },
 ];
 
-const features = [
-  { icon: Target, title: "Personalized Approach", description: "Tailored learning plans for each student" },
-  { icon: Users, title: "Expert Tutors", description: "Experienced professionals in all subjects" },
-  { icon: BookOpen, title: "Any Curriculum", description: "Support for all educational systems" },
+const features: { icon: React.ElementType; title: string; description: string; color: CardColor }[] = [
+  {
+    icon: Target,
+    title: "Personalized Approach",
+    description: "Tailored learning plans for each student",
+    color: mk(C.lightBlue, C.ink, C.blue),
+  },
+  {
+    icon: Users,
+    title: "Expert Tutors",
+    description: "Experienced professionals in all subjects",
+    color: mk("#FFFFFF", C.ink, C.mainGreen),
+  },
+  {
+    icon: BookOpen,
+    title: "Any Curriculum",
+    description: "Support for all educational systems",
+    color: mk(C.cardYellow, C.ink, C.navy, C.goldTouch),
+  },
 ];
 
-const iconMap = {
-  graduation: GraduationCap,
-  user: UserCheck,
-  file: FileText,
-};
+const CSS = `
+  .hl-card {
+    background: var(--card-bg);
+    color: var(--card-fg);
+    transition: background-color .2s ease, color .2s ease, transform .2s ease;
+  }
+  .hl-card .hl-accent { color: var(--card-accent); transition: color .2s ease; }
+  .hl-card .hl-chip { background: var(--card-accent); transition: background-color .2s ease; }
+  .hl-card .hl-chip svg { color: var(--card-bg); transition: color .2s ease; }
+  .hl-card:hover, .hl-card:active {
+    background: var(--card-hover);
+    color: var(--card-fg-hover);
+  }
+  .hl-card:hover .hl-accent, .hl-card:active .hl-accent { color: var(--card-accent-hover); }
+  .hl-card:hover .hl-chip, .hl-card:active .hl-chip { background: var(--card-accent-hover); }
+  .hl-card:hover .hl-chip svg, .hl-card:active .hl-chip svg { color: var(--card-hover); }
+  @media (hover: hover) { .hl-card:hover { transform: translateY(-4px); } }
+`;
 
 export const Services = () => {
   return (
-    <div className="w-full bg-[#20241F] py-8 md:py-20">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
-        .font-display { font-family: 'Fraunces', serif; }
-        .font-body { font-family: 'Inter', sans-serif; }
-        .font-label { font-family: 'IBM Plex Mono', monospace; }
-      `}</style>
+    <section
+      className="animate-fade-in w-full px-4 md:px-8 lg:px-12 xl:px-16 py-10 md:py-20"
+      style={{ backgroundColor: C.mainGreen }}
+    >
+      <style>{CSS}</style>
 
-      <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-10 font-body">
-
+      <div className="max-w-[1760px] mx-auto">
         {/* Hero */}
-        <div className="max-w-3xl mb-14 md:mb-20">
-          <p className="font-label text-[#D9A441] text-xs uppercase tracking-[0.25em] mb-4">
-            What We Offer
+        <div className="max-w-3xl mb-8 md:mb-14">
+          <p
+            className="text-xs font-bold uppercase tracking-[0.25em] mb-3 md:mb-4"
+            style={{ color: C.cardYellow }}
+          >
+            Our Services
           </p>
-          <h2 className="font-display font-semibold text-4xl sm:text-5xl md:text-6xl text-[#F7F2E7] leading-[1.1]">
-            What We Offer <span className="text-[#D9A441]">Services</span>
+          <h2 className="font-display font-semibold text-3xl sm:text-4xl md:text-6xl text-white leading-[1.1]">
+            What We <span style={{ color: C.cardYellow }}>Offer</span>
           </h2>
-          <p className="text-[#B9C2B8] text-base md:text-lg mt-4 md:mt-6 max-w-2xl">
+          <p className="text-base md:text-lg mt-3 md:mt-6 max-w-2xl" style={{ color: C.lightBlue }}>
             Comprehensive tutoring services designed to help every student reach their full potential.
           </p>
         </div>
 
-        {/* Services — flowing list, no cards */}
-        <div className="border-t border-[#3A423A]">
+        {/* Services */}
+        <div className="grid grid-cols-1 gap-3 md:gap-6 lg:grid-cols-3">
           {services.map((service) => {
-            const IconComponent = iconMap[service.icon] || GraduationCap;
+            const Icon = service.icon;
             return (
-              <div
+              <article
                 key={service.id}
-                className="group grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 py-10 md:py-14 border-b border-[#3A423A] items-start"
+                className="hl-card flex flex-col rounded-2xl p-5 md:p-8 shadow-md"
+                style={cardVars(service.color)}
                 data-testid={`card-service-${service.id}`}
               >
-                <div className="md:col-span-2 flex md:flex-col items-center md:items-start gap-4">
-                  <span className="font-label text-sm text-[#6E796E]">{service.id}</span>
-                  <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: service.accent }}
-                  >
-                    <IconComponent className="h-6 w-6 text-white" />
+                <div className="flex items-center gap-4">
+                  <span className="hl-chip flex h-12 w-12 md:h-14 md:w-14 shrink-0 items-center justify-center rounded-2xl">
+                    <Icon className="h-6 w-6" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="hl-accent text-xs font-bold tracking-widest">{service.id}</p>
+                    <h3 className="font-display font-semibold text-xl md:text-2xl leading-tight">
+                      {service.title}
+                    </h3>
                   </div>
                 </div>
 
-                <div className="md:col-span-7">
-                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-[#F7F2E7] mb-1">
-                    {service.title}
-                  </h3>
-                  <p className="font-label text-[10px] uppercase tracking-widest mb-3" style={{ color: service.accent }}>
-                    {service.subtitle}
-                  </p>
-                  <p className="text-[#B9C2B8] text-[15px] leading-7 max-w-none md:max-w-lg">
-                    {service.description}
-                  </p>
-                </div>
+                <p className="hl-accent mt-4 text-[11px] md:text-xs font-bold uppercase tracking-widest">
+                  {service.subtitle}
+                </p>
+                <p className="mt-2 text-sm md:text-[15px] leading-7 opacity-90 flex-grow">
+                  {service.description}
+                </p>
 
-                <div className="md:col-span-3 flex md:justify-end items-center">
-                  <a
-                    href="mailto:houseoflearning153@gmail.com"
-                    className="inline-flex items-center gap-1.5 text-sm text-[#F7F2E7] border-b border-transparent group-hover:border-[#D9A441] transition-colors pb-0.5"
-                  >
-                    Ask about this
-                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
-                </div>
-              </div>
+                <a
+                  href={`mailto:${LINKS.EMAIL}`}
+                  className="hl-accent mt-5 inline-flex items-center gap-1.5 self-start text-sm font-bold underline underline-offset-4"
+                >
+                  Ask about this
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </article>
             );
           })}
         </div>
 
-        {/* Why choose us — inline row, no panel/cards */}
-        <div className="mt-20 md:mt-24">
-          <h3 className="font-display font-semibold text-2xl md:text-3xl text-[#F7F2E7] mb-3">
-            Why Choose House of Learning?
+        {/* Why choose us */}
+        <div className="mt-10 md:mt-20">
+          <h3 className="font-display font-semibold text-2xl md:text-3xl text-white mb-2 md:mb-3">
+            Why Choose <span style={{ color: C.cardYellow }}>{BRAND_NAME}?</span>
           </h3>
-          <p className="text-[#B9C2B8] max-w-xl mb-10">
+          <p className="max-w-xl mb-5 md:mb-8 text-sm md:text-base" style={{ color: C.lightBlue }}>
             We're committed to providing the best educational support for every student.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-            {features.map((feature, index) => (
-              <div key={index} className="flex gap-4 md:block md:border-l md:border-[#3A423A] md:pl-6">
-                <feature.icon className="h-5 w-5 text-[#D9A441] shrink-0 mt-1 md:mb-4" />
-                <div>
-                  <h4 className="font-display font-semibold text-[#F7F2E7] mb-1 text-lg">
-                    {feature.title}
-                  </h4>
-                  <p className="text-sm text-[#B9C2B8] leading-relaxed">
-                    {feature.description}
-                  </p>
+
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-6">
+            {features.map((feature) => {
+              const Icon = feature.icon;
+              return (
+                <div
+                  key={feature.title}
+                  className="hl-card flex items-center gap-4 rounded-2xl p-4 md:p-6 shadow-md"
+                  style={cardVars(feature.color)}
+                >
+                  <span className="hl-chip flex h-11 w-11 shrink-0 items-center justify-center rounded-xl">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <h4 className="font-display font-semibold text-base md:text-lg leading-tight">
+                      {feature.title}
+                    </h4>
+                    <p className="mt-0.5 text-sm opacity-85">{feature.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
-        {/* CTA — plain band, not a card */}
-        <div className="mt-14 md:mt-20 pt-10 md:pt-12 border-t border-[#3A423A] flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+        {/* CTA */}
+        <div
+          className="mt-10 md:mt-16 flex flex-col gap-6 rounded-2xl p-6 md:flex-row md:items-center md:justify-between md:p-10 shadow-lg"
+          style={{ backgroundColor: C.navy }}
+        >
           <div>
-            <h3 className="font-display font-semibold text-3xl md:text-4xl text-[#F7F2E7] mb-2">
-              Let's Build Your Academic Success
+            <h3 className="font-display font-semibold text-2xl md:text-4xl text-white mb-2">
+              Let's Build Your <span style={{ color: C.cardYellow }}>Academic Success</span>
             </h3>
-            <p className="text-[#B9C2B8]">
+            <p className="text-sm md:text-base" style={{ color: C.lightBlue }}>
               Contact us today to schedule your first session.
             </p>
           </div>
-          <div className="flex items-center gap-6 shrink-0">
+
+          <div className="flex flex-col gap-3 sm:flex-row shrink-0">
             <a
-              href="mailto:houseoflearning153@gmail.com"
-              className="text-[#F7F2E7] border-b border-[#6E796E] hover:border-[#D9A441] pb-0.5 transition-colors"
+              href={`mailto:${LINKS.EMAIL}`}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/40 px-6 py-3.5 font-bold text-white transition hover:bg-white/10 active:scale-[0.98]"
               data-testid="link-services-email"
             >
+              <Mail size={18} />
               Email Us
             </a>
             <a
-              href="tel:+27712716011"
-              className="bg-[#D9A441] hover:bg-[#c7943a] text-[#23302A] px-6 py-3 rounded-full font-semibold transition-colors"
+              href={`tel:${LINKS.PHONE.replace(/\s/g, "")}`}
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 font-bold shadow-md transition hover:brightness-105 active:scale-[0.98]"
+              style={{ backgroundColor: C.cardYellow, color: C.ink }}
               data-testid="link-services-phone"
             >
+              <Phone size={18} />
               Call Now
             </a>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
 export default Services;
-
