@@ -31,7 +31,7 @@ const C = {
   ink: '#14213D',
 };
 
-const HERO_PHOTO = 'https://i.postimg.cc/nzXtG4RT/IMG-20261006-WA0027.png';
+const HERO_PHOTO = 'https://i.postimg.cc/7hCS3ZTB/IMG-20261006-WA0027.webp';
 const FORM_ENDPOINT = '';
 
 interface Plan {
@@ -138,13 +138,8 @@ const CSS = `
   .hl-page-content {
     background-color: ${C.mainGreen};
     min-height: 100vh;
-    /* Full-bleed breakout: escapes any centred/padded parent wrapper */
-    width: 100vw;
-    max-width: 100vw;
-    position: relative;
-    left: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: 100%;
+    max-width: 100%;
     overflow-x: clip; /* clip instead of hidden: no sticky/scroll side effects */
   }
 
@@ -174,35 +169,31 @@ const CSS = `
     position: relative;
     width: 100%;
     overflow: hidden;
-  }
-
-  .hl-photo {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    z-index: 0;
-  }
-
-  .hl-photo::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(76, 167, 113, 0.78) 0%,
-      rgba(76, 167, 113, 0.9) 60%,
-      ${C.mainGreen} 100%
-    );
+    background: linear-gradient(135deg, ${C.mainGreen} 0%, #3F9163 100%);
   }
 
   .hl-hero-copy {
     position: relative;
     z-index: 10;
     color: #fff;
+  }
+
+  /* The logo photo is shown in full: no overlay, no cropping */
+  .hl-hero-logo {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #F4F1EA;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    border: 4px solid rgba(255, 255, 255, 0.85);
+  }
+
+  .hl-hero-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   /* ---------------------------------------------------------------------- */
@@ -254,31 +245,7 @@ const CSS = `
   /* RESPONSIVE Adjustments                                                 */
   /* ---------------------------------------------------------------------- */
 
-  @media (max-width: 767px) {
-    .hl-hero-container {
-      min-height: 480px;
-      display: flex;
-      align-items: flex-end;
-      padding-bottom: 24px;
-    }
-  }
-
   @media (min-width: 768px) {
-    .hl-hero-container {
-      min-height: 550px;
-      display: flex;
-      align-items: center;
-    }
-
-    .hl-photo::after {
-      background: linear-gradient(
-        95deg,
-        rgba(76, 167, 113, 0.96) 0%,
-        rgba(76, 167, 113, 0.88) 50%,
-        rgba(76, 167, 113, 0.75) 100%
-      );
-    }
-
     .hl-snap {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -422,11 +389,9 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       {/* ---------------------------------------------------------------- */}
 
       <section className="hl-hero-container">
-        <div className="hl-photo" style={{ backgroundImage: `url('${HERO_PHOTO}')` }} />
-
-        <Container className="relative z-10">
-          <div className="hl-hero-copy w-full pt-10 pb-8 md:py-14 text-center md:text-left">
-            <h1 className="mt-4 md:mt-6 text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-white max-w-2xl mx-auto md:mx-0">
+        <Container className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-12 py-8 md:py-16">
+          <div className="hl-hero-copy text-center md:text-left">
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-white">
               Tutoring that helps every <span style={{ color: C.cardYellow }}>learner thrive</span>
             </h1>
 
@@ -445,6 +410,10 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             >
               Book a Session
             </a>
+          </div>
+
+          <div className="hl-hero-logo">
+            <img src={HERO_PHOTO} alt="HL Tutoring Non-Profit Organization logo" width={821} height={835} />
           </div>
         </Container>
       </section>
