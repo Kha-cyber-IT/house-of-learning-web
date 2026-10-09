@@ -98,7 +98,7 @@ export const About: React.FC = () => {
             className="font-semibold tracking-[0.2em] uppercase text-xs md:text-sm"
             style={{ color: C.cardYellow }}
           >
-            About House of Learning
+            About HL Tutoring
           </span>
 
           <h2 className="mt-3 md:mt-4 text-3xl md:text-5xl font-extrabold tracking-tight font-display text-white">
@@ -111,7 +111,7 @@ export const About: React.FC = () => {
           />
 
           <p className="mt-4 md:mt-6 text-base md:text-lg leading-7 md:leading-8" style={{ color: C.lightBlue }}>
-            House of Learning is dedicated to helping learners improve their academic performance while
+            HL Tutoring is dedicated to helping learners improve their academic performance while
             building <Hi>confidence</Hi>, <Hi>discipline</Hi> and a <Hi>love for learning</Hi>. We guide every
             learner to discover their strengths, develop strong study habits and prepare for a successful
             future.
@@ -164,7 +164,7 @@ export const About: React.FC = () => {
 
           <div className="space-y-4 md:space-y-6 text-base md:text-lg leading-7 md:leading-8" style={{ color: C.lightBlue }}>
             <p>
-              House of Learning was established because we recognised a growing need for quality academic
+              HL Tutoring was established because we recognised a growing need for quality academic
               support within the <Hi>Eldorado Park community</Hi>. Many learners have the potential to succeed
               but simply need additional guidance, encouragement and structured learning.
             </p>
