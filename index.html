@@ -3,22 +3,42 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>House of Learning</title>
-    
+    <title>HL Tutoring | Non-Profit Tutoring, Grade R to 12</title>
+    <meta name="description" content="HL Tutoring is a non-profit tutoring organisation matching each student with expert tutors, Grade R to 12. Private tutoring, structured programs and exam prep in Eldorado Park."/>
+    <meta name="theme-color" content="#123B63"/>
+
+    <!-- Link previews (WhatsApp, Facebook, etc.) -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="HL Tutoring"/>
+    <meta property="og:title" content="HL Tutoring | Non-Profit Tutoring, Grade R to 12"/>
+    <meta property="og:description" content="A non-profit tutoring organisation matching each student with expert tutors, Grade R to 12."/>
+    <meta property="og:image" content="https://i.postimg.cc/7hCS3ZTB/IMG-20261006-WA0027.webp"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
+
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        /* Updated to the House of Learning ink / paper / gold system */
-                        "primary": "#D9A441", // Gold accent
-                        "brand-navy": "#F7F2E7", // Repurposed: main light text color (paper) on the dark background
-                        "surface-gray": "#20241F", // Repurposed: main dark background (ink), replaces the old off-white
+                        /* HL Tutoring palette (same colours as Home.tsx) */
+                        "hl-green": "#4CA771",
+                        "hl-yellow": "#F9CE69",
+                        "hl-sky": "#D9EFF7",
+                        "hl-mint": "#C0E6BA",
+                        "hl-navy": "#123B63",
+                        "hl-ink": "#14213D",
+
+                        /* Legacy names, kept so existing classes still work */
+                        "primary": "#F9CE69",       // Yellow accent
+                        "brand-navy": "#FFFFFF",    // Main text colour on the green page
+                        "surface-gray": "#4CA771",  // Main page background (green)
                     },
                     fontFamily: {
                         "sans": ["Inter", "sans-serif"],
@@ -38,27 +58,27 @@
             },
         }
     </script>
-    
+
     <style type="text/tailwindcss">
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
         }
-        
+
         body {
-            /* Now renders as ink background with paper text instead of off-white/navy */
+            /* Green page with white text */
             @apply bg-surface-gray text-brand-navy antialiased;
         }
-        
+
         /* Scaled down the card styles so they look sharp and not massive on mobile */
         .card-service {
             @apply bg-white border-t-2 border-primary transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 rounded-xl;
         }
-        
+
         .bento-card {
             @apply bg-white border border-gray-100 rounded-xl p-6 transition-all duration-300 shadow-sm hover:shadow-md;
         }
     </style>
-    
+
     <script type="importmap">
     {
       "imports": {
