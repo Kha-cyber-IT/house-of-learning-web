@@ -19,11 +19,9 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeView]);
 
-  // These views manage their own full-bleed sections; the others keep the padded container.
-  const isHome = activeView === 'home' || activeView === 'tutors' || activeView === 'stories';
-
   return (
-    <div className="min-h-screen w-full overflow-x-hidden font-sans text-brand-navy bg-surface-gray">
+    // overflow-x-clip (not hidden): stops sideways scroll without breaking the sticky navbar
+    <div className="min-h-screen w-full overflow-x-clip font-sans text-brand-navy bg-surface-gray">
 
       <Navigation
         isOpen={isMenuOpen}
@@ -32,13 +30,8 @@ function App() {
         setActiveView={setActiveView}
       />
 
-      <main
-        className={
-          isHome
-            ? 'w-full'
-            : 'w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 py-16'
-        }
-      >
+      {/* Every view is full width and handles its own padding and background */}
+      <main className="w-full">
         {activeView === 'home' && <Home setActiveView={setActiveView} />}
         {activeView === 'about' && <About />}
         {activeView === 'tutors' && <Tutors />}
