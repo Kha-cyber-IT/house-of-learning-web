@@ -9,25 +9,45 @@ const C = {
   lightBlue: '#D9EFF7',
   lightMint: '#C0E6BA',
   navy: '#123B63',
+  blue: '#2A6592',
   ink: '#14213D',
   goldTouch: '#F2B84B',
 };
 
-// Each card gets its own colour; every card turns gold when touched / hovered.
-const CARD_COLORS = [
-  { bg: C.cardYellow, hover: C.goldTouch },
-  { bg: C.lightBlue, hover: C.cardYellow },
-  { bg: C.lightMint, hover: C.cardYellow },
-  { bg: '#FFFFFF', hover: C.cardYellow },
-  { bg: C.lightBlue, hover: C.cardYellow },
+// Each card has its own Home.tsx colour, text colour and accent; every card turns gold on touch / hover.
+const mk = (bg: string, fg: string, accent: string, hover = C.cardYellow) => ({
+  bg,
+  fg,
+  accent,
+  hover,
+  hoverFg: C.ink,
+  hoverAccent: C.navy,
+});
+
+type CardColor = ReturnType<typeof mk>;
+
+const CARD_COLORS: CardColor[] = [
+  mk(C.cardYellow, C.ink, C.navy, C.goldTouch), // yellow
+  mk(C.navy, '#FFFFFF', C.cardYellow),          // navy, white text, yellow accents
+  mk(C.lightMint, C.ink, C.navy),               // mint
+  mk(C.lightBlue, C.ink, C.blue),               // light blue
+  mk('#FFFFFF', C.ink, C.mainGreen),            // white, green accents
 ];
 
 const CSS = `
   .hl-card {
     background: var(--card-bg);
+    color: var(--card-fg);
     transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
   }
-  .hl-card:hover, .hl-card:active { background: var(--card-hover); }
+  .hl-card .hl-accent { color: var(--card-accent); }
+  .hl-card .hl-ring { border-color: var(--card-accent); }
+  .hl-card:hover, .hl-card:active {
+    background: var(--card-hover);
+    color: var(--card-fg-hover);
+  }
+  .hl-card:hover .hl-accent, .hl-card:active .hl-accent { color: var(--card-accent-hover); }
+  .hl-card:hover .hl-ring, .hl-card:active .hl-ring { border-color: var(--card-accent-hover); }
   @media (hover: hover) { .hl-card:hover { transform: translateY(-4px); } }
 
   /* Mobile: 3-line preview. Desktop: show everything. */
@@ -44,7 +64,7 @@ const CSS = `
 
 type Story = (typeof STORIES)[number];
 
-const StoryCard: React.FC<{ story: Story; color: { bg: string; hover: string }; className?: string }> = ({
+const StoryCard: React.FC<{ story: Story; color: CardColor; className?: string }> = ({
   story,
   color,
   className = '',
@@ -56,13 +76,21 @@ const StoryCard: React.FC<{ story: Story; color: { bg: string; hover: string }; 
   return (
     <article
       className={`hl-card relative overflow-hidden rounded-2xl p-4 md:p-8 shadow-md ${className}`}
-      style={{ ['--card-bg' as string]: color.bg, ['--card-hover' as string]: color.hover, color: C.ink } as React.CSSProperties}
+      style={
+        {
+          '--card-bg': color.bg,
+          '--card-hover': color.hover,
+          '--card-fg': color.fg,
+          '--card-fg-hover': color.hoverFg,
+          '--card-accent': color.accent,
+          '--card-accent-hover': color.hoverAccent,
+        } as React.CSSProperties
+      }
     >
       <Quote
         size={44}
-        className="absolute top-3 right-3 md:top-5 md:right-5 opacity-[0.12] pointer-events-none"
-        style={{ color: C.navy }}
-        fill={C.navy}
+        className="hl-accent absolute top-3 right-3 md:top-5 md:right-5 opacity-20 pointer-events-none"
+        fill="currentColor"
       />
 
       <div className="relative grid grid-cols-[56px_1fr] md:grid-cols-[96px_1fr] gap-x-4 md:gap-x-6 gap-y-3 items-center">
@@ -70,12 +98,12 @@ const StoryCard: React.FC<{ story: Story; color: { bg: string; hover: string }; 
           src={story.image}
           alt={story.name}
           loading="lazy"
-          className="w-14 h-14 md:w-24 md:h-24 rounded-full object-cover border-[3px] md:border-4 border-white shadow-md"
+          className="w-14 h-14 md:w-24 md:h-24 rounded-full object-cover border-[3px] md:border-4 hl-ring shadow-md"
         />
 
         <div className="min-w-0">
           <h3 className="font-display text-lg md:text-2xl font-bold leading-tight">{story.name}</h3>
-          <p className="mt-0.5 text-xs md:text-sm font-bold uppercase tracking-wider" style={{ color: C.navy }}>
+          <p className="hl-accent mt-0.5 text-xs md:text-sm font-bold uppercase tracking-wider">
             Learner story
           </p>
         </div>
@@ -96,8 +124,7 @@ const StoryCard: React.FC<{ story: Story; color: { bg: string; hover: string }; 
               type="button"
               onClick={() => setOpen((o) => !o)}
               aria-expanded={open}
-              className="md:hidden mt-2 inline-flex items-center gap-1 text-sm font-bold not-italic"
-              style={{ color: C.navy }}
+              className="hl-accent md:hidden mt-2 inline-flex items-center gap-1 text-sm font-bold not-italic"
             >
               {open ? 'Show less' : 'Read more'}
               <ChevronDown size={16} className={`transition-transform ${open ? 'rotate-180' : ''}`} />
