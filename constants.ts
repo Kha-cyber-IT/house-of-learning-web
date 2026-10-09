@@ -7,9 +7,9 @@ export const TUTORS: Tutor[] = [
     role: 'Program Director',
     image: 'https://i.postimg.cc/YqDbJMBf/IMG-20251124-WA0057.jpg',
     description: [
-      "At House of Learning, Albert Khoza is the Program Director. He plays an important role in making sure every learner gets high-quality academic support. He oversees all tutoring programs, manages the team of tutors, and keeps our learning environment running smoothly.",
+      "At HL Tutoring, Albert Khoza is the Program Director. He plays an important role in making sure every learner gets high-quality academic support. He oversees all tutoring programs, manages the team of tutors, and keeps our learning environment running smoothly.",
       "Albert designs and improves our educational programs. He creates effective learning schedules and ensures that each learner is placed in the right class. He closely monitors learner progress, identifies individual learning needs, and makes sure every learner gets the help they need to succeed.",
-      "As Program Director, he works closely with parents, providing updates, sharing feedback, and keeping open communication between home and the center. By guiding tutors, supporting learners, and maintaining high teaching standards, Albert makes sure House of Learning continues to provide quality education in all subjects.",
+      "As Program Director, he works closely with parents, providing updates, sharing feedback, and keeping open communication between home and the center. By guiding tutors, supporting learners, and maintaining high teaching standards, Albert makes sure HL Tutoring continues to provide quality education in all subjects.",
       "In addition to his leadership role, Albert also tutors. He teaches Mathematical Literacy, History, Business Studies, Tourism, and Economic Management Sciences (EMS)."
     ]
   },
@@ -19,7 +19,7 @@ export const TUTORS: Tutor[] = [
     role: 'Mathematics Grade 1-12',
     image: 'https://i.postimg.cc/9QDnLzSd/IMG-20251124-WA0053.jpg',
     description: [
-      "Jabulani is the co-founder of House of Learning. He tutors Mathematics from Grade 1-12."
+      "Jabulani is the co-founder of HL Tutoring. He tutors Mathematics from Grade 1-12."
     ]
   },
   {
@@ -28,7 +28,7 @@ export const TUTORS: Tutor[] = [
     role: 'Accounting and Economics',
     image: 'https://i.postimg.cc/Vvs7nNnF/IMG-20251124-WA0050.jpg',
     description: [
-      "My name is Alisandre and I tutor Accounting and Economics at House of Learning. I enjoy helping students better understand topics they struggle with and seeing them improve."
+      "My name is Alisandre and I tutor Accounting and Economics at HL Tutoring. I enjoy helping students better understand topics they struggle with and seeing them improve."
     ]
   },
   {
