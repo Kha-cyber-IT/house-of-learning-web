@@ -19,8 +19,8 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeView]);
 
-  // Home manages its own full-bleed sections; other views keep the padded container.
-  const isHome = activeView === 'home';
+  // These views manage their own full-bleed sections; the others keep the padded container.
+  const isHome = activeView === 'home' || activeView === 'tutors' || activeView === 'stories';
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden font-sans text-brand-navy bg-surface-gray">
