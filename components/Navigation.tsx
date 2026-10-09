@@ -14,7 +14,7 @@ const C = {
 };
 
 // Change the name here when the site is rebranded
-const BRAND_NAME = "House of Learning";
+const BRAND_NAME = "HL Tutoring";
 
 interface NavigationProps {
   isOpen: boolean;
