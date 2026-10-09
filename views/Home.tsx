@@ -126,7 +126,7 @@ const CSS = `
   .hl-page-content textarea,
   .hl-page-content a,
   .hl-page-content :where(p, h1, h2, h3, h4, h5, h6, li, div, span):not(.material-symbols-outlined) {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Cabin', Calibri, 'Trebuchet MS', sans-serif;
   }
 
   .hl-page-content .material-symbols-outlined {
@@ -272,7 +272,7 @@ const Container: React.FC<{ className?: string; children: React.ReactNode }> = (
   className = '',
   children,
 }) => (
-  <div className={`w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12 ${className}`}>{children}</div>
+  <div className={`w-full max-w-[1760px] mx-auto px-4 md:px-8 lg:px-12 xl:px-16 ${className}`}>{children}</div>
 );
 
 /** Full-width band (edge to edge) with a centred inner container. */
@@ -423,7 +423,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       {/* ---------------------------------------------------------------- */}
 
       <section className="w-full min-w-0">
-        <div className="w-full max-w-7xl mx-auto md:px-8 lg:px-12">
+        <div className="w-full max-w-[1760px] mx-auto md:px-8 lg:px-12 xl:px-16">
           <div className="hl-snap" onScroll={(e) => onSnapScroll(e, setSlide)}>
             {services.map((s) => (
               <div
@@ -535,7 +535,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
       {/* PRICING (Horizontal Scroll on Mobile)                            */}
       {/* ---------------------------------------------------------------- */}
 
-      <Band id="pricing" className="text-white" innerClassName="!px-0 md:!px-8 lg:!px-12">
+      <Band id="pricing" className="text-white" innerClassName="!px-0 md:!px-8 lg:!px-12 xl:!px-16">
         <div className="text-center mb-6 md:mb-10 px-4">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-2">Transparent Pricing</h2>
           <p className="text-sm md:text-base" style={{ color: C.lightBlue }}>
