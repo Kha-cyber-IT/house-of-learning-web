@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import './index.css'; // global styles: HL Tutoring palette + full-width reset
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
