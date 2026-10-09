@@ -1,109 +1,148 @@
-import React from 'react';
-import { Quote } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronDown, Quote } from 'lucide-react';
+import { STORIES } from '../constants';
 
-const COLORS = {
-  ink: '#20241F',
-  secondary: '#23302A',
-  border: '#3A423A',
-  paper: '#F7F2E7',
-  muted: '#B9C2B8',
-  honey: '#D9A441',
+// Same palette as Home.tsx
+const C = {
+  mainGreen: '#4CA771',
+  cardYellow: '#F9CE69',
+  lightBlue: '#D9EFF7',
+  lightMint: '#C0E6BA',
+  navy: '#123B63',
+  ink: '#14213D',
+  goldTouch: '#F2B84B',
 };
 
-// Updated Success Stories Data (as per request, using existing images)
-const stories = [
-  {
-    id: 1,
-    name: 'Neo Nkadimeng',
-    text: 'I’ve commanded incredible support academically... The new tutors understand my own pace and build confidence.',
-    image: 'https://i.postimg.cc/gJ3hGsXK/Smart-Select-20251123-152747-Whats-App.jpg'
-  },
-  {
-    id: 2,
-    name: 'Trevor Nematohoni',
-    text: 'Admitting my struggles this year has been a game changer. The skills taught here... my grades have improved significantly.',
-    image: 'https://i.postimg.cc/T2JQ0TH4/IMG-20251124-WA0018.jpg'
-  },
-  {
-    id: 3,
-    name: 'Leyondre Walters',
-    text: 'House of Learning is a massive help and a new story of teaching logic. They were there to protect me when I felt like giving up.',
-    image: 'https://i.postimg.cc/R0nxJWGv/IMG-20251124-WA0019.jpg'
-  },
-  {
-    id: 4,
-    name: 'Keabetswe Usekwa',
-    text: 'The last day I announced House of Learning I thought I accepted failure. But the help I received changed my project entirely.',
-    image: 'https://i.postimg.cc/NMvyCXJY/IMG-20251209-WA0009.jpg'
-  },
-  {
-    id: 5,
-    name: 'Kaynica Malan',
-    text: 'I really do appreciate the support and help you have given me. Thank you to House of Learning.',
-    image: 'https://i.postimg.cc/9QY75fZg/IMG-20251124-WA0038.jpg'
-  }
+// Each card gets its own colour; every card turns gold when touched / hovered.
+const CARD_COLORS = [
+  { bg: C.cardYellow, hover: C.goldTouch },
+  { bg: C.lightBlue, hover: C.cardYellow },
+  { bg: C.lightMint, hover: C.cardYellow },
+  { bg: '#FFFFFF', hover: C.cardYellow },
+  { bg: C.lightBlue, hover: C.cardYellow },
 ];
 
-export const Stories: React.FC = () => {
+const CSS = `
+  .hl-card {
+    background: var(--card-bg);
+    transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .hl-card:hover, .hl-card:active { background: var(--card-hover); }
+  @media (hover: hover) { .hl-card:hover { transform: translateY(-4px); } }
+
+  /* Mobile: 3-line preview. Desktop: show everything. */
+  .hl-clamp-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .hl-clamp-3 { display: block; -webkit-line-clamp: unset; overflow: visible; }
+  }
+`;
+
+type Story = (typeof STORIES)[number];
+
+const StoryCard: React.FC<{ story: Story; color: { bg: string; hover: string }; className?: string }> = ({
+  story,
+  color,
+  className = '',
+}) => {
+  const [open, setOpen] = useState(false);
+  const [first, ...rest] = story.text;
+  const hasMore = rest.length > 0 || first.length > 130;
+
   return (
-    <section
-      className="animate-fade-in py-16 md:py-24 px-4"
-      style={{ backgroundColor: COLORS.ink }}
+    <article
+      className={`hl-card relative overflow-hidden rounded-2xl p-4 md:p-8 shadow-md ${className}`}
+      style={{ ['--card-bg' as string]: color.bg, ['--card-hover' as string]: color.hover, color: C.ink } as React.CSSProperties}
     >
-      <div className="max-w-[1200px] mx-auto">
-        <div className="text-center mb-14">
-          <p
-            className="font-label text-xs uppercase tracking-[0.25em] mb-4 font-bold"
-            style={{ color: COLORS.honey }}
-          >
-            Success Stories
+      <Quote
+        size={44}
+        className="absolute top-3 right-3 md:top-5 md:right-5 opacity-[0.12] pointer-events-none"
+        style={{ color: C.navy }}
+        fill={C.navy}
+      />
+
+      <div className="relative grid grid-cols-[56px_1fr] md:grid-cols-[96px_1fr] gap-x-4 md:gap-x-6 gap-y-3 items-center">
+        <img
+          src={story.image}
+          alt={story.name}
+          loading="lazy"
+          className="w-14 h-14 md:w-24 md:h-24 rounded-full object-cover border-[3px] md:border-4 border-white shadow-md"
+        />
+
+        <div className="min-w-0">
+          <h3 className="font-display text-lg md:text-2xl font-bold leading-tight">{story.name}</h3>
+          <p className="mt-0.5 text-xs md:text-sm font-bold uppercase tracking-wider" style={{ color: C.navy }}>
+            Learner story
           </p>
-          <h2
-            className="text-4xl md:text-5xl font-bold font-display"
-            style={{ color: COLORS.paper }}
-          >
-            Success Stories
-          </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {stories.map((story, index) => (
-            <div
-              key={story.id}
-              className={`relative overflow-hidden rounded-3xl p-10 flex flex-col items-center text-center h-full min-h-[400px] border transition-all duration-300 hover:-translate-y-1 ${
-                index === stories.length - 1 && stories.length % 2 !== 0 ? 'lg:col-span-2 lg:w-3/4 lg:mx-auto' : ''
-              }`}
-              style={{ backgroundColor: COLORS.secondary, borderColor: COLORS.border }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = COLORS.honey)}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = COLORS.border)}
-            >
-              <Quote
-                size={72}
-                className="absolute top-6 left-6 opacity-[0.08] pointer-events-none"
-                style={{ color: COLORS.honey }}
-                fill={COLORS.honey}
-              />
-
-              <div
-                className="relative w-36 h-36 md:w-40 md:h-40 rounded-full mb-6 flex items-center justify-center overflow-hidden flex-shrink-0 border-4"
-                style={{ borderColor: `${COLORS.honey}55` }}
-              >
-                <img src={story.image} alt={story.name} className="w-full h-full object-cover" />
-              </div>
-
-              <h3
-                className="text-2xl font-bold mb-6 font-display relative"
-                style={{ color: COLORS.paper }}
-              >
-                {story.name}
-              </h3>
-              <p
-                className="text-xl leading-relaxed italic relative"
-                style={{ color: COLORS.muted }}
-              >
-                "{story.text}"
+        <div className="col-span-2">
+          <div className="space-y-2 text-sm md:text-lg leading-relaxed italic opacity-90">
+            <p className={open ? '' : 'hl-clamp-3'}>“{first}{rest.length === 0 ? '”' : ''}</p>
+            {rest.map((para, i) => (
+              <p key={i} className={open ? '' : 'hidden md:block'}>
+                {para}
+                {i === rest.length - 1 ? '”' : ''}
               </p>
-            </div>
+            ))}
+          </div>
+
+          {hasMore && (
+            <button
+              type="button"
+              onClick={() => setOpen((o) => !o)}
+              aria-expanded={open}
+              className="md:hidden mt-2 inline-flex items-center gap-1 text-sm font-bold not-italic"
+              style={{ color: C.navy }}
+            >
+              {open ? 'Show less' : 'Read more'}
+              <ChevronDown size={16} className={`transition-transform ${open ? 'rotate-180' : ''}`} />
+            </button>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export const Stories: React.FC = () => {
+  const lastIsOdd = STORIES.length % 2 !== 0;
+
+  return (
+    <section
+      className="animate-fade-in w-full py-10 md:py-20 px-4"
+      style={{ backgroundColor: C.mainGreen }}
+    >
+      <style>{CSS}</style>
+
+      <div className="max-w-[1200px] mx-auto">
+        <div className="text-center mb-8 md:mb-12">
+          <p
+            className="font-label text-xs uppercase tracking-[0.25em] mb-3 font-bold"
+            style={{ color: C.cardYellow }}
+          >
+            Real Results
+          </p>
+          <h2 className="font-display text-3xl md:text-5xl font-bold mb-2 text-white">Success Stories</h2>
+          <p className="text-sm md:text-base" style={{ color: C.lightBlue }}>
+            In the words of our learners.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-6">
+          {STORIES.map((story, index) => (
+            <StoryCard
+              key={story.id}
+              story={story}
+              color={CARD_COLORS[index % CARD_COLORS.length]}
+              className={
+                lastIsOdd && index === STORIES.length - 1 ? 'lg:col-span-2 lg:w-3/4 lg:mx-auto' : ''
+              }
+            />
           ))}
         </div>
       </div>
