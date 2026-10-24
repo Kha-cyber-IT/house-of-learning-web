@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Clock,
   Star,
@@ -13,6 +13,7 @@ import {
 import { ViewState } from '../types';
 import { LINKS } from '../constants';
 import { SubjectsSection } from './SubjectsSection';
+import { MobileCarousel } from '../components/MobileCarousel';
 
 interface HomeProps {
   setActiveView: (view: ViewState) => void;
@@ -303,6 +304,43 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [openPlan, setOpenPlan] = useState<string | null>(null);
 
+  // ---- Pricing carousel (mobile): swipe, tappable dots, gentle auto-advance ----
+  const pricingRef = useRef<HTMLDivElement>(null);
+  const pausedUntil = useRef(0);
+
+  const slideStep = (el: HTMLDivElement) => {
+    const first = el.firstElementChild as HTMLElement | null;
+    if (!first) return 0;
+    const cs = getComputedStyle(el);
+    const gap = parseFloat(cs.columnGap || cs.gap) || 16;
+    return first.offsetWidth + gap;
+  };
+
+  const scrollToPlan = (i: number) => {
+    const el = pricingRef.current;
+    if (!el) return;
+    el.scrollTo({ left: i * slideStep(el), behavior: 'smooth' });
+  };
+
+  // Pause auto-advance for a while after the visitor touches the carousel
+  const pauseCarousel = () => {
+    pausedUntil.current = Date.now() + 8000;
+  };
+
+  useEffect(() => {
+    const mobile = window.matchMedia('(max-width: 767px)');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const id = window.setInterval(() => {
+      const el = pricingRef.current;
+      if (!el || !mobile.matches || reduce.matches || openPlan || Date.now() < pausedUntil.current) return;
+      const step = slideStep(el);
+      if (!step) return;
+      const current = Math.round(el.scrollLeft / step);
+      scrollToPlan((current + 1) % plans.length);
+    }, 4000);
+    return () => window.clearInterval(id);
+  }, [openPlan]);
+
   const services = [
     {
       icon: 'person',
@@ -500,7 +538,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+          <MobileCarousel desktopClassName="md:grid-cols-2 lg:grid-cols-4" itemWidth="64%" dotActive={C.cardYellow}>
             {why.map((w) => (
               <div
                 key={w.title}
@@ -514,7 +552,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                 <p className="text-xs md:text-sm opacity-80 leading-relaxed">{w.text}</p>
               </div>
             ))}
-          </div>
+          </MobileCarousel>
         </Container>
       </section>
 
@@ -544,7 +582,14 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
         </div>
 
         <div className="w-full min-w-0">
-          <div className="hl-snap" onScroll={(e) => onSnapScroll(e, setPricingSlide)}>
+          <div
+            ref={pricingRef}
+            className="hl-snap"
+            onScroll={(e) => onSnapScroll(e, setPricingSlide)}
+            onTouchStart={pauseCarousel}
+            onPointerDown={pauseCarousel}
+            onWheel={pauseCarousel}
+          >
             {plans.map((p) => {
               const isOpen = openPlan === p.id;
               return (
@@ -566,11 +611,6 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
                   <div className="flex items-center gap-3 mb-3">
                     <p.icon size={20} style={{ color: p.popular ? C.navy : C.cardYellow }} />
                     <h3 className="text-lg font-bold">{p.name}</h3>
-                  </div>
-
-                  <div className="mb-4">
-                    <span className="text-3xl font-bold">{p.price}</span>
-                    <span className="text-xs opacity-75"> {p.period}</span>
                   </div>
 
                   <p className="text-xs mb-4 opacity-80 min-h-[32px]">{p.description}</p>
@@ -619,16 +659,26 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
             })}
           </div>
 
-          <div className="flex justify-center gap-2 mt-2 md:hidden">
-            {plans.map((_, i) => (
-              <span
-                key={i}
-                className="h-2 rounded-full transition-all"
-                style={{
-                  width: pricingSlide === i ? 24 : 8,
-                  background: pricingSlide === i ? C.cardYellow : 'rgba(255,255,255,0.3)',
+          <div className="flex justify-center gap-1 mt-1 md:hidden">
+            {plans.map((p, i) => (
+              <button
+                key={p.id}
+                type="button"
+                aria-label={`Show ${p.name} plan`}
+                onClick={() => {
+                  pauseCarousel();
+                  scrollToPlan(i);
                 }}
-              />
+                className="p-1.5"
+              >
+                <span
+                  className="block h-2 rounded-full transition-all"
+                  style={{
+                    width: pricingSlide === i ? 24 : 8,
+                    background: pricingSlide === i ? C.cardYellow : 'rgba(255,255,255,0.35)',
+                  }}
+                />
+              </button>
             ))}
           </div>
         </div>
