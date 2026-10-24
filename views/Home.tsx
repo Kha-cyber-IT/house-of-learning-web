@@ -444,7 +444,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
               href={LINKS.REGISTRATION}
               target="_blank"
               rel="noreferrer"
-              className="hl-btn hl-gold-btn mt-6 md:mt-8 inline-block w-full md:w-auto px-8 py-3.5 rounded-xl text-base font-bold shadow-lg text-center"
+              className="hl-btn hl-gold-btn mt-6 md:mt-8 hidden md:inline-block px-8 py-3.5 rounded-xl text-base font-bold shadow-lg text-center"
             >
               Book a Session
             </a>
