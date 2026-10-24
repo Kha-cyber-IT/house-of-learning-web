@@ -104,19 +104,10 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const goPricing = () => {
-    setActiveView("home");
-    setTimeout(
-      () => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" }),
-      300
-    );
-  };
-
   const serviceLinks: FooterLink[] = [
     { label: "Private Tutoring", onClick: () => go("services") },
     { label: "Structured Programs", onClick: () => go("services") },
     { label: "Exam Prep", onClick: () => go("services") },
-    { label: "Pricing", onClick: goPricing },
   ];
 
   const companyLinks: FooterLink[] = [
