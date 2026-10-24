@@ -1,791 +1,242 @@
-import React, { useEffect, useRef, useState } from 'react';
-import {
-  Clock,
-  Star,
-  Calendar,
-  Check,
-  Mail,
-  Phone,
-  Send,
-  CheckCircle,
-  MessageCircle,
-} from 'lucide-react';
-import { ViewState } from '../types';
-import { LINKS } from '../constants';
-import { SubjectsSection } from './SubjectsSection';
-import { MobileCarousel } from '../components/MobileCarousel';
+import React, { useState } from "react";
+import { ChevronDown, Mail, MapPin, MessageCircle, Phone, ArrowUp } from "lucide-react";
+import { LINKS } from "../constants";
+import { ViewState } from "../types";
 
-interface HomeProps {
+// Same palette as Home.tsx
+const C = {
+  mainGreen: "#4CA771",
+  cardYellow: "#F9CE69",
+  lightBlue: "#D9EFF7",
+  lightMint: "#C0E6BA",
+  navy: "#123B63",
+  ink: "#14213D",
+};
+
+const BRAND_NAME = "HL Tutoring";
+const LEGAL_LINE = "HL TUTORING NPC (Reg: 2026/791574/08)";
+const ADDRESS = "Eldorado Park Ext 2, Tennis Courts by the Women's Forum";
+
+interface FooterProps {
   setActiveView: (view: ViewState) => void;
 }
 
-// ---- HL Tutoring brand ----
-const C = {
-  mainGreen: '#4CA771', // Global background
-  cardYellow: '#F9CE69', // Services & Subjects cards
-  lightBlue: '#D9EFF7', // Accent text color (Subheadings/Paragraphs)
-  lightMint: '#C0E6BA', // Soft accent (Used for 'Why choose us' cards)
-  navy: '#123B63',
-  blue: '#2A6592',
-  gold: '#C9A04A',
-  goldHover: '#B58B38',
-  ink: '#14213D',
-};
+type FooterLink = { label: string; onClick: () => void };
 
-const HERO_PHOTO = 'https://i.postimg.cc/7hCS3ZTB/IMG-20261006-WA0027.webp';
-const FORM_ENDPOINT = '';
-
-interface Plan {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  period: string;
-  icon: React.ElementType;
-  features: string[];
-  popular?: boolean;
-}
-
-const plans: Plan[] = [
-  {
-    id: 'hourly',
-    name: 'Hourly',
-    description: 'Flexible help when needed.',
-    price: 'R150',
-    period: '/ hr',
-    icon: Clock,
-    features: [
-      '1-on-1 personalised tutoring',
-      'Subject specific assistance',
-      'Flexible scheduling',
-    ],
-  },
-  {
-    id: 'monthly',
-    name: 'Monthly',
-    description: 'Sustained improvement.',
-    price: 'R260',
-    period: '/ mo',
-    icon: Star,
-    popular: true,
-    features: [
-      '16 hours monthly tutoring',
-      'Dedicated mentor assignment',
-      'Monthly progress assessments',
-      'Exam readiness preparation',
-    ],
-  },
-  {
-    id: 'weekly',
-    name: 'Weekly',
-    description: 'Intensive support.',
-    price: 'R600',
-    period: '/ mo',
-    icon: Calendar,
-    features: [
-      '4 hours weekly tutoring',
-      'Priority session booking',
-      'Weekly goal setting',
-      'Homework & assignment help',
-    ],
-  },
-];
-
-/* -------------------------------------------------------------------------- */
-/* STYLES                                                                     */
-/* -------------------------------------------------------------------------- */
-
-const CSS = `
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  /* FULL-WIDTH FIX: undo the default Vite/CRA "#root { max-width; margin: 0 auto; padding }" */
-  html, body, #root, #__next {
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    text-align: left;
-  }
-
-  html, body {
-    background-color: ${C.mainGreen};
-    color: #ffffff;
-  }
-
-  img { max-width: 100%; }
-
-  button, a, input, textarea {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* Gill Sans, scoped to this page. Icon fonts are excluded so Material Symbols still render as icons. */
-  .hl-page-content,
-  .hl-page-content button,
-  .hl-page-content input,
-  .hl-page-content textarea,
-  .hl-page-content a,
-  .hl-page-content :where(p, h1, h2, h3, h4, h5, h6, li, div, span):not(.material-symbols-outlined) {
-    font-family: 'Gill Sans', 'Gill Sans MT', 'Cabin', Calibri, 'Trebuchet MS', sans-serif;
-  }
-
-  .hl-page-content .material-symbols-outlined {
-    font-family: 'Material Symbols Outlined' !important;
-  }
-
-  html, body { overflow-x: clip; }
-
-  .hl-page-content {
-    background-color: ${C.mainGreen};
-    min-height: 100vh;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: clip; /* clip instead of hidden: no sticky/scroll side effects */
-  }
-
-  .hl-gold-btn {
-    background: ${C.cardYellow};
-    color: ${C.ink};
-  }
-
-  .hl-blue-btn {
-    background: ${C.navy};
-    color: #fff;
-  }
-
-  .hl-btn {
-    cursor: pointer;
-    transition: transform 0.15s ease, filter 0.15s ease;
-  }
-  .hl-btn:hover { filter: brightness(0.95); }
-  .hl-btn:active { transform: scale(0.98); }
-  .hl-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-
-  /* ---------------------------------------------------------------------- */
-  /* HERO                                                                   */
-  /* ---------------------------------------------------------------------- */
-
-  .hl-hero-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    background: linear-gradient(135deg, ${C.mainGreen} 0%, #3F9163 100%);
-  }
-
-  .hl-hero-copy {
-    position: relative;
-    z-index: 10;
-    color: #fff;
-  }
-
-  /* The logo photo is shown in full: no overlay, no cropping */
-  .hl-hero-logo {
-    width: 100%;
-    max-width: 440px;
-    margin: 0 auto;
-    border-radius: 24px;
-    overflow: hidden;
-    background: #F4F1EA;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-    border: 4px solid rgba(255, 255, 255, 0.85);
-  }
-
-  .hl-hero-logo img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  /* ---------------------------------------------------------------------- */
-  /* SNAP SCROLL                                                            */
-  /* ---------------------------------------------------------------------- */
-
-  .hl-snap {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    /* top padding stops the "Most Chosen" badge being clipped by the scroller */
-    padding: 16px 20px 16px;
-    scroll-padding: 0 20px;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .hl-snap::-webkit-scrollbar {
-    display: none;
-  }
-
-  .hl-snap > * {
-    flex: 0 0 calc(100% - 56px);
-    width: calc(100% - 56px);
-    max-width: 340px;
-    scroll-snap-align: center;
-  }
-
-  /* ---------------------------------------------------------------------- */
-  /* INPUTS                                                                 */
-  /* ---------------------------------------------------------------------- */
-
-  .hl-field {
-    width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border-radius: 12px;
-    padding: 12px 14px;
-    font-size: 16px;
-  }
-
-  .hl-field::placeholder { color: rgba(255, 255, 255, 0.75); }
-  .hl-field:focus-visible { outline: 2px solid ${C.cardYellow}; }
-
-  /* ---------------------------------------------------------------------- */
-  /* RESPONSIVE Adjustments                                                 */
-  /* ---------------------------------------------------------------------- */
-
-  @media (min-width: 768px) {
-    .hl-snap {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      overflow: visible;
-      padding: 16px 0 0;
-      scroll-padding: 0;
-      gap: 24px;
-    }
-
-    .hl-snap > * {
-      flex: initial;
-      width: auto;
-      max-width: none;
-    }
-  }
-`;
-
-/* -------------------------------------------------------------------------- */
-/* LAYOUT HELPERS                                                             */
-/* -------------------------------------------------------------------------- */
-
-/** Content container: centred and capped, but sections themselves are full-bleed. */
-const Container: React.FC<{ className?: string; children: React.ReactNode }> = ({
-  className = '',
-  children,
-}) => (
-  <div className={`w-full max-w-[1760px] mx-auto px-4 md:px-8 lg:px-12 xl:px-16 ${className}`}>{children}</div>
-);
-
-/** Full-width band (edge to edge) with a centred inner container. */
-const Band: React.FC<{
-  id?: string;
-  className?: string;
-  innerClassName?: string;
-  background?: string;
-  children: React.ReactNode;
-}> = ({ id, className = '', innerClassName = '', background, children }) => (
-  <section
-    id={id}
-    style={background ? { background } : undefined}
-    className={`relative w-full ${className}`}
-  >
-    <Container className={`py-8 md:py-16 ${innerClassName}`}>{children}</Container>
-  </section>
-);
-
-/* -------------------------------------------------------------------------- */
-/* HOME COMPONENT                                                             */
-/* -------------------------------------------------------------------------- */
-
-export const Home: React.FC<HomeProps> = ({ setActiveView }) => {
-  const [slide, setSlide] = useState(0);
-  const [pricingSlide, setPricingSlide] = useState(0);
-  const [showForm, setShowForm] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-  const [openPlan, setOpenPlan] = useState<string | null>(null);
-
-  // ---- Pricing carousel (mobile): swipe, tappable dots, gentle auto-advance ----
-  const pricingRef = useRef<HTMLDivElement>(null);
-  const pausedUntil = useRef(0);
-
-  const slideStep = (el: HTMLDivElement) => {
-    const first = el.firstElementChild as HTMLElement | null;
-    if (!first) return 0;
-    const cs = getComputedStyle(el);
-    const gap = parseFloat(cs.columnGap || cs.gap) || 16;
-    return first.offsetWidth + gap;
-  };
-
-  const scrollToPlan = (i: number) => {
-    const el = pricingRef.current;
-    if (!el) return;
-    el.scrollTo({ left: i * slideStep(el), behavior: 'smooth' });
-  };
-
-  // Pause auto-advance for a while after the visitor touches the carousel
-  const pauseCarousel = () => {
-    pausedUntil.current = Date.now() + 8000;
-  };
-
-  useEffect(() => {
-    const mobile = window.matchMedia('(max-width: 767px)');
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const id = window.setInterval(() => {
-      const el = pricingRef.current;
-      if (!el || !mobile.matches || reduce.matches || openPlan || Date.now() < pausedUntil.current) return;
-      const step = slideStep(el);
-      if (!step) return;
-      const current = Math.round(el.scrollLeft / step);
-      scrollToPlan((current + 1) % plans.length);
-    }, 4000);
-    return () => window.clearInterval(id);
-  }, [openPlan]);
-
-  const services = [
-    {
-      icon: 'person',
-      title: 'Private Tutoring',
-      text: 'One-on-one attention tailored to your learning style and pace.',
-      items: ['Personalised plans', 'Flexible scheduling'],
-      cta: 'See pricing',
-      onClick: () => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }),
-    },
-    {
-      icon: 'school',
-      title: 'Structured Programs',
-      text: 'Curriculum-aligned learning paths that build solid foundations.',
-      items: ['Grade R to 12', 'Consistent support'],
-      cta: 'View programs',
-      onClick: () => {
-        setActiveView('home');
-        setTimeout(() => {
-          const btn = document.getElementById('browse-all-btn');
-          if (btn) btn.click();
-          else document.getElementById('subjects')?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      },
-    },
-    {
-      icon: 'menu_book',
-      title: 'Exam Prep',
-      text: 'Past papers, mock exams and strategies to maximise results.',
-      items: ['Past papers', 'Exam strategies'],
-      cta: 'Get ready',
-      href: LINKS.REGISTRATION,
-    },
-  ];
-
-  const why = [
-    { icon: 'workspace_premium', title: 'Personalised', text: 'Individual plans for every student.' },
-    { icon: 'groups', title: 'Expert Tutors', text: 'Vetted tutors dedicated to your success.' },
-    { icon: 'trending_up', title: 'Real Progress', text: 'Moving up grades with confidence.' },
-    { icon: 'library_books', title: 'Wide Coverage', text: 'Maths, Sciences, and Languages.' },
-  ];
-
-  const onSnapScroll = (
-    e: React.UIEvent<HTMLDivElement>,
-    setter: React.Dispatch<React.SetStateAction<number>>
-  ) => {
-    const el = e.currentTarget;
-    const first = el.firstElementChild as HTMLElement | null;
-    if (first) {
-      const gap = parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap) || 16;
-      const idx = Math.round(el.scrollLeft / (first.offsetWidth + gap));
-      setter(Math.max(0, idx));
-    }
-  };
-
-  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries()) as Record<string, string>;
-
-    if (!FORM_ENDPOINT) {
-      const body = `Name: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\n\n${data.message}`;
-      window.location.href = `mailto:${LINKS.EMAIL}?subject=${encodeURIComponent('Enquiry from website')}&body=${encodeURIComponent(body)}`;
-      return;
-    }
-
-    setStatus('sending');
-    try {
-      const res = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(data),
-      });
-      setStatus(res.ok ? 'sent' : 'error');
-    } catch {
-      setStatus('error');
-    }
-  };
+/** Link group. Accordion on mobile (keeps the footer short), always open on desktop. */
+const FooterGroup: React.FC<{ title: string; links: FooterLink[] }> = ({ title, links }) => {
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="hl-page-content space-y-10 md:space-y-20 pb-10">
-      <style>{CSS}</style>
+    <div className="border-b border-white/15 md:border-0">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="flex w-full items-center justify-between py-4 md:py-0 md:mb-4 md:cursor-default text-left"
+      >
+        <span
+          className="text-xs font-bold uppercase tracking-[0.2em]"
+          style={{ color: C.cardYellow }}
+        >
+          {title}
+        </span>
+        <ChevronDown
+          size={18}
+          className={`md:hidden text-white transition-transform ${open ? "rotate-180" : ""}`}
+        />
+      </button>
 
-      {/* ---------------------------------------------------------------- */}
-      {/* HERO                                                             */}
-      {/* ---------------------------------------------------------------- */}
-
-      <section className="hl-hero-container">
-        <Container className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-12 py-8 md:py-16">
-          <div className="hl-hero-copy text-center md:text-left">
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-white">
-              Tutoring that helps every <span style={{ color: C.cardYellow }}>learner thrive</span>
-            </h1>
-
-            <p
-              className="mt-3 text-[16px] md:text-xl leading-relaxed max-w-md md:max-w-xl mx-auto md:mx-0"
-              style={{ color: C.lightBlue }}
+      <ul className={`${open ? "block" : "hidden"} md:block space-y-1 pb-4 md:pb-0`}>
+        {links.map((l) => (
+          <li key={l.label}>
+            <button
+              type="button"
+              onClick={l.onClick}
+              className="py-1.5 text-sm text-left text-[#D9EFF7] transition-colors hover:text-[#F9CE69] active:text-[#F9CE69]"
             >
-              A non-profit tutoring organisation matching each student with expert tutors, Grade R to 12.
-            </p>
+              {l.label}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
+const ContactRow: React.FC<{
+  icon: React.ReactNode;
+  label: string;
+  href?: string;
+  external?: boolean;
+}> = ({ icon, label, href, external }) => {
+  const inner = (
+    <>
+      <span
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
+        style={{ backgroundColor: C.cardYellow, color: C.navy }}
+      >
+        {icon}
+      </span>
+      <span className="text-sm leading-snug break-words">{label}</span>
+    </>
+  );
+
+  const cls =
+    "flex items-center gap-3 py-1.5 text-[#D9EFF7] transition-colors hover:text-[#F9CE69] active:text-[#F9CE69]";
+
+  return href ? (
+    <a
+      href={href}
+      className={cls}
+      {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+    >
+      {inner}
+    </a>
+  ) : (
+    <div className={cls}>{inner}</div>
+  );
+};
+
+export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
+  const go = (view: ViewState) => {
+    setActiveView(view);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const serviceLinks: FooterLink[] = [
+    { label: "Private Tutoring", onClick: () => go("services") },
+    { label: "Structured Programs", onClick: () => go("services") },
+    { label: "Exam Prep", onClick: () => go("services") },
+  ];
+
+  const companyLinks: FooterLink[] = [
+    { label: "About Us", onClick: () => go("about") },
+    { label: "Our Tutors", onClick: () => go("tutors") },
+    { label: "Success Stories", onClick: () => go("stories") },
+    { label: "Contact", onClick: () => go("locations") },
+  ];
+
+  return (
+    <footer className="w-full">
+      {/* ============ CTA BAND ============ */}
+      <div style={{ backgroundColor: C.cardYellow, color: C.ink }}>
+        <div className="mx-auto flex w-full max-w-[1760px] flex-col gap-5 px-4 py-8 md:flex-row md:items-center md:justify-between md:px-8 md:py-10 lg:px-12 xl:px-16">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight font-display">
+              Ready to help your learner thrive?
+            </h2>
+            <p className="mt-1 text-sm md:text-base opacity-80">
+              Book a session today. Grade R to 12, with expert tutors.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3 sm:flex-row">
             <a
               href={LINKS.REGISTRATION}
               target="_blank"
               rel="noreferrer"
-              className="hl-btn hl-gold-btn mt-6 md:mt-8 hidden md:inline-block px-8 py-3.5 rounded-xl text-base font-bold shadow-lg text-center"
+              className="rounded-xl px-7 py-3.5 text-center text-sm font-bold text-white shadow-md transition hover:brightness-110 active:scale-[0.98]"
+              style={{ backgroundColor: C.navy }}
             >
               Book a Session
-            </a>
-          </div>
-
-          <div className="hl-hero-logo">
-            <img src={HERO_PHOTO} alt="HL Tutoring Non-Profit Organization logo" width={821} height={835} />
-          </div>
-        </Container>
-      </section>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* SERVICES (Yellow Cards)                                          */}
-      {/* ---------------------------------------------------------------- */}
-
-      <section className="w-full min-w-0">
-        <div className="w-full max-w-[1760px] mx-auto md:px-8 lg:px-12 xl:px-16">
-          <div className="hl-snap" onScroll={(e) => onSnapScroll(e, setSlide)}>
-            {services.map((s) => (
-              <div
-                key={s.title}
-                className="rounded-2xl p-6 flex flex-col shadow-lg"
-                style={{ background: C.cardYellow, color: C.ink }}
-              >
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
-                  <span className="material-symbols-outlined text-2xl" style={{ color: C.navy }}>
-                    {s.icon}
-                  </span>
-                </div>
-
-                <h3 className="text-xl font-bold mb-2">{s.title}</h3>
-                <p className="text-sm leading-relaxed mb-4 opacity-90">{s.text}</p>
-
-                <ul className="space-y-2 mb-6 flex-grow">
-                  {s.items.map((i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm font-medium">
-                      <Check size={16} style={{ color: C.navy }} />
-                      <span>{i}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {s.href ? (
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hl-btn hl-blue-btn block w-full py-3 rounded-xl font-bold text-sm text-center"
-                  >
-                    {s.cta}
-                  </a>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={s.onClick}
-                    className="hl-btn hl-blue-btn w-full py-3 rounded-xl font-bold text-sm text-center"
-                  >
-                    {s.cta}
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Slide indicators for mobile */}
-          <div className="flex justify-center gap-2 mt-2 md:hidden">
-            {services.map((_, i) => (
-              <span
-                key={i}
-                className="h-2 rounded-full transition-all"
-                style={{
-                  width: slide === i ? 24 : 8,
-                  background: slide === i ? C.cardYellow : 'rgba(255,255,255,0.3)',
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* WHY CHOOSE US (Using Light Mint accent)                          */}
-      {/* ---------------------------------------------------------------- */}
-
-      <section className="w-full">
-        <Container>
-          <div className="text-center mb-6 md:mb-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-white">Why choose us</h2>
-            <p className="text-sm md:text-base" style={{ color: C.lightBlue }}>
-              Teaching students how to learn, not just subjects.
-            </p>
-          </div>
-
-          <MobileCarousel desktopClassName="md:grid-cols-2 lg:grid-cols-4" itemWidth="64%" dotActive={C.cardYellow}>
-            {why.map((w) => (
-              <div
-                key={w.title}
-                className="rounded-2xl p-4 md:p-6 text-center shadow-md"
-                style={{ background: C.lightMint, color: C.ink }}
-              >
-                <span className="material-symbols-outlined text-3xl mb-2" style={{ color: C.navy }}>
-                  {w.icon}
-                </span>
-                <h4 className="text-base font-bold mb-1">{w.title}</h4>
-                <p className="text-xs md:text-sm opacity-80 leading-relaxed">{w.text}</p>
-              </div>
-            ))}
-          </MobileCarousel>
-        </Container>
-      </section>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* SUBJECTS (full-bleed yellow band)                                */}
-      {/* ---------------------------------------------------------------- */}
-
-      <section id="subjects" className="w-full min-w-0" style={{ background: C.cardYellow, color: C.ink }}>
-        <Container className="py-8 md:py-14">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6">Our Subjects</h2>
-          <div style={{ color: C.ink }}>
-            <SubjectsSection />
-          </div>
-        </Container>
-      </section>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* PRICING (Horizontal Scroll on Mobile)                            */}
-      {/* ---------------------------------------------------------------- */}
-
-      <Band id="pricing" className="text-white" innerClassName="!px-0 md:!px-8 lg:!px-12 xl:!px-16">
-        <div className="text-center mb-6 md:mb-10 px-4">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-2">Transparent Pricing</h2>
-          <p className="text-sm md:text-base" style={{ color: C.lightBlue }}>
-            Choose the plan that fits your goals.
-          </p>
-        </div>
-
-        <div className="w-full min-w-0">
-          <div
-            ref={pricingRef}
-            className="hl-snap"
-            onScroll={(e) => onSnapScroll(e, setPricingSlide)}
-            onTouchStart={pauseCarousel}
-            onPointerDown={pauseCarousel}
-            onWheel={pauseCarousel}
-          >
-            {plans.map((p) => {
-              const isOpen = openPlan === p.id;
-              return (
-                <div
-                  key={p.id}
-                  className="p-5 rounded-2xl flex flex-col relative"
-                  style={{
-                    background: p.popular ? '#fff' : 'rgba(255,255,255,0.1)',
-                    color: p.popular ? C.ink : '#fff',
-                    border: p.popular ? '1px solid #fff' : '1px solid rgba(255,255,255,0.2)',
-                  }}
-                >
-                  {p.popular && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full bg-[#123B63] text-white shadow-md whitespace-nowrap">
-                      Most Chosen
-                    </span>
-                  )}
-
-                  <div className="flex items-center gap-3 mb-3">
-                    <p.icon size={20} style={{ color: p.popular ? C.navy : C.cardYellow }} />
-                    <h3 className="text-lg font-bold">{p.name}</h3>
-                  </div>
-
-                  <p className="text-xs mb-4 opacity-80 min-h-[32px]">{p.description}</p>
-
-                  <button
-                    type="button"
-                    onClick={() => setOpenPlan(isOpen ? null : p.id)}
-                    aria-expanded={isOpen}
-                    className="text-xs font-bold underline underline-offset-4 mb-4 text-left"
-                    style={{ color: p.popular ? C.navy : C.cardYellow }}
-                  >
-                    {isOpen ? 'Hide Features' : 'View Features'}
-                  </button>
-
-                  {isOpen && (
-                    <ul className="space-y-2 mb-5 flex-grow">
-                      {p.features.map((f) => (
-                        <li key={f} className="flex items-start gap-2 text-xs">
-                          <Check
-                            size={14}
-                            className="mt-0.5 shrink-0"
-                            style={{ color: p.popular ? C.navy : C.cardYellow }}
-                          />
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  <div className="mt-auto">
-                    <a
-                      href={LINKS.WHATSAPP}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="hl-btn w-full py-2.5 rounded-xl font-bold text-sm text-center block"
-                      style={{
-                        background: p.popular ? C.cardYellow : C.navy,
-                        color: p.popular ? C.ink : '#fff',
-                      }}
-                    >
-                      Select Plan
-                    </a>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="flex justify-center gap-1 mt-1 md:hidden">
-            {plans.map((p, i) => (
-              <button
-                key={p.id}
-                type="button"
-                aria-label={`Show ${p.name} plan`}
-                onClick={() => {
-                  pauseCarousel();
-                  scrollToPlan(i);
-                }}
-                className="p-1.5"
-              >
-                <span
-                  className="block h-2 rounded-full transition-all"
-                  style={{
-                    width: pricingSlide === i ? 24 : 8,
-                    background: pricingSlide === i ? C.cardYellow : 'rgba(255,255,255,0.35)',
-                  }}
-                />
-              </button>
-            ))}
-          </div>
-        </div>
-      </Band>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* CONTACT                                                          */}
-      {/* ---------------------------------------------------------------- */}
-
-      <Band id="contact" className="text-white" innerClassName="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div className="min-w-0">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-3">Get in touch</h2>
-          <p className="mb-6 text-sm md:text-base leading-relaxed" style={{ color: C.lightBlue }}>
-            Questions? Call, message us on WhatsApp or send an email.
-          </p>
-
-          <div className="space-y-4">
-            <a
-              href={`tel:${LINKS.PHONE.replace(/\s/g, '')}`}
-              className="flex items-center gap-4 p-3 rounded-xl bg-white/10 border border-white/20"
-            >
-              <Phone size={20} style={{ color: C.cardYellow }} />
-              <span className="font-semibold text-sm">{LINKS.PHONE}</span>
             </a>
             <a
               href={LINKS.WHATSAPP}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-4 p-3 rounded-xl bg-white/10 border border-white/20"
+              className="rounded-xl bg-white px-7 py-3.5 text-center text-sm font-bold shadow-md transition hover:brightness-95 active:scale-[0.98]"
+              style={{ color: C.ink }}
             >
-              <MessageCircle size={20} style={{ color: C.cardYellow }} />
-              <span className="font-semibold text-sm">Chat on WhatsApp</span>
-            </a>
-            <a
-              href={`mailto:${LINKS.EMAIL}`}
-              className="flex items-center gap-4 p-3 rounded-xl bg-white/10 border border-white/20"
-            >
-              <Mail size={20} style={{ color: C.cardYellow }} />
-              <span className="font-semibold text-sm break-all">{LINKS.EMAIL}</span>
+              Chat on WhatsApp
             </a>
           </div>
-
-          {!showForm && (
-            <button
-              type="button"
-              onClick={() => setShowForm(true)}
-              className="hl-btn hl-gold-btn md:hidden mt-6 w-full py-3.5 rounded-xl font-bold"
-            >
-              Send an email instead
-            </button>
-          )}
         </div>
+      </div>
 
-        <div className={`${showForm ? 'block' : 'hidden'} md:block min-w-0`}>
-          {status === 'sent' ? (
-            <div className="text-center py-10 bg-white/10 rounded-2xl border border-white/20">
-              <CheckCircle size={40} className="mx-auto mb-3" style={{ color: C.cardYellow }} />
-              <h3 className="text-xl font-bold mb-1">Message Sent</h3>
-              <p className="text-sm opacity-80 mb-4">We'll be in touch shortly.</p>
-              <button
-                type="button"
-                onClick={() => setStatus('idle')}
-                className="text-sm font-bold underline"
+      {/* ============ MAIN FOOTER ============ */}
+      <div style={{ backgroundColor: C.navy }} className="text-white">
+        <div className="mx-auto w-full max-w-[1760px] px-4 pt-10 pb-6 md:px-8 md:pt-14 lg:px-12 xl:px-16">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr] lg:gap-12">
+            {/* Brand */}
+            <div className="md:col-span-2 lg:col-span-1">
+              <h2 className="text-2xl font-extrabold tracking-tight font-display">{BRAND_NAME}</h2>
+              <p className="mt-1 text-sm font-semibold" style={{ color: C.lightMint }}>
+                Non-Profit Organization
+              </p>
+              <div
+                className="mt-4 mb-4 h-[3px] w-12 rounded-full"
+                style={{ backgroundColor: C.cardYellow }}
+              />
+              <p className="max-w-sm text-sm leading-relaxed" style={{ color: C.lightBlue }}>
+                A non-profit tutoring organisation matching each student with expert tutors, Grade R to 12.
+              </p>
+            </div>
+
+            {/* Link groups (accordions on mobile) */}
+            <div className="md:col-span-2 lg:col-span-2 grid gap-0 md:grid-cols-2 md:gap-8 lg:gap-12">
+              <FooterGroup title="Services" links={serviceLinks} />
+              <FooterGroup title="Company" links={companyLinks} />
+            </div>
+
+            {/* Contact */}
+            <div className="md:col-span-2 lg:col-span-1">
+              <h3
+                className="mb-3 text-xs font-bold uppercase tracking-[0.2em]"
                 style={{ color: C.cardYellow }}
               >
-                Send another
-              </button>
+                Get in touch
+              </h3>
+
+              <div className="space-y-1">
+                <ContactRow
+                  icon={<Phone size={16} />}
+                  label={LINKS.PHONE}
+                  href={`tel:${LINKS.PHONE.replace(/\s/g, "")}`}
+                />
+                <ContactRow
+                  icon={<MessageCircle size={16} />}
+                  label="WhatsApp us"
+                  href={LINKS.WHATSAPP}
+                  external
+                />
+                <ContactRow
+                  icon={<Mail size={16} />}
+                  label={LINKS.EMAIL}
+                  href={`mailto:${LINKS.EMAIL}`}
+                />
+                <ContactRow
+                  icon={<MapPin size={16} />}
+                  label={ADDRESS}
+                  href={LINKS.MAPS}
+                  external
+                />
+              </div>
             </div>
-          ) : (
-            <form onSubmit={submit} className="space-y-3">
-              <input name="name" className="hl-field" placeholder="Your name" autoComplete="name" required />
-              <input
-                name="phone"
-                type="tel"
-                className="hl-field"
-                placeholder="Phone (+27...)"
-                autoComplete="tel"
-                required
-              />
-              <input
-                name="email"
-                type="email"
-                className="hl-field"
-                placeholder="Email"
-                autoComplete="email"
-                required
-              />
-              <textarea name="message" className="hl-field min-h-[100px]" placeholder="How can we help?" required />
+          </div>
 
-              {status === 'error' && (
-                <p className="text-sm font-semibold" style={{ color: C.cardYellow }} role="alert">
-                  Something went wrong sending your message. Please try again or use WhatsApp.
-                </p>
-              )}
+          {/* ============ LEGAL STRIP ============ */}
+          <div className="mt-10 flex flex-col gap-4 border-t border-white/15 pt-6 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-1 text-xs leading-relaxed" style={{ color: C.lightBlue }}>
+              <p className="font-semibold text-white">{LEGAL_LINE}</p>
+              <p>
+                Registered non-profit company. © {new Date().getFullYear()} {BRAND_NAME}. All rights
+                reserved.
+              </p>
+            </div>
 
-              <button
-                type="submit"
-                disabled={status === 'sending'}
-                className="hl-btn hl-gold-btn w-full font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 disabled:opacity-70"
-              >
-                <Send size={18} />
-                {status === 'sending' ? 'Sending...' : 'Send message'}
-              </button>
-            </form>
-          )}
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="inline-flex items-center gap-2 self-start rounded-full px-4 py-2 text-xs font-bold transition hover:brightness-105 active:scale-[0.98] md:self-auto"
+              style={{ backgroundColor: C.cardYellow, color: C.ink }}
+            >
+              Back to top
+              <ArrowUp size={14} />
+            </button>
+          </div>
         </div>
-      </Band>
-    </div>
+      </div>
+    </footer>
   );
 };
